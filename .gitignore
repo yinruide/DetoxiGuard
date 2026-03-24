@@ -205,3 +205,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+*.csv
+__pycache__/
+*.pyc
+*.pt
+*.bin
+.ipynb_checkpoints/
