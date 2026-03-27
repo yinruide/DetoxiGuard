@@ -8,9 +8,13 @@ Labels: toxic, severe_toxic, obscene, threat, insult, identity_hate
 Dependencies:
     pip install transformers peft accelerate bitsandbytes datasets scikit-learn pandas torch iterstrat
 
+Prerequisite:
+    python split_data.py          # run once to generate train_split.csv & val_split.csv
+
 Usage:
     python train_llama.py --model_name meta-llama/Llama-3.2-1B
-                          --train_csv data/train.csv
+                          --train_csv data/train_split.csv
+                          --val_csv   data/val_split.csv
                           --output_dir outputs/llama_lora
                           --epochs 5 --batch_size 64
 """
@@ -18,6 +22,7 @@ Usage:
 import argparse
 import functools
 import json
+import math
 import os
 import numpy as np
 import pandas as pd
@@ -27,7 +32,6 @@ import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
-from iterstrat.ml_stratifiers import MultilabelStratifiedShuffleSplit
 from sklearn.metrics import f1_score, roc_auc_score, average_precision_score, precision_score, recall_score
 from transformers import (
     AutoTokenizer,
@@ -444,7 +448,10 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Fine-tune LLaMA+LoRA for toxic comment classification")
     parser.add_argument("--model_name",  type=str, default="meta-llama/Llama-3.2-1B",
                         help="HuggingFace model ID or local path")
-    parser.add_argument("--train_csv",   type=str, default="data/train.csv")
+    parser.add_argument("--train_csv",   type=str, default="data/train_split.csv",
+                        help="Pre-split training CSV (from split_data.py)")
+    parser.add_argument("--val_csv",     type=str, default="data/val_split.csv",
+                        help="Pre-split validation CSV (from split_data.py)")
     parser.add_argument("--output_dir",  type=str, default="outputs/llama_lora")
     parser.add_argument("--max_length",  type=int, default=512,
                         help="Hard cap on token length; actual padding is dynamic per batch")
@@ -456,7 +463,6 @@ def parse_args():
     parser.add_argument("--target_effective_batch", type=int, default=64,
                         help="Target effective batch size; grad_accum_steps auto-computed if not explicitly set")
     parser.add_argument("--lr",          type=float, default=2e-4)
-    parser.add_argument("--val_split",   type=float, default=0.1)
     parser.add_argument("--lora_r",      type=int, default=8)
     parser.add_argument("--lora_alpha",  type=int, default=16)
     parser.add_argument("--lora_dropout",type=float, default=0.1)
@@ -473,8 +479,8 @@ def _worker(rank, world_size, args):
     is_distributed = world_size > 1
 
     if is_distributed:
-        os.environ["MASTER_ADDR"] = "localhost"
-        os.environ["MASTER_PORT"] = "29500"
+        os.environ.setdefault("MASTER_ADDR", "localhost")
+        os.environ.setdefault("MASTER_PORT", "29500")
         dist.init_process_group(backend="nccl", rank=rank, world_size=world_size)
         torch.cuda.set_device(rank)
 
@@ -501,17 +507,11 @@ def _worker(rank, world_size, args):
             f"{args.batch_size * world_size * grad_accum_steps}"
         )
 
-    # ── 1. Load & split data (multi-label stratified) ──
+    # ── 1. Load pre-split data ─────────────────
     if rank == 0:
-        logger.info("Loading dataset ...")
-    df = pd.read_csv(args.train_csv)
-
-    msss = MultilabelStratifiedShuffleSplit(
-        n_splits=1, test_size=args.val_split, random_state=args.seed
-    )
-    train_idx, val_idx = next(msss.split(df, df[LABELS]))
-    train_df = df.iloc[train_idx]
-    val_df   = df.iloc[val_idx]
+        logger.info("Loading pre-split datasets ...")
+    train_df = pd.read_csv(args.train_csv)
+    val_df   = pd.read_csv(args.val_csv)
     if rank == 0:
         logger.info(f"Train: {len(train_df):,}  |  Val: {len(val_df):,}")
 
@@ -561,7 +561,7 @@ def _worker(rank, world_size, args):
         lr=args.lr, weight_decay=0.01,
         betas=(0.9, 0.999),             # beta1 = momentum coefficient
     )
-    total_steps   = (len(train_loader) // grad_accum_steps) * args.epochs
+    total_steps   = math.ceil(len(train_loader) / grad_accum_steps) * args.epochs
     warmup_steps  = int(0.10 * total_steps)
     scheduler = get_cosine_schedule_with_warmup(
         optimizer, num_warmup_steps=warmup_steps, num_training_steps=total_steps
@@ -616,6 +616,8 @@ def _worker(rank, world_size, args):
 
         # Broadcast early stopping decision to all ranks
         if is_distributed:
+            dist.barrier()
+        if is_distributed:
             stop_tensor = torch.tensor([1 if should_stop else 0], device=device)
             dist.broadcast(stop_tensor, src=0)
             should_stop = stop_tensor.item() == 1
@@ -629,7 +631,12 @@ def _worker(rank, world_size, args):
         # ── 7. Find optimal per-label thresholds on val set ──
         best_ckpt_dir = os.path.join(args.output_dir, "best_checkpoint")
         logger.info(f"Reloading best checkpoint from {best_ckpt_dir} for threshold search ...")
-        model_for_thresh = PeftModel.from_pretrained(raw_model.base_model.model, best_ckpt_dir)
+        base_for_thresh = AutoModelForSequenceClassification.from_pretrained(
+            args.model_name, num_labels=NUM_LABELS,
+            problem_type="multi_label_classification", torch_dtype=torch.bfloat16,
+        )
+        base_for_thresh.config.pad_token_id = tokenizer.eos_token_id
+        model_for_thresh = PeftModel.from_pretrained(base_for_thresh, best_ckpt_dir)
         model_for_thresh = model_for_thresh.to(device)
         model_for_thresh.eval()
 
