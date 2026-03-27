@@ -4,16 +4,23 @@ train_bert.py
 Fine-tune BERT for multi-label toxic comment classification.
 
 This file is intentionally interface-aligned with train_llama.py so that a
-future ensemble.py can call both models with the same contract.
+future ensemble.py can call both models with the same inference contract.
+
+Unlike the earlier version, this script does NOT create its own train/val
+split. It expects the shared split produced by split.py so that BERT, LLaMA,
+and any later ensemble-weight tuning all use the exact same validation set.
 
 Labels: toxic, severe_toxic, obscene, threat, insult, identity_hate
 
 Dependencies:
-    pip install transformers accelerate scikit-learn pandas torch iterstrat
+    pip install transformers accelerate scikit-learn pandas torch
 
-Usage:
+Recommended workflow:
+    python split.py --raw_csv data/train.csv --output_dir data --val_ratio 0.1
+
     python train_bert.py --model_name bert-base-uncased \
-                         --train_csv data/train.csv \
+                         --train_csv data/train_split.csv \
+                         --val_csv data/val_split.csv \
                          --output_dir outputs/bert \
                          --epochs 5 --batch_size 32
 """
@@ -24,14 +31,12 @@ import json
 import logging
 import math
 import os
-from contextlib import nullcontext
 
 import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
-from iterstrat.ml_stratifiers import MultilabelStratifiedShuffleSplit
 from sklearn.metrics import (
     average_precision_score,
     f1_score,
@@ -142,9 +147,50 @@ def dynamic_collate_fn(batch, tokenizer):
 
 
 # ──────────────────────────────────────────────
-# Class-imbalance utilities
+# Shared split utilities
 # ──────────────────────────────────────────────
 
+def validate_dataframe(df: pd.DataFrame, csv_path: str) -> pd.DataFrame:
+    """
+    Ensure the dataframe has the columns expected by the training pipeline.
+    """
+    required_columns = {"comment_text", *LABELS}
+    missing_columns = required_columns - set(df.columns)
+    if missing_columns:
+        raise ValueError(f"Missing required columns in {csv_path}: {sorted(missing_columns)}")
+
+    df = df.copy()
+    df["comment_text"] = df["comment_text"].fillna("").astype(str)
+    return df.reset_index(drop=True)
+
+
+def log_split_summary(train_df: pd.DataFrame, val_df: pd.DataFrame):
+    """
+    Log a quick summary so we can verify the shared split being used by BERT.
+    """
+    logger.info(f"Train: {len(train_df):,}  |  Val: {len(val_df):,}")
+    logger.info("Per-label positive counts from the provided split:")
+    logger.info(f"  {'Label':15s} {'Train':>8s} {'Val':>8s} {'Val %':>8s}")
+    for label in LABELS:
+        train_pos = int(train_df[label].sum())
+        val_pos = int(val_df[label].sum())
+        total_pos = train_pos + val_pos
+        val_pct = (100.0 * val_pos / total_pos) if total_pos > 0 else 0.0
+        logger.info(f"  {label:15s} {train_pos:8,d} {val_pos:8,d} {val_pct:7.1f}%")
+
+    if "id" in train_df.columns and "id" in val_df.columns:
+        overlap_ids = set(train_df["id"]).intersection(set(val_df["id"]))
+        if overlap_ids:
+            raise ValueError(
+                f"Detected {len(overlap_ids)} overlapping ids between train and val splits. "
+                "split.py should produce disjoint files."
+            )
+        logger.info("Verified: train/val split has no overlapping ids.")
+
+
+# ──────────────────────────────────────────────
+# Class-imbalance utilities
+# ──────────────────────────────────────────────
 
 def compute_pos_weight(label_df: pd.DataFrame) -> torch.Tensor:
     """
@@ -164,7 +210,6 @@ def compute_pos_weight(label_df: pd.DataFrame) -> torch.Tensor:
 # ──────────────────────────────────────────────
 # Model builder
 # ──────────────────────────────────────────────
-
 
 def build_bert_model(model_name: str):
     """
@@ -196,7 +241,6 @@ def build_bert_model(model_name: str):
 # Metrics
 # ──────────────────────────────────────────────
 
-
 def find_optimal_thresholds(
     all_labels: np.ndarray,
     all_probs: np.ndarray,
@@ -220,7 +264,6 @@ def find_optimal_thresholds(
         logger.info(f"  optimal threshold for {label:15s}: {best_t:.2f}  (F1={best_f1:.4f})")
 
     return best_thresholds
-
 
 
 def compute_metrics(
@@ -275,7 +318,6 @@ def compute_metrics(
 # ──────────────────────────────────────────────
 # Train / Eval loops
 # ──────────────────────────────────────────────
-
 
 def train_one_epoch(
     model,
@@ -389,7 +431,6 @@ class EarlyStopping:
 # Inference helper (used by ensemble.py)
 # ──────────────────────────────────────────────
 
-
 def load_trained_model(checkpoint_dir: str, base_model_name: str, device: str = "cuda"):
     """
     Reload the fine-tuned BERT model for inference.
@@ -463,12 +504,14 @@ def predict(
 # Main
 # ──────────────────────────────────────────────
 
-
 def parse_args():
     parser = argparse.ArgumentParser(description="Fine-tune BERT for toxic comment classification")
     parser.add_argument("--model_name", type=str, default="bert-base-uncased",
                         help="HuggingFace model ID or local path")
-    parser.add_argument("--train_csv", type=str, default="data/train.csv")
+    parser.add_argument("--train_csv", type=str, default="data/train_split.csv",
+                        help="Training split generated by split.py")
+    parser.add_argument("--val_csv", type=str, default="data/val_split.csv",
+                        help="Validation split generated by split.py")
     parser.add_argument("--output_dir", type=str, default="outputs/bert")
     parser.add_argument("--max_length", type=int, default=512,
                         help="Hard cap on token length; actual padding is dynamic per batch")
@@ -479,7 +522,6 @@ def parse_args():
                         help="Gradient accumulation steps")
     parser.add_argument("--lr", type=float, default=2e-5)
     parser.add_argument("--weight_decay", type=float, default=0.01)
-    parser.add_argument("--val_split", type=float, default=0.1)
     parser.add_argument("--warmup_ratio", type=float, default=0.10)
     parser.add_argument("--seed", type=int, default=TEAM_SEED)
     parser.add_argument("--patience", type=int, default=2,
@@ -487,7 +529,6 @@ def parse_args():
     parser.add_argument("--num_workers", type=int, default=0,
                         help="DataLoader workers (0 = main process only, safest on HPC)")
     return parser.parse_args()
-
 
 
 def main():
@@ -503,24 +544,22 @@ def main():
     logger.info(f"GPUs available: {num_gpus}")
     os.makedirs(args.output_dir, exist_ok=True)
 
-    # ── 1. Load & split data (multi-label stratified) ──
-    logger.info("Loading dataset ...")
-    df = pd.read_csv(args.train_csv)
+    # ── 1. Load the shared train/val split ──
+    logger.info("Loading pre-split datasets ...")
+    if not os.path.exists(args.train_csv):
+        raise FileNotFoundError(
+            f"Training split not found: {args.train_csv}. "
+            "Run split.py first to generate train_split.csv and val_split.csv."
+        )
+    if not os.path.exists(args.val_csv):
+        raise FileNotFoundError(
+            f"Validation split not found: {args.val_csv}. "
+            "Run split.py first to generate train_split.csv and val_split.csv."
+        )
 
-    required_columns = {"comment_text", *LABELS}
-    missing_columns = required_columns - set(df.columns)
-    if missing_columns:
-        raise ValueError(f"Missing required columns in {args.train_csv}: {sorted(missing_columns)}")
-
-    df["comment_text"] = df["comment_text"].fillna("")
-
-    msss = MultilabelStratifiedShuffleSplit(
-        n_splits=1, test_size=args.val_split, random_state=args.seed
-    )
-    train_idx, val_idx = next(msss.split(df, df[LABELS]))
-    train_df = df.iloc[train_idx].reset_index(drop=True)
-    val_df = df.iloc[val_idx].reset_index(drop=True)
-    logger.info(f"Train: {len(train_df):,}  |  Val: {len(val_df):,}")
+    train_df = validate_dataframe(pd.read_csv(args.train_csv), args.train_csv)
+    val_df = validate_dataframe(pd.read_csv(args.val_csv), args.val_csv)
+    log_split_summary(train_df, val_df)
 
     # ── 2. Build model & tokenizer ───────────
     model, tokenizer = build_bert_model(args.model_name)
@@ -612,8 +651,22 @@ def main():
             best_ckpt_dir = os.path.join(args.output_dir, "best_checkpoint")
             model.save_pretrained(best_ckpt_dir)
             tokenizer.save_pretrained(best_ckpt_dir)
+
             with open(os.path.join(best_ckpt_dir, "label_order.json"), "w") as f:
                 json.dump({"labels": LABELS}, f, indent=2)
+
+            with open(os.path.join(best_ckpt_dir, "split_config.json"), "w") as f:
+                json.dump(
+                    {
+                        "train_csv": args.train_csv,
+                        "val_csv": args.val_csv,
+                        "seed": args.seed,
+                        "shared_split_expected": True,
+                    },
+                    f,
+                    indent=2,
+                )
+
             logger.info(f"  ✓ New best model saved (macro-F1={best_macro_f1:.4f})")
 
         if early_stopper.step(metrics["macro_f1"]):
@@ -621,7 +674,7 @@ def main():
 
     logger.info(f"Training complete. Best macro-F1={best_macro_f1:.4f} at epoch {best_epoch}.")
 
-    # ── 7. Find optimal per-label thresholds on val set ──
+    # ── 7. Find optimal per-label thresholds on the shared val split ──
     best_ckpt_dir = os.path.join(args.output_dir, "best_checkpoint")
     logger.info(f"Reloading best checkpoint from {best_ckpt_dir} for threshold search ...")
     model, _ = load_trained_model(best_ckpt_dir, args.model_name, device=str(device))
