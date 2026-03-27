@@ -9,9 +9,9 @@ Dependencies:
     pip install transformers peft accelerate bitsandbytes datasets scikit-learn pandas torch iterstrat
 
 Usage:
-    python train_llama.py --model_name meta-llama/Llama-3.2-1B 
-                          --train_csv data/train.csv 
-                          --output_dir outputs/llama_lora 
+    python train_llama.py --model_name meta-llama/Llama-3.2-1B
+                          --train_csv data/train.csv
+                          --output_dir outputs/llama_lora
                           --epochs 5 --batch_size 64
 """
 
@@ -23,7 +23,10 @@ import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
+import torch.distributed as dist
+from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.utils.data import Dataset, DataLoader
+from torch.utils.data.distributed import DistributedSampler
 from iterstrat.ml_stratifiers import MultilabelStratifiedShuffleSplit
 from sklearn.metrics import f1_score, roc_auc_score, average_precision_score, precision_score, recall_score
 from transformers import (
@@ -37,7 +40,6 @@ from peft import (
     TaskType,
     PeftModel,
 )
-from torch.amp import GradScaler, autocast
 import logging
 
 # ──────────────────────────────────────────────
@@ -155,9 +157,8 @@ def build_lora_model(model_name: str, lora_r: int, lora_alpha: int, lora_dropout
     """
     Load a LLaMA base model and attach a LoRA adapter + classification head.
 
-    LoRA is applied to query and value projection matrices — this captures
-    the most important attention interactions while keeping trainable
-    parameter count lower than targeting all four projections.
+    LoRA is applied to all four attention projection matrices (Q, K, V, O)
+    for maximum expressiveness while keeping trainable parameter count low.
     """
     logger.info(f"Loading base model: {model_name}")
 
@@ -165,7 +166,7 @@ def build_lora_model(model_name: str, lora_r: int, lora_alpha: int, lora_dropout
         model_name,
         num_labels=NUM_LABELS,
         problem_type="multi_label_classification",
-        torch_dtype=torch.float16,
+        torch_dtype=torch.bfloat16,
     )
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -180,7 +181,7 @@ def build_lora_model(model_name: str, lora_r: int, lora_alpha: int, lora_dropout
         lora_alpha=lora_alpha,
         lora_dropout=lora_dropout,
         bias="none",
-        target_modules=["q_proj", "v_proj"],
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
         modules_to_save=["score"],
     )
 
@@ -277,8 +278,8 @@ def compute_metrics(all_labels: np.ndarray, all_probs: np.ndarray,
 # Train / Eval loops
 # ──────────────────────────────────────────────
 
-def train_one_epoch(model, loader, optimizer, scheduler, scaler, device, loss_fn,
-                    grad_accum_steps=1):
+def train_one_epoch(model, loader, optimizer, scheduler, device, loss_fn,
+                    grad_accum_steps=1, rank=0):
     model.train()
     total_loss = 0.0
 
@@ -293,26 +294,24 @@ def train_one_epoch(model, loader, optimizer, scheduler, scaler, device, loss_fn
         window_start = step - step % grad_accum_steps
         actual_accum = min(grad_accum_steps, len(loader) - window_start)
 
-        with autocast(device_type="cuda"):
+        with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
             outputs = model(
                 input_ids=input_ids,
                 attention_mask=attention_mask,
             )
             loss = loss_fn(outputs.logits, labels) / actual_accum
 
-        scaler.scale(loss).backward()
+        loss.backward()
 
         if (step + 1) % grad_accum_steps == 0 or (step + 1) == len(loader):
-            scaler.unscale_(optimizer)
             nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-            scaler.step(optimizer)
-            scaler.update()
+            optimizer.step()
             scheduler.step()
             optimizer.zero_grad()
 
         total_loss += loss.item() * actual_accum
 
-        if (step + 1) % 100 == 0:
+        if (step + 1) % 100 == 0 and rank == 0:
             logger.info(f"  step {step+1}/{len(loader)} | loss {loss.item() * actual_accum:.4f}")
 
     return total_loss / len(loader)
@@ -330,7 +329,7 @@ def evaluate(model, loader, device, loss_fn, thresholds: dict[str, float] | None
         attention_mask = batch["attention_mask"].to(device)
         labels         = batch["labels"].to(device)
 
-        with autocast(device_type="cuda"):
+        with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
             outputs = model(
                 input_ids=input_ids,
                 attention_mask=attention_mask,
@@ -429,7 +428,7 @@ def predict(model, tokenizer, texts: list[str], batch_size: int = 32,
         input_ids      = enc["input_ids"].to(device)
         attention_mask = enc["attention_mask"].to(device)
 
-        with autocast(device_type=str(device)):
+        with torch.autocast(device_type=str(device)):
             logits = model(input_ids=input_ids, attention_mask=attention_mask).logits
         probs = torch.sigmoid(logits).cpu().float().numpy()
         all_probs.append(probs)
@@ -450,10 +449,12 @@ def parse_args():
     parser.add_argument("--max_length",  type=int, default=512,
                         help="Hard cap on token length; actual padding is dynamic per batch")
     parser.add_argument("--epochs",      type=int, default=5)
-    parser.add_argument("--batch_size",  type=int, default=8,
+    parser.add_argument("--batch_size",  type=int, default=32,
                         help="Per-GPU batch size (effective = batch_size * num_gpus)")
-    parser.add_argument("--grad_accum_steps", type=int, default=8,
-                        help="Gradient accumulation steps (effective batch = batch_size * grad_accum_steps)")
+    parser.add_argument("--grad_accum_steps", type=int, default=None,
+                        help="Gradient accumulation steps (overrides auto-compute from target_effective_batch)")
+    parser.add_argument("--target_effective_batch", type=int, default=64,
+                        help="Target effective batch size; grad_accum_steps auto-computed if not explicitly set")
     parser.add_argument("--lr",          type=float, default=2e-4)
     parser.add_argument("--val_split",   type=float, default=0.1)
     parser.add_argument("--lora_r",      type=int, default=8)
@@ -462,24 +463,47 @@ def parse_args():
     parser.add_argument("--seed",        type=int, default=TEAM_SEED)
     parser.add_argument("--patience",    type=int, default=2,
                         help="Early stopping patience (epochs without improvement)")
-    parser.add_argument("--num_workers", type=int, default=0,
+    parser.add_argument("--num_workers", type=int, default=2,
                         help="DataLoader workers (0 = main process only, safest on HPC)")
     return parser.parse_args()
 
 
-def main():
-    args = parse_args()
+def _worker(rank, world_size, args):
+    """DDP worker function. Each process runs this with its own rank."""
+    is_distributed = world_size > 1
+
+    if is_distributed:
+        os.environ["MASTER_ADDR"] = "localhost"
+        os.environ["MASTER_PORT"] = "29500"
+        dist.init_process_group(backend="nccl", rank=rank, world_size=world_size)
+        torch.cuda.set_device(rank)
+
+    device = torch.device(f"cuda:{rank}")
+
     torch.manual_seed(args.seed)
     torch.cuda.manual_seed_all(args.seed)
     np.random.seed(args.seed)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    logger.info(f"Device: {device}")
-    num_gpus = torch.cuda.device_count()
-    logger.info(f"GPUs available: {num_gpus}")
-    os.makedirs(args.output_dir, exist_ok=True)
+
+    if rank == 0:
+        logger.info(f"Device: {device}")
+        logger.info(f"GPUs available: {world_size}")
+        os.makedirs(args.output_dir, exist_ok=True)
+
+    # Compute grad_accum_steps
+    if args.grad_accum_steps is not None:
+        grad_accum_steps = args.grad_accum_steps
+    else:
+        grad_accum_steps = max(1, args.target_effective_batch // (args.batch_size * world_size))
+
+    if rank == 0:
+        logger.info(
+            f"Effective batch size: {args.batch_size} * {world_size} GPUs * {grad_accum_steps} accum = "
+            f"{args.batch_size * world_size * grad_accum_steps}"
+        )
 
     # ── 1. Load & split data (multi-label stratified) ──
-    logger.info("Loading dataset ...")
+    if rank == 0:
+        logger.info("Loading dataset ...")
     df = pd.read_csv(args.train_csv)
 
     msss = MultilabelStratifiedShuffleSplit(
@@ -488,13 +512,17 @@ def main():
     train_idx, val_idx = next(msss.split(df, df[LABELS]))
     train_df = df.iloc[train_idx]
     val_df   = df.iloc[val_idx]
-    logger.info(f"Train: {len(train_df):,}  |  Val: {len(val_df):,}")
+    if rank == 0:
+        logger.info(f"Train: {len(train_df):,}  |  Val: {len(val_df):,}")
 
     # ── 2. Build model & tokenizer ───────────
     model, tokenizer = build_lora_model(
         args.model_name, args.lora_r, args.lora_alpha, args.lora_dropout
     )
     model = model.to(device)
+
+    if is_distributed:
+        model = DDP(model, device_ids=[rank], find_unused_parameters=True)
 
     # ── 3. Compute class-imbalance weights ───
     pos_weight = compute_pos_weight(train_df[LABELS]).to(device)
@@ -507,8 +535,13 @@ def main():
     val_dataset = ToxicCommentDataset(
         val_df["comment_text"], val_df[LABELS], tokenizer, args.max_length
     )
+
+    train_sampler = DistributedSampler(train_dataset, num_replicas=world_size, rank=rank, shuffle=True) if is_distributed else None
+
     train_loader = DataLoader(
-        train_dataset, batch_size=args.batch_size, shuffle=True,
+        train_dataset, batch_size=args.batch_size,
+        shuffle=(train_sampler is None),
+        sampler=train_sampler,
         num_workers=args.num_workers, pin_memory=True,
         collate_fn=functools.partial(dynamic_collate_fn, tokenizer=tokenizer),
     )
@@ -522,17 +555,17 @@ def main():
     # AdamW already provides momentum via beta1 (default 0.9) and adaptive
     # learning rates via beta2 (default 0.999).  This subsumes classical
     # SGD+momentum and is the standard choice for LLM fine-tuning.
+    raw_model = model.module if is_distributed else model
     optimizer = torch.optim.AdamW(
-        filter(lambda p: p.requires_grad, model.parameters()),
+        filter(lambda p: p.requires_grad, raw_model.parameters()),
         lr=args.lr, weight_decay=0.01,
         betas=(0.9, 0.999),             # beta1 = momentum coefficient
     )
-    total_steps   = (len(train_loader) // args.grad_accum_steps) * args.epochs
+    total_steps   = (len(train_loader) // grad_accum_steps) * args.epochs
     warmup_steps  = int(0.10 * total_steps)
     scheduler = get_cosine_schedule_with_warmup(
         optimizer, num_warmup_steps=warmup_steps, num_training_steps=total_steps
     )
-    scaler = GradScaler(device_type="cuda")
 
     # ── 6. Training loop with early stopping ─
     best_macro_f1 = 0.0
@@ -540,71 +573,108 @@ def main():
     early_stopper = EarlyStopping(patience=args.patience)
 
     for epoch in range(1, args.epochs + 1):
-        logger.info(f"═══ Epoch {epoch}/{args.epochs} ═══")
+        if rank == 0:
+            logger.info(f"═══ Epoch {epoch}/{args.epochs} ═══")
+
+        if train_sampler is not None:
+            train_sampler.set_epoch(epoch)
 
         train_loss = train_one_epoch(
-            model, train_loader, optimizer, scheduler, scaler, device, loss_fn,
-            grad_accum_steps=args.grad_accum_steps,
+            model, train_loader, optimizer, scheduler, device, loss_fn,
+            grad_accum_steps=grad_accum_steps, rank=rank,
         )
-        val_loss, metrics, _, _ = evaluate(model, val_loader, device, loss_fn)
 
+        # Only rank 0 runs evaluation, saves checkpoints, and checks early stopping
+        if rank == 0:
+            eval_model = raw_model
+            val_loss, metrics, _, _ = evaluate(eval_model, val_loader, device, loss_fn)
+
+            logger.info(
+                f"Train loss: {train_loss:.4f} | Val loss: {val_loss:.4f} | "
+                f"Macro-F1: {metrics['macro_f1']:.4f} | Macro-AUC: {metrics['macro_auc']:.4f} | "
+                f"Macro-PR-AUC: {metrics['macro_pr_auc']:.4f}"
+            )
+            for label in LABELS:
+                logger.info(
+                    f"  {label:15s}  F1={metrics['per_label_f1'][label]:.4f}  "
+                    f"P={metrics['per_label_precision'][label]:.4f}  "
+                    f"R={metrics['per_label_recall'][label]:.4f}  "
+                    f"AUC={metrics['per_label_auc'][label]:.4f}  "
+                    f"PR-AUC={metrics['per_label_pr_auc'][label]:.4f}"
+                )
+
+            if metrics["macro_f1"] > best_macro_f1:
+                best_macro_f1 = metrics["macro_f1"]
+                best_epoch    = epoch
+                raw_model.save_pretrained(os.path.join(args.output_dir, "best_checkpoint"))
+                tokenizer.save_pretrained(os.path.join(args.output_dir, "best_checkpoint"))
+                logger.info(f"  ✓ New best model saved (macro-F1={best_macro_f1:.4f})")
+
+            should_stop = early_stopper.step(metrics["macro_f1"])
+        else:
+            should_stop = False
+
+        # Broadcast early stopping decision to all ranks
+        if is_distributed:
+            stop_tensor = torch.tensor([1 if should_stop else 0], device=device)
+            dist.broadcast(stop_tensor, src=0)
+            should_stop = stop_tensor.item() == 1
+
+        if should_stop:
+            break
+
+    if rank == 0:
+        logger.info(f"Training complete. Best macro-F1={best_macro_f1:.4f} at epoch {best_epoch}.")
+
+        # ── 7. Find optimal per-label thresholds on val set ──
+        best_ckpt_dir = os.path.join(args.output_dir, "best_checkpoint")
+        logger.info(f"Reloading best checkpoint from {best_ckpt_dir} for threshold search ...")
+        model_for_thresh = PeftModel.from_pretrained(raw_model.base_model.model, best_ckpt_dir)
+        model_for_thresh = model_for_thresh.to(device)
+        model_for_thresh.eval()
+
+        logger.info("═══ Searching for optimal per-label thresholds on validation set ═══")
+        _, _, val_probs, val_labels = evaluate(model_for_thresh, val_loader, device, loss_fn)
+        optimal_thresholds = find_optimal_thresholds(val_labels, val_probs)
+
+        logger.info("═══ Val metrics with optimal thresholds ═══")
+        tuned_metrics = compute_metrics(val_labels, val_probs, optimal_thresholds)
         logger.info(
-            f"Train loss: {train_loss:.4f} | Val loss: {val_loss:.4f} | "
-            f"Macro-F1: {metrics['macro_f1']:.4f} | Macro-AUC: {metrics['macro_auc']:.4f} | "
-            f"Macro-PR-AUC: {metrics['macro_pr_auc']:.4f}"
+            f"Macro-F1: {tuned_metrics['macro_f1']:.4f} | "
+            f"Micro-F1: {tuned_metrics['micro_f1']:.4f} | "
+            f"Macro-AUC: {tuned_metrics['macro_auc']:.4f} | "
+            f"Macro-PR-AUC: {tuned_metrics['macro_pr_auc']:.4f}"
         )
         for label in LABELS:
             logger.info(
-                f"  {label:15s}  F1={metrics['per_label_f1'][label]:.4f}  "
-                f"P={metrics['per_label_precision'][label]:.4f}  "
-                f"R={metrics['per_label_recall'][label]:.4f}  "
-                f"AUC={metrics['per_label_auc'][label]:.4f}  "
-                f"PR-AUC={metrics['per_label_pr_auc'][label]:.4f}"
+                f"  {label:15s}  t={optimal_thresholds[label]:.2f}  "
+                f"F1={tuned_metrics['per_label_f1'][label]:.4f}  "
+                f"P={tuned_metrics['per_label_precision'][label]:.4f}  "
+                f"R={tuned_metrics['per_label_recall'][label]:.4f}"
             )
 
-        if metrics["macro_f1"] > best_macro_f1:
-            best_macro_f1 = metrics["macro_f1"]
-            best_epoch    = epoch
-            model.save_pretrained(os.path.join(args.output_dir, "best_checkpoint"))
-            tokenizer.save_pretrained(os.path.join(args.output_dir, "best_checkpoint"))
-            logger.info(f"  ✓ New best model saved (macro-F1={best_macro_f1:.4f})")
+        thresh_path = os.path.join(args.output_dir, "best_checkpoint", "optimal_thresholds.json")
+        with open(thresh_path, "w") as f:
+            json.dump(optimal_thresholds, f, indent=2)
+        logger.info(f"Optimal thresholds saved to {thresh_path}")
 
-        if early_stopper.step(metrics["macro_f1"]):
-            break
+    if is_distributed:
+        dist.destroy_process_group()
 
-    logger.info(f"Training complete. Best macro-F1={best_macro_f1:.4f} at epoch {best_epoch}.")
 
-    # ── 7. Find optimal per-label thresholds on val set ──
-    best_ckpt_dir = os.path.join(args.output_dir, "best_checkpoint")
-    logger.info(f"Reloading best checkpoint from {best_ckpt_dir} for threshold search ...")
-    model = PeftModel.from_pretrained(model.base_model.model, best_ckpt_dir)
-    model = model.to(device)
-    model.eval()
+def main():
+    args = parse_args()
+    num_gpus = torch.cuda.device_count()
 
-    logger.info("═══ Searching for optimal per-label thresholds on validation set ═══")
-    _, _, val_probs, val_labels = evaluate(model, val_loader, device, loss_fn)
-    optimal_thresholds = find_optimal_thresholds(val_labels, val_probs)
-
-    logger.info("═══ Val metrics with optimal thresholds ═══")
-    tuned_metrics = compute_metrics(val_labels, val_probs, optimal_thresholds)
-    logger.info(
-        f"Macro-F1: {tuned_metrics['macro_f1']:.4f} | "
-        f"Micro-F1: {tuned_metrics['micro_f1']:.4f} | "
-        f"Macro-AUC: {tuned_metrics['macro_auc']:.4f} | "
-        f"Macro-PR-AUC: {tuned_metrics['macro_pr_auc']:.4f}"
-    )
-    for label in LABELS:
-        logger.info(
-            f"  {label:15s}  t={optimal_thresholds[label]:.2f}  "
-            f"F1={tuned_metrics['per_label_f1'][label]:.4f}  "
-            f"P={tuned_metrics['per_label_precision'][label]:.4f}  "
-            f"R={tuned_metrics['per_label_recall'][label]:.4f}"
+    if num_gpus > 1:
+        torch.multiprocessing.spawn(
+            _worker,
+            args=(num_gpus, args),
+            nprocs=num_gpus,
+            join=True,
         )
-
-    thresh_path = os.path.join(args.output_dir, "best_checkpoint", "optimal_thresholds.json")
-    with open(thresh_path, "w") as f:
-        json.dump(optimal_thresholds, f, indent=2)
-    logger.info(f"Optimal thresholds saved to {thresh_path}")
+    else:
+        _worker(rank=0, world_size=1, args=args)
 
 
 if __name__ == "__main__":
