@@ -398,7 +398,7 @@ def load_trained_model(checkpoint_dir: str, base_model_name: str, device: str = 
         base_model_name,
         num_labels=NUM_LABELS,
         problem_type="multi_label_classification",
-        torch_dtype=torch.float16,
+        torch_dtype=torch.bfloat16,
     )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -432,7 +432,7 @@ def predict(model, tokenizer, texts: list[str], batch_size: int = 32,
         input_ids      = enc["input_ids"].to(device)
         attention_mask = enc["attention_mask"].to(device)
 
-        with torch.autocast(device_type=str(device)):
+        with torch.autocast(device_type="cuda"):
             logits = model(input_ids=input_ids, attention_mask=attention_mask).logits
         probs = torch.sigmoid(logits).cpu().float().numpy()
         all_probs.append(probs)
