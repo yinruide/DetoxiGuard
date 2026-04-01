@@ -341,9 +341,9 @@ def evaluate(model, loader, device, loss_fn, thresholds: dict[str, float] | None
             loss = loss_fn(outputs.logits, labels)
 
         total_loss += loss.item()
-        probs = torch.sigmoid(outputs.logits).cpu().numpy()   # (B, 6)
+        probs = torch.sigmoid(outputs.logits).cpu().float().numpy()   # (B, 6)
         all_probs.append(probs)
-        all_labels.append(labels.cpu().numpy())
+        all_labels.append(labels.cpu().float().numpy())
 
     all_probs  = np.concatenate(all_probs,  axis=0)
     all_labels = np.concatenate(all_labels, axis=0)
