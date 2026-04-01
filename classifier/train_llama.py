@@ -170,7 +170,7 @@ def build_lora_model(model_name: str, lora_r: int, lora_alpha: int, lora_dropout
         model_name,
         num_labels=NUM_LABELS,
         problem_type="multi_label_classification",
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
     )
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -398,7 +398,7 @@ def load_trained_model(checkpoint_dir: str, base_model_name: str, device: str = 
         base_model_name,
         num_labels=NUM_LABELS,
         problem_type="multi_label_classification",
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
     )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -522,7 +522,7 @@ def _worker(rank, world_size, args):
     model = model.to(device)
 
     if is_distributed:
-        model = DDP(model, device_ids=[rank], find_unused_parameters=True)
+        model = DDP(model, device_ids=[rank], find_unused_parameters=False)
 
     # ── 3. Compute class-imbalance weights ───
     pos_weight = compute_pos_weight(train_df[LABELS]).to(device)
@@ -633,7 +633,7 @@ def _worker(rank, world_size, args):
         logger.info(f"Reloading best checkpoint from {best_ckpt_dir} for threshold search ...")
         base_for_thresh = AutoModelForSequenceClassification.from_pretrained(
             args.model_name, num_labels=NUM_LABELS,
-            problem_type="multi_label_classification", torch_dtype=torch.bfloat16,
+            problem_type="multi_label_classification", dtype=torch.bfloat16,
         )
         base_for_thresh.config.pad_token_id = tokenizer.eos_token_id
         model_for_thresh = PeftModel.from_pretrained(base_for_thresh, best_ckpt_dir)
