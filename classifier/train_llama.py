@@ -400,9 +400,7 @@ def load_trained_model(checkpoint_dir: str, base_model_name: str, device: str = 
         problem_type="multi_label_classification",
         dtype=torch.bfloat16,
     )
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.eos_token
-        base_model.config.pad_token_id = tokenizer.eos_token_id
+    base_model.config.pad_token_id = tokenizer.pad_token_id
     model = PeftModel.from_pretrained(base_model, checkpoint_dir)
     model = model.to(device)
     model.eval()
@@ -452,7 +450,7 @@ def parse_args():
                         help="Pre-split training CSV (from split_data.py)")
     parser.add_argument("--val_csv",     type=str, default="data/val_split.csv",
                         help="Pre-split validation CSV (from split_data.py)")
-    parser.add_argument("--output_dir",  type=str, default="outputs/llama_lora")
+    parser.add_argument("--output_dir",  type=str, default="outputs/llama")
     parser.add_argument("--max_length",  type=int, default=512,
                         help="Hard cap on token length; actual padding is dynamic per batch")
     parser.add_argument("--epochs",      type=int, default=5)
