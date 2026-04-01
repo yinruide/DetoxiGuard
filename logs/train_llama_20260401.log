@@ -1,0 +1,385 @@
+(base) Singularity> python3 classifier/train_llama.py --train_csv data/train_split.csv --val_csv data/val_split.csvplit.csv --val_csv data/val_split.csv
+2026-04-01 13:16:37 | INFO | Device: cuda:0
+2026-04-01 13:16:37 | INFO | GPUs available: 2
+2026-04-01 13:16:37 | INFO | Effective batch size: 32 * 2 GPUs * 1 accum = 64
+2026-04-01 13:16:37 | INFO | Loading pre-split datasets ...
+2026-04-01 13:16:38 | INFO | Loading base model: meta-llama/Llama-3.2-1B
+2026-04-01 13:16:38 | INFO | Train: 201,194  |  Val: 22,355
+2026-04-01 13:16:38 | INFO | Loading base model: meta-llama/Llama-3.2-1B
+2026-04-01 13:16:38 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 13:16:38 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 13:16:38 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 13:16:38 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+Loading weights: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 146/146 [00:00<00:00, 351.53it/s]
+Loading weights: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 146/146 [00:00<00:00, 338.51it/s]
+LlamaForSequenceClassification LOAD REPORT from: meta-llama/Llama-3.2-1B
+Key          | Status  | 
+-------------+---------+-
+score.weight | MISSING | 
+
+Notes:
+- MISSING       :those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+LlamaForSequenceClassification LOAD REPORT from: meta-llama/Llama-3.2-1B
+Key          | Status  | 
+-------------+---------+-
+score.weight | MISSING | 
+
+Notes:
+- MISSING       :those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+2026-04-01 13:16:39 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 13:16:39 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 13:16:39 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-01 13:16:39 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/tokenizer_config.json "HTTP/1.1 200 OK"
+2026-04-01 13:16:39 | INFO | HTTP Request: GET https://huggingface.co/api/models/meta-llama/Llama-3.2-1B/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-01 13:16:39 | INFO | HTTP Request: GET https://huggingface.co/api/models/meta-llama/Llama-3.2-1B/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+2026-04-01 13:16:39 | INFO | HTTP Request: GET https://huggingface.co/api/models/meta-llama/Llama-3.2-1B/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-01 13:16:39 | INFO | HTTP Request: GET https://huggingface.co/api/models/meta-llama/Llama-3.2-1B/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-04-01 13:16:41 | INFO | HTTP Request: GET https://huggingface.co/api/models/meta-llama/Llama-3.2-1B "HTTP/1.1 200 OK"
+2026-04-01 13:16:41 | INFO | HTTP Request: GET https://huggingface.co/api/models/meta-llama/Llama-3.2-1B "HTTP/1.1 200 OK"
+trainable params: 1,716,224 || all params: 1,237,542,912 || trainable%: 0.1387
+trainable params: 1,716,224 || all params: 1,237,542,912 || trainable%: 0.1387
+2026-04-01 13:17:22 | INFO | pos_weight per label:
+2026-04-01 13:17:22 | INFO | pos_weight per label:
+2026-04-01 13:17:22 | INFO |   toxic          : 9.45
+2026-04-01 13:17:22 | INFO |   toxic          : 9.45
+2026-04-01 13:17:22 | INFO |   severe_toxic   : 112.93
+2026-04-01 13:17:22 | INFO |   severe_toxic   : 112.93
+2026-04-01 13:17:22 | INFO |   obscene        : 17.41
+2026-04-01 13:17:22 | INFO |   obscene        : 17.41
+2026-04-01 13:17:22 | INFO |   threat         : 323.51
+2026-04-01 13:17:22 | INFO |   threat         : 323.51
+2026-04-01 13:17:22 | INFO |   insult         : 18.78
+2026-04-01 13:17:22 | INFO |   insult         : 18.78
+2026-04-01 13:17:22 | INFO |   identity_hate  : 104.61
+2026-04-01 13:17:22 | INFO |   identity_hate  : 104.61
+2026-04-01 13:17:22 | INFO | ═══ Epoch 1/5 ═══
+2026-04-01 13:18:36 | INFO |   step 100/3144 | loss 1.3183
+2026-04-01 13:19:36 | INFO |   step 200/3144 | loss 0.7088
+2026-04-01 13:20:36 | INFO |   step 300/3144 | loss 0.5230
+2026-04-01 13:21:36 | INFO |   step 400/3144 | loss 0.1137
+2026-04-01 13:22:36 | INFO |   step 500/3144 | loss 0.2671
+2026-04-01 13:23:37 | INFO |   step 600/3144 | loss 0.0734
+2026-04-01 13:24:38 | INFO |   step 700/3144 | loss 0.7456
+2026-04-01 13:25:37 | INFO |   step 800/3144 | loss 0.1101
+2026-04-01 13:26:37 | INFO |   step 900/3144 | loss 0.2275
+2026-04-01 13:27:38 | INFO |   step 1000/3144 | loss 1.0108
+2026-04-01 13:28:38 | INFO |   step 1100/3144 | loss 0.9562
+2026-04-01 13:29:38 | INFO |   step 1200/3144 | loss 0.0813
+2026-04-01 13:30:38 | INFO |   step 1300/3144 | loss 0.2748
+2026-04-01 13:31:39 | INFO |   step 1400/3144 | loss 0.2056
+2026-04-01 13:32:39 | INFO |   step 1500/3144 | loss 0.2261
+2026-04-01 13:33:40 | INFO |   step 1600/3144 | loss 0.0754
+2026-04-01 13:34:39 | INFO |   step 1700/3144 | loss 0.1615
+2026-04-01 13:35:40 | INFO |   step 1800/3144 | loss 0.1419
+2026-04-01 13:36:39 | INFO |   step 1900/3144 | loss 0.2738
+2026-04-01 13:37:39 | INFO |   step 2000/3144 | loss 0.1641
+2026-04-01 13:38:40 | INFO |   step 2100/3144 | loss 0.0452
+2026-04-01 13:39:40 | INFO |   step 2200/3144 | loss 0.1844
+2026-04-01 13:40:42 | INFO |   step 2300/3144 | loss 0.2278
+2026-04-01 13:41:41 | INFO |   step 2400/3144 | loss 0.5431
+2026-04-01 13:42:42 | INFO |   step 2500/3144 | loss 0.0752
+2026-04-01 13:43:43 | INFO |   step 2600/3144 | loss 0.1553
+2026-04-01 13:44:44 | INFO |   step 2700/3144 | loss 0.1644
+2026-04-01 13:45:43 | INFO |   step 2800/3144 | loss 0.1366
+2026-04-01 13:46:41 | INFO |   step 2900/3144 | loss 0.2773
+2026-04-01 13:47:41 | INFO |   step 3000/3144 | loss 0.0516
+2026-04-01 13:48:41 | INFO |   step 3100/3144 | loss 0.1676
+2026-04-01 13:52:07 | INFO | Train loss: 0.4240 | Val loss: 0.2179 | Macro-F1: 0.5514 | Macro-AUC: 0.9914 | Macro-PR-AUC: 0.6898
+2026-04-01 13:52:07 | INFO |   toxic            F1=0.7456  P=0.6138  R=0.9495  AUC=0.9866  PR-AUC=0.8951
+2026-04-01 13:52:07 | INFO |   severe_toxic     F1=0.3103  P=0.1854  R=0.9490  AUC=0.9885  PR-AUC=0.3706
+2026-04-01 13:52:07 | INFO |   obscene          F1=0.6729  P=0.5137  R=0.9753  AUC=0.9922  PR-AUC=0.8813
+2026-04-01 13:52:07 | INFO |   threat           F1=0.3864  P=0.2403  R=0.9855  AUC=0.9984  PR-AUC=0.5632
+2026-04-01 13:52:07 | INFO |   insult           F1=0.6569  P=0.4968  R=0.9690  AUC=0.9897  PR-AUC=0.8161
+2026-04-01 13:52:07 | INFO |   identity_hate    F1=0.5366  P=0.3764  R=0.9340  AUC=0.9928  PR-AUC=0.6124
+2026-04-01 13:52:07 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 13:52:07 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 13:52:07 | INFO |   ✓ New best model saved (macro-F1=0.5514)
+/ext3/miniforge3/lib/python3.13/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+2026-04-01 13:52:07 | INFO | ═══ Epoch 2/5 ═══
+2026-04-01 13:53:19 | INFO |   step 100/3144 | loss 0.2516
+2026-04-01 13:54:20 | INFO |   step 200/3144 | loss 0.0994
+2026-04-01 13:55:19 | INFO |   step 300/3144 | loss 0.4666
+2026-04-01 13:56:20 | INFO |   step 400/3144 | loss 0.1068
+2026-04-01 13:57:21 | INFO |   step 500/3144 | loss 0.1113
+2026-04-01 13:58:21 | INFO |   step 600/3144 | loss 0.0512
+2026-04-01 13:59:21 | INFO |   step 700/3144 | loss 0.0896
+2026-04-01 14:00:21 | INFO |   step 800/3144 | loss 0.2256
+2026-04-01 14:01:21 | INFO |   step 900/3144 | loss 0.0594
+2026-04-01 14:02:22 | INFO |   step 1000/3144 | loss 0.2829
+2026-04-01 14:03:23 | INFO |   step 1100/3144 | loss 0.0528
+2026-04-01 14:04:25 | INFO |   step 1200/3144 | loss 0.0407
+2026-04-01 14:05:24 | INFO |   step 1300/3144 | loss 0.1015
+2026-04-01 14:06:24 | INFO |   step 1400/3144 | loss 0.1839
+2026-04-01 14:07:24 | INFO |   step 1500/3144 | loss 0.2728
+2026-04-01 14:08:24 | INFO |   step 1600/3144 | loss 0.0079
+2026-04-01 14:09:25 | INFO |   step 1700/3144 | loss 0.1708
+2026-04-01 14:10:25 | INFO |   step 1800/3144 | loss 0.2098
+2026-04-01 14:11:24 | INFO |   step 1900/3144 | loss 0.0610
+2026-04-01 14:12:23 | INFO |   step 2000/3144 | loss 0.0277
+2026-04-01 14:13:23 | INFO |   step 2100/3144 | loss 0.1213
+2026-04-01 14:14:24 | INFO |   step 2200/3144 | loss 0.0702
+2026-04-01 14:15:25 | INFO |   step 2300/3144 | loss 0.6827
+2026-04-01 14:16:25 | INFO |   step 2400/3144 | loss 0.1025
+2026-04-01 14:17:25 | INFO |   step 2500/3144 | loss 0.0689
+2026-04-01 14:18:26 | INFO |   step 2600/3144 | loss 0.1379
+2026-04-01 14:19:27 | INFO |   step 2700/3144 | loss 0.1659
+2026-04-01 14:20:29 | INFO |   step 2800/3144 | loss 0.1005
+2026-04-01 14:21:30 | INFO |   step 2900/3144 | loss 0.0362
+2026-04-01 14:22:30 | INFO |   step 3000/3144 | loss 0.1286
+2026-04-01 14:23:28 | INFO |   step 3100/3144 | loss 0.3839
+2026-04-01 14:26:53 | INFO | Train loss: 0.2443 | Val loss: 0.3313 | Macro-F1: 0.6348 | Macro-AUC: 0.9912 | Macro-PR-AUC: 0.7216
+2026-04-01 14:26:53 | INFO |   toxic            F1=0.7829  P=0.6790  R=0.9242  AUC=0.9872  PR-AUC=0.8994
+2026-04-01 14:26:53 | INFO |   severe_toxic     F1=0.4091  P=0.2677  R=0.8673  AUC=0.9889  PR-AUC=0.4191
+2026-04-01 14:26:53 | INFO |   obscene          F1=0.7220  P=0.5796  R=0.9572  AUC=0.9921  PR-AUC=0.8804
+2026-04-01 14:26:53 | INFO |   threat           F1=0.5586  P=0.4052  R=0.8986  AUC=0.9972  PR-AUC=0.6135
+2026-04-01 14:26:53 | INFO |   insult           F1=0.7166  P=0.5874  R=0.9186  AUC=0.9897  PR-AUC=0.8303
+2026-04-01 14:26:53 | INFO |   identity_hate    F1=0.6198  P=0.4805  R=0.8726  AUC=0.9924  PR-AUC=0.6870
+2026-04-01 14:26:53 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 14:26:53 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 14:26:54 | INFO |   ✓ New best model saved (macro-F1=0.6348)
+/ext3/miniforge3/lib/python3.13/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+2026-04-01 14:26:54 | INFO | ═══ Epoch 3/5 ═══
+2026-04-01 14:28:06 | INFO |   step 100/3144 | loss 0.1032
+2026-04-01 14:29:07 | INFO |   step 200/3144 | loss 0.1039
+2026-04-01 14:30:07 | INFO |   step 300/3144 | loss 0.0543
+2026-04-01 14:31:06 | INFO |   step 400/3144 | loss 0.2202
+2026-04-01 14:32:06 | INFO |   step 500/3144 | loss 0.0331
+2026-04-01 14:33:07 | INFO |   step 600/3144 | loss 0.0510
+2026-04-01 14:34:08 | INFO |   step 700/3144 | loss 0.0010
+2026-04-01 14:35:08 | INFO |   step 800/3144 | loss 0.0423
+2026-04-01 14:36:08 | INFO |   step 900/3144 | loss 0.1079
+2026-04-01 14:37:08 | INFO |   step 1000/3144 | loss 0.1217
+2026-04-01 14:38:09 | INFO |   step 1100/3144 | loss 0.2397
+2026-04-01 14:39:10 | INFO |   step 1200/3144 | loss 0.0253
+2026-04-01 14:40:10 | INFO |   step 1300/3144 | loss 0.1009
+2026-04-01 14:41:10 | INFO |   step 1400/3144 | loss 0.1565
+2026-04-01 14:42:09 | INFO |   step 1500/3144 | loss 0.1654
+2026-04-01 14:43:10 | INFO |   step 1600/3144 | loss 0.0583
+2026-04-01 14:44:09 | INFO |   step 1700/3144 | loss 0.0266
+2026-04-01 14:45:10 | INFO |   step 1800/3144 | loss 0.3162
+2026-04-01 14:46:11 | INFO |   step 1900/3144 | loss 0.1025
+2026-04-01 14:47:12 | INFO |   step 2000/3144 | loss 0.4986
+2026-04-01 14:48:13 | INFO |   step 2100/3144 | loss 0.1998
+2026-04-01 14:49:12 | INFO |   step 2200/3144 | loss 0.0836
+2026-04-01 14:50:12 | INFO |   step 2300/3144 | loss 0.0679
+2026-04-01 14:51:12 | INFO |   step 2400/3144 | loss 0.0238
+2026-04-01 14:52:12 | INFO |   step 2500/3144 | loss 0.1572
+2026-04-01 14:53:10 | INFO |   step 2600/3144 | loss 0.1017
+2026-04-01 14:54:12 | INFO |   step 2700/3144 | loss 0.7178
+2026-04-01 14:55:12 | INFO |   step 2800/3144 | loss 0.1785
+2026-04-01 14:56:12 | INFO |   step 2900/3144 | loss 0.0607
+2026-04-01 14:57:12 | INFO |   step 3000/3144 | loss 0.0655
+2026-04-01 14:58:11 | INFO |   step 3100/3144 | loss 0.6794
+2026-04-01 15:01:35 | INFO | Train loss: 0.1808 | Val loss: 0.4029 | Macro-F1: 0.6526 | Macro-AUC: 0.9914 | Macro-PR-AUC: 0.7232
+2026-04-01 15:01:35 | INFO |   toxic            F1=0.7812  P=0.6743  R=0.9284  AUC=0.9873  PR-AUC=0.9001
+2026-04-01 15:01:35 | INFO |   severe_toxic     F1=0.4083  P=0.2638  R=0.9031  AUC=0.9892  PR-AUC=0.4090
+2026-04-01 15:01:35 | INFO |   obscene          F1=0.7716  P=0.6618  R=0.9250  AUC=0.9924  PR-AUC=0.8912
+2026-04-01 15:01:35 | INFO |   threat           F1=0.6087  P=0.4565  R=0.9130  AUC=0.9960  PR-AUC=0.6258
+2026-04-01 15:01:35 | INFO |   insult           F1=0.7276  P=0.5951  R=0.9363  AUC=0.9900  PR-AUC=0.8345
+2026-04-01 15:01:35 | INFO |   identity_hate    F1=0.6181  P=0.4957  R=0.8208  AUC=0.9933  PR-AUC=0.6784
+2026-04-01 15:01:35 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 15:01:35 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 15:01:36 | INFO |   ✓ New best model saved (macro-F1=0.6526)
+/ext3/miniforge3/lib/python3.13/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+2026-04-01 15:01:36 | INFO | ═══ Epoch 4/5 ═══
+2026-04-01 15:02:47 | INFO |   step 100/3144 | loss 0.0306
+2026-04-01 15:03:47 | INFO |   step 200/3144 | loss 0.0693
+2026-04-01 15:04:48 | INFO |   step 300/3144 | loss 0.0763
+2026-04-01 15:05:48 | INFO |   step 400/3144 | loss 0.0303
+2026-04-01 15:06:48 | INFO |   step 500/3144 | loss 0.0262
+2026-04-01 15:07:48 | INFO |   step 600/3144 | loss 0.0143
+2026-04-01 15:08:48 | INFO |   step 700/3144 | loss 0.0674
+2026-04-01 15:09:49 | INFO |   step 800/3144 | loss 0.0622
+2026-04-01 15:10:49 | INFO |   step 900/3144 | loss 0.0798
+2026-04-01 15:11:49 | INFO |   step 1000/3144 | loss 0.0490
+2026-04-01 15:12:50 | INFO |   step 1100/3144 | loss 0.0207
+2026-04-01 15:13:50 | INFO |   step 1200/3144 | loss 0.0196
+2026-04-01 15:14:50 | INFO |   step 1300/3144 | loss 0.4638
+2026-04-01 15:15:51 | INFO |   step 1400/3144 | loss 0.1413
+2026-04-01 15:16:51 | INFO |   step 1500/3144 | loss 0.0525
+2026-04-01 15:17:50 | INFO |   step 1600/3144 | loss 0.0564
+2026-04-01 15:18:50 | INFO |   step 1700/3144 | loss 0.0512
+2026-04-01 15:19:51 | INFO |   step 1800/3144 | loss 0.5796
+2026-04-01 15:20:50 | INFO |   step 1900/3144 | loss 0.0212
+2026-04-01 15:21:50 | INFO |   step 2000/3144 | loss 0.0721
+2026-04-01 15:22:49 | INFO |   step 2100/3144 | loss 0.1376
+2026-04-01 15:23:48 | INFO |   step 2200/3144 | loss 0.0904
+2026-04-01 15:24:48 | INFO |   step 2300/3144 | loss 0.1160
+2026-04-01 15:25:49 | INFO |   step 2400/3144 | loss 0.1195
+2026-04-01 15:26:48 | INFO |   step 2500/3144 | loss 0.1673
+2026-04-01 15:27:49 | INFO |   step 2600/3144 | loss 0.0796
+2026-04-01 15:28:49 | INFO |   step 2700/3144 | loss 0.0522
+2026-04-01 15:29:48 | INFO |   step 2800/3144 | loss 0.0764
+2026-04-01 15:30:49 | INFO |   step 2900/3144 | loss 0.0339
+2026-04-01 15:31:49 | INFO |   step 3000/3144 | loss 0.0588
+2026-04-01 15:32:50 | INFO |   step 3100/3144 | loss 0.0589
+2026-04-01 15:36:15 | INFO | Train loss: 0.1172 | Val loss: 0.4742 | Macro-F1: 0.6563 | Macro-AUC: 0.9911 | Macro-PR-AUC: 0.7183
+2026-04-01 15:36:15 | INFO |   toxic            F1=0.7860  P=0.6814  R=0.9284  AUC=0.9871  PR-AUC=0.8980
+2026-04-01 15:36:15 | INFO |   severe_toxic     F1=0.4183  P=0.2761  R=0.8622  AUC=0.9882  PR-AUC=0.3959
+2026-04-01 15:36:15 | INFO |   obscene          F1=0.7660  P=0.6504  R=0.9316  AUC=0.9923  PR-AUC=0.8815
+2026-04-01 15:36:15 | INFO |   threat           F1=0.6374  P=0.5133  R=0.8406  AUC=0.9969  PR-AUC=0.6602
+2026-04-01 15:36:15 | INFO |   insult           F1=0.7250  P=0.5932  R=0.9319  AUC=0.9895  PR-AUC=0.8164
+2026-04-01 15:36:15 | INFO |   identity_hate    F1=0.6050  P=0.4656  R=0.8632  AUC=0.9923  PR-AUC=0.6577
+2026-04-01 15:36:15 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 15:36:15 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 15:36:16 | INFO |   ✓ New best model saved (macro-F1=0.6563)
+/ext3/miniforge3/lib/python3.13/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+2026-04-01 15:36:16 | INFO | ═══ Epoch 5/5 ═══
+2026-04-01 15:37:28 | INFO |   step 100/3144 | loss 0.0743
+2026-04-01 15:38:30 | INFO |   step 200/3144 | loss 0.0196
+2026-04-01 15:39:29 | INFO |   step 300/3144 | loss 0.1325
+2026-04-01 15:40:30 | INFO |   step 400/3144 | loss 0.0326
+2026-04-01 15:41:30 | INFO |   step 500/3144 | loss 0.1157
+2026-04-01 15:42:31 | INFO |   step 600/3144 | loss 0.0323
+2026-04-01 15:43:31 | INFO |   step 700/3144 | loss 0.0882
+2026-04-01 15:44:31 | INFO |   step 800/3144 | loss 0.0783
+2026-04-01 15:45:32 | INFO |   step 900/3144 | loss 0.1255
+2026-04-01 15:46:32 | INFO |   step 1000/3144 | loss 0.1368
+2026-04-01 15:47:30 | INFO |   step 1100/3144 | loss 0.0480
+2026-04-01 15:48:30 | INFO |   step 1200/3144 | loss 0.0764
+2026-04-01 15:49:30 | INFO |   step 1300/3144 | loss 0.1500
+2026-04-01 15:50:30 | INFO |   step 1400/3144 | loss 0.0554
+2026-04-01 15:51:32 | INFO |   step 1500/3144 | loss 0.0242
+2026-04-01 15:52:32 | INFO |   step 1600/3144 | loss 0.0179
+2026-04-01 15:53:33 | INFO |   step 1700/3144 | loss 0.0591
+2026-04-01 15:54:32 | INFO |   step 1800/3144 | loss 0.0393
+2026-04-01 15:55:32 | INFO |   step 1900/3144 | loss 0.1017
+2026-04-01 15:56:33 | INFO |   step 2000/3144 | loss 0.0369
+2026-04-01 15:57:34 | INFO |   step 2100/3144 | loss 0.0459
+2026-04-01 15:58:35 | INFO |   step 2200/3144 | loss 0.1123
+2026-04-01 15:59:34 | INFO |   step 2300/3144 | loss 0.0076
+2026-04-01 16:00:34 | INFO |   step 2400/3144 | loss 0.0922
+2026-04-01 16:01:35 | INFO |   step 2500/3144 | loss 0.0344
+2026-04-01 16:02:34 | INFO |   step 2600/3144 | loss 0.0215
+2026-04-01 16:03:34 | INFO |   step 2700/3144 | loss 0.1058
+2026-04-01 16:04:34 | INFO |   step 2800/3144 | loss 0.0475
+2026-04-01 16:05:35 | INFO |   step 2900/3144 | loss 0.0223
+2026-04-01 16:06:34 | INFO |   step 3000/3144 | loss 0.1134
+2026-04-01 16:07:34 | INFO |   step 3100/3144 | loss 0.0727
+2026-04-01 16:10:59 | INFO | Train loss: 0.0818 | Val loss: 0.7160 | Macro-F1: 0.6778 | Macro-AUC: 0.9889 | Macro-PR-AUC: 0.7130
+2026-04-01 16:10:59 | INFO |   toxic            F1=0.8021  P=0.7176  R=0.9093  AUC=0.9867  PR-AUC=0.8938
+2026-04-01 16:10:59 | INFO |   severe_toxic     F1=0.4506  P=0.3150  R=0.7908  AUC=0.9823  PR-AUC=0.4030
+2026-04-01 16:10:59 | INFO |   obscene          F1=0.7877  P=0.6976  R=0.9044  AUC=0.9917  PR-AUC=0.8772
+2026-04-01 16:10:59 | INFO |   threat           F1=0.6444  P=0.5225  R=0.8406  AUC=0.9948  PR-AUC=0.6393
+2026-04-01 16:10:59 | INFO |   insult           F1=0.7447  P=0.6373  R=0.8956  AUC=0.9887  PR-AUC=0.8162
+2026-04-01 16:10:59 | INFO |   identity_hate    F1=0.6371  P=0.5392  R=0.7783  AUC=0.9890  PR-AUC=0.6487
+2026-04-01 16:10:59 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 16:10:59 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 16:11:00 | INFO |   ✓ New best model saved (macro-F1=0.6778)
+/ext3/miniforge3/lib/python3.13/site-packages/torch/distributed/c10d_logger.py:83: UserWarning: barrier(): using the device under current context. You can specify `device_id` in `init_process_group` to mute this warning.
+  return func(*args, **kwargs)
+2026-04-01 16:11:00 | INFO | Training complete. Best macro-F1=0.6778 at epoch 5.
+2026-04-01 16:11:00 | INFO | Reloading best checkpoint from outputs/llama_lora/best_checkpoint for threshold search ...
+2026-04-01 16:11:00 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+2026-04-01 16:11:00 | INFO | HTTP Request: HEAD https://huggingface.co/meta-llama/Llama-3.2-1B/resolve/main/config.json "HTTP/1.1 200 OK"
+Loading weights: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 146/146 [00:00<00:00, 5785.14it/s]
+LlamaForSequenceClassification LOAD REPORT from: meta-llama/Llama-3.2-1B
+Key          | Status  | 
+-------------+---------+-
+score.weight | MISSING | 
+
+Notes:
+- MISSING       :those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+2026-04-01 16:11:01 | INFO | ═══ Searching for optimal per-label thresholds on validation set ═══
+2026-04-01 16:13:59 | INFO |   optimal threshold for toxic          : 0.87  (F1=0.8190)
+2026-04-01 16:13:59 | INFO |   optimal threshold for severe_toxic   : 0.92  (F1=0.5096)
+2026-04-01 16:14:00 | INFO |   optimal threshold for obscene        : 0.92  (F1=0.8075)
+2026-04-01 16:14:00 | INFO |   optimal threshold for threat         : 0.95  (F1=0.6939)
+2026-04-01 16:14:00 | INFO |   optimal threshold for insult         : 0.89  (F1=0.7707)
+2026-04-01 16:14:01 | INFO |   optimal threshold for identity_hate  : 0.79  (F1=0.6609)
+2026-04-01 16:14:01 | INFO | ═══ Val metrics with optimal thresholds ═══
+2026-04-01 16:14:01 | INFO | Macro-F1: 0.7102 | Micro-F1: 0.7803 | Macro-AUC: 0.9889 | Macro-PR-AUC: 0.7130
+2026-04-01 16:14:01 | INFO |   toxic            t=0.87  F1=0.8190  P=0.8126  R=0.8255
+2026-04-01 16:14:01 | INFO |   severe_toxic     t=0.92  F1=0.5096  P=0.4080  R=0.6786
+2026-04-01 16:14:01 | INFO |   obscene          t=0.92  F1=0.8075  P=0.8118  R=0.8031
+2026-04-01 16:14:01 | INFO |   threat           t=0.95  F1=0.6939  P=0.6538  R=0.7391
+2026-04-01 16:14:01 | INFO |   insult           t=0.89  F1=0.7707  P=0.7359  R=0.8088
+2026-04-01 16:14:01 | INFO |   identity_hate    t=0.79  F1=0.6609  P=0.6096  R=0.7217
+2026-04-01 16:14:01 | INFO | Optimal thresholds saved to outputs/llama_lora/best_checkpoint/optimal_thresholds.json
+(base) Singularity> ls outputs/llama_lora/best_checkpoint/
+README.md  adapter_config.json  adapter_model.safetensors  optimal_thresholds.json  tokenizer.json  tokenizer_config.json
+(base) Singularity> cd /scratch/ry2406/DetoxiGuard
+(base) Singularity> unset GIT_ASKPASS
+(base) Singularity> git add classifier/train_llama.py
+(base) Singularity> git add outputs/llama_lora/best_checkpoint/
+(base) Singularity> git add data/train_split.csv data/val_split.csv
+The following paths are ignored by one of your .gitignore files:
+data/train_split.csv
+data/val_split.csv
+hint: Use -f if you really want to add them.
+hint: Turn this message off by running
+hint: "git config advice.addIgnoredFile false"
+(base) Singularity> git add -f data/train_split.csv data/val_split.csv
+(base) Singularity> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   data/train_split.csv
+        new file:   data/val_split.csv
+        new file:   outputs/llama_lora/best_checkpoint/README.md
+        new file:   outputs/llama_lora/best_checkpoint/adapter_config.json
+        new file:   outputs/llama_lora/best_checkpoint/adapter_model.safetensors
+        new file:   outputs/llama_lora/best_checkpoint/optimal_thresholds.json
+        new file:   outputs/llama_lora/best_checkpoint/tokenizer.json
+        new file:   outputs/llama_lora/best_checkpoint/tokenizer_config.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        Miniforge3-Linux-x86_64.sh
+        get-pip.py
+
+(base) Singularity> git commit -m "LLaMA LoRA training: best checkpoint + optimal thresholds + data splits"
+[main da04155] LLaMA LoRA training: best checkpoint + optimal thresholds + data splits
+ Committer: Ruide Yin <ry2406@b-20-62.c.hpc-slurm-9c75.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 8 files changed, 2047653 insertions(+)
+ create mode 100644 data/train_split.csv
+ create mode 100644 data/val_split.csv
+ create mode 100644 outputs/llama_lora/best_checkpoint/README.md
+ create mode 100644 outputs/llama_lora/best_checkpoint/adapter_config.json
+ create mode 100644 outputs/llama_lora/best_checkpoint/adapter_model.safetensors
+ create mode 100644 outputs/llama_lora/best_checkpoint/optimal_thresholds.json
+ create mode 100644 outputs/llama_lora/best_checkpoint/tokenizer.json
+ create mode 100644 outputs/llama_lora/best_checkpoint/tokenizer_config.json
+(base) Singularity> git push
+Enumerating objects: 16, done.
+Counting objects: 100% (16/16), done.
+Delta compression using up to 24 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (14/14), 45.41 MiB | 5.28 MiB/s, done.
+Total 14 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote: warning: See https://gh.io/lfs for more information.
+remote: warning: File data/train_split.csv is 81.91 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+To https://github.com/ry2406/DetoxiGuard.git
+   adbfede..da04155  main -> main
+(base) Singularity> cat outputs/llama_lora/best_checkpoint/optimal_thresholds.json
+{
+  "toxic": 0.8700000000000002,
+  "severe_toxic": 0.9200000000000003,
+  "obscene": 0.9200000000000003,
+  "threat": 0.9500000000000002,
+  "insult": 0.8900000000000002,
+  "identity_hate": 0.7900000000000001
+(base) Singularity> wc -l data/train_split.csv data/val_split.csvv
+  715547 data/train_split.csv
+   80827 data/val_split.csv
+  796374 total
