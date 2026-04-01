@@ -134,7 +134,7 @@ def build_metrics_table(labels_arr: np.ndarray, probs_arr: np.ndarray,
         "t=0.5 F1": f1_score(labels_arr, all_preds_def, average="macro", zero_division=0),
         "t=0.5 P": precision_score(labels_arr, all_preds_def, average="macro", zero_division=0),
         "t=0.5 R": recall_score(labels_arr, all_preds_def, average="macro", zero_division=0),
-        "opt_t": "",
+        "opt_t": np.nan,
         "opt F1": f1_score(labels_arr, all_preds_opt, average="macro", zero_division=0),
         "opt P": precision_score(labels_arr, all_preds_opt, average="macro", zero_division=0),
         "opt R": recall_score(labels_arr, all_preds_opt, average="macro", zero_division=0),
@@ -147,7 +147,7 @@ def build_metrics_table(labels_arr: np.ndarray, probs_arr: np.ndarray,
         "t=0.5 F1": f1_score(labels_arr, all_preds_def, average="micro", zero_division=0),
         "t=0.5 P": precision_score(labels_arr, all_preds_def, average="micro", zero_division=0),
         "t=0.5 R": recall_score(labels_arr, all_preds_def, average="micro", zero_division=0),
-        "opt_t": "",
+        "opt_t": np.nan,
         "opt F1": f1_score(labels_arr, all_preds_opt, average="micro", zero_division=0),
         "opt P": precision_score(labels_arr, all_preds_opt, average="micro", zero_division=0),
         "opt R": recall_score(labels_arr, all_preds_opt, average="micro", zero_division=0),
@@ -416,7 +416,7 @@ def main():
     print("SUMMARY METRICS")
     print("=" * 60)
     metrics_df = build_metrics_table(labels_arr, probs_arr, thresholds)
-    print(metrics_df.to_string(index=False, float_format="%.4f"))
+    print(metrics_df.to_string(index=False, float_format=lambda x: f"{x:.4f}"))
     csv_path = os.path.join(args.output_dir, "metrics_summary.csv")
     metrics_df.to_csv(csv_path, index=False, float_format="%.4f")
     print(f"\n  Saved: {csv_path}")
