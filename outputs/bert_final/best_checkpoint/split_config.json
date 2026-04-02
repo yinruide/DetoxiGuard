@@ -1,0 +1,6 @@
+{
+  "train_csv": "data\\train_split.csv",
+  "val_csv": "data\\val_split.csv",
+  "seed": 49458345,
+  "shared_split_expected": true
+}
