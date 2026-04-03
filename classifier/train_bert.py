@@ -442,6 +442,7 @@ def load_trained_model(checkpoint_dir: str, base_model_name: str, device: str = 
     For BERT we reload directly from checkpoint_dir. base_model_name is kept in
     the signature so both models can be called through one shared interface.
     """
+    checkpoint_dir = os.path.abspath(checkpoint_dir)
     tokenizer_source = checkpoint_dir if os.path.exists(checkpoint_dir) else base_model_name
     tokenizer = AutoTokenizer.from_pretrained(
         tokenizer_source,
