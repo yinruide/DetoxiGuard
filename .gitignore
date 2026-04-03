@@ -211,3 +211,6 @@ __pycache__/
 *.pt
 *.bin
 .ipynb_checkpoints/
+Miniforge3-Linux-x86_64.sh
+get-pip.py
+python
