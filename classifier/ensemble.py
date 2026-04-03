@@ -375,7 +375,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description="Ensemble BERT + LLaMA for toxic comment classification"
     )
-    parser.add_argument("--bert_ckpt", type=str, default="outputs/bert/best_checkpoint",
+    parser.add_argument("--bert_ckpt", type=str, default="outputs/bert_final/best_checkpoint",
                         help="Path to the fine-tuned BERT checkpoint directory")
     parser.add_argument("--bert_base", type=str, default="bert-base-uncased",
                         help="HuggingFace model ID for the BERT base model")
