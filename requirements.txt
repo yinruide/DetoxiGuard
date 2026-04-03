@@ -6,3 +6,6 @@ scikit-learn
 pandas
 numpy
 accelerate
+iterative-stratification
+langgraph
+langchain-core
