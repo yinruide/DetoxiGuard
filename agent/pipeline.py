@@ -69,7 +69,7 @@ def init_ensemble(
     llama_ckpt: str,
     llama_base: str,
     ensemble_dir: str,
-    device: str = "cuda",
+    device: str = "cpu",
 ) -> None:
     """Call once before running the pipeline to load both models."""
     if USE_MOCK_SCORER:
@@ -246,6 +246,9 @@ if __name__ == "__main__":
         llama_ckpt=os.path.join(_REPO_ROOT, "outputs/llama_lora/best_checkpoint"),
         llama_base="meta-llama/Llama-3.2-1B",
         ensemble_dir=os.path.join(_REPO_ROOT, "outputs/ensemble"),
+        device="cpu",
     )
-    answer = run_pipeline("tell me something")
-    print(f"\n=== Pipeline returned ===\n{answer}")
+    user_input = input("请输入你的问题：")
+    result = run_pipeline(user_input)
+    print("\n=== Pipeline returned ===")
+    print(result)
