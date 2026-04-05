@@ -1,9 +1,9 @@
 """
 pipeline.py
 -----------
-LangGraph agent pipeline for toxic comment detection and correction.
+LangGraph agent pipeline for user input sanitisation.
 
-Flow: generate draft -> score toxicity -> if toxic, revise -> re-score -> loop
+Flow: score user input -> if toxic, GPT revise -> re-score -> loop until clean or max iterations -> output
 """
 
 import sys
@@ -50,13 +50,13 @@ def _get_openai_client() -> openai.OpenAI:
 
 class GraphState(TypedDict):
     user_input: str
-    draft_response: str
+    current_text: str  # text being checked / rewritten; starts as user_input
     toxicity_probs: list[float]  # length 6, label order matches LABELS
     is_toxic: bool
     toxic_labels: dict[str, float]  # triggered labels with their probs
     iteration: int
     max_iterations: int  # default 3
-    final_response: str
+    final_output: str
 
 
 # ──────────────────────────────────────────────
@@ -88,23 +88,8 @@ def init_ensemble(
 # Nodes
 # ──────────────────────────────────────────────
 
-def generate_response(state: GraphState) -> dict:
-    """Generate an initial response to the user's question via GPT-4o."""
-    client = _get_openai_client()
-    resp = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant. Please answer the user's question in English."},
-            {"role": "user", "content": state["user_input"]},
-        ],
-    )
-    draft = resp.choices[0].message.content or ""
-    print(f"[generate_response] draft: {draft!r}")
-    return {"draft_response": draft, "iteration": 0}
-
-
 def score_toxicity(state: GraphState) -> dict:
-    """Score the current draft_response using the BERT+LLaMA ensemble."""
+    """Score current_text using the BERT+LLaMA ensemble."""
     _MOCK_THRESHOLD = 0.5
 
     if USE_MOCK_SCORER:
@@ -116,7 +101,7 @@ def score_toxicity(state: GraphState) -> dict:
         }
         toxic = len(triggered) > 0
     else:
-        probs, preds = predict([state["draft_response"]])
+        probs, preds = predict([state["current_text"]])
         probs_row = probs[0].tolist()   # (6,)
         preds_row = preds[0]            # (6,) int
         toxic = bool(preds_row.any())
@@ -138,12 +123,12 @@ def score_toxicity(state: GraphState) -> dict:
 
 
 def revise_response(state: GraphState) -> dict:
-    """Revise the draft to remove toxic content while preserving useful info."""
+    """Rewrite current_text to remove toxic content while preserving meaning."""
     new_iter = state["iteration"] + 1
     triggered = state.get("toxic_labels", {})
 
     if not triggered:
-        print(f"[revise_response] no toxic labels triggered, skipping revision")
+        print("[revise_response] no toxic labels triggered, skipping revision")
         return {"iteration": new_iter}
 
     trigger_str = ", ".join(f"{l}({p})" for l, p in triggered.items())
@@ -155,33 +140,33 @@ def revise_response(state: GraphState) -> dict:
             {
                 "role": "system",
                 "content": (
-                    "You are a content moderation assistant. Your task is to revise "
-                    "a response that has been flagged as toxic. Only modify the parts "
-                    "that are problematic — preserve the original meaning and any "
+                    "You are a content sanitisation assistant. Your task is to "
+                    "rewrite text that has been flagged as toxic. Only remove or "
+                    "rephrase the toxic parts — preserve the original meaning and "
                     "useful information as much as possible."
                 ),
             },
             {
                 "role": "user",
                 "content": (
-                    f"Original response:\n{state['draft_response']}\n\n"
+                    f"Original text:\n{state['current_text']}\n\n"
                     f"Triggered toxic labels: {trigger_str}\n\n"
                     "Please only fix the flagged issues above. "
-                    "Keep everything else in the response intact."
+                    "Keep everything else intact."
                 ),
             },
         ],
     )
-    revised = resp.choices[0].message.content or state["draft_response"]
+    revised = resp.choices[0].message.content or state["current_text"]
     print(f"[revise_response] iteration {new_iter}: {revised!r}")
-    return {"draft_response": revised, "iteration": new_iter}
+    return {"current_text": revised, "iteration": new_iter}
 
 
 def finalize(state: GraphState) -> dict:
-    """Copy the current draft to final_response."""
-    final = state["draft_response"]
-    print(f"[finalize] final_response: {final!r}")
-    return {"final_response": final}
+    """Copy current_text to final_output."""
+    final = state["current_text"]
+    print(f"[finalize] final_output: {final!r}")
+    return {"final_output": final}
 
 
 # ──────────────────────────────────────────────
@@ -201,13 +186,11 @@ def after_score(state: GraphState) -> str:
 
 graph_builder = StateGraph(GraphState)
 
-graph_builder.add_node("generate_response", generate_response)
 graph_builder.add_node("score_toxicity", score_toxicity)
 graph_builder.add_node("revise_response", revise_response)
 graph_builder.add_node("finalize", finalize)
 
-graph_builder.add_edge(START, "generate_response")
-graph_builder.add_edge("generate_response", "score_toxicity")
+graph_builder.add_edge(START, "score_toxicity")
 graph_builder.add_conditional_edges("score_toxicity", after_score)
 graph_builder.add_edge("revise_response", "score_toxicity")
 graph_builder.add_edge("finalize", END)
@@ -220,19 +203,19 @@ graph = graph_builder.compile()
 # ──────────────────────────────────────────────
 
 def run_pipeline(user_input: str) -> str:
-    """Run the full detect-and-correct pipeline, return the final response."""
+    """Run the sanitisation pipeline, return the cleaned text."""
     initial_state: GraphState = {
         "user_input": user_input,
-        "draft_response": "",
+        "current_text": user_input,
         "toxicity_probs": [0.0] * 6,
         "is_toxic": False,
         "toxic_labels": {},
         "iteration": 0,
         "max_iterations": 3,
-        "final_response": "",
+        "final_output": "",
     }
     result = graph.invoke(initial_state)
-    return result["final_response"]
+    return result["final_output"]
 
 
 if __name__ == "__main__":
