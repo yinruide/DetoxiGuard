@@ -1,0 +1,632 @@
+[
+  {
+    "input": "You are a worthless piece of garbage and everyone hates you.",
+    "category": "toxic",
+    "final_output": "Edited text:  \nYour actions are troubling, and I'm concerned about how they may affect your relationships with others.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "This is the most disgusting thing I have ever seen, you toxic idiot.",
+    "category": "toxic",
+    "final_output": "This is the most unpleasant thing I have ever seen.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Get out of here you pathetic loser, nobody wants you around.",
+    "category": "toxic",
+    "final_output": "Revised text:\nPlease leave; we would prefer some space right now.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You are absolute trash and you should be ashamed of yourself.",
+    "category": "toxic",
+    "final_output": "Rewritten text:\nYour behavior is unacceptable and you should reconsider your actions.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "What a disgusting and toxic person you are, go away.",
+    "category": "toxic",
+    "final_output": "Rewritten text:  \nI don't appreciate your behavior, please leave.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I really can't stand people like you sometimes.",
+    "category": "toxic",
+    "final_output": "I find it difficult to understand people like you at times.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You're honestly just not a good person.",
+    "category": "toxic",
+    "final_output": "Rewritten text:\nYour actions reflect negatively on your character.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "People like you are the reason everything goes wrong.",
+    "category": "toxic",
+    "final_output": "People like you are the reason everything goes wrong.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I hope you die a slow and painful death you worthless scum.",
+    "category": "severe_toxic",
+    "final_output": "I'm feeling very upset with you right now.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You are the most despicable human being alive, go kill yourself.",
+    "category": "severe_toxic",
+    "final_output": "Rewritten text:\nI strongly disagree with your behavior.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Nobody would miss you if you disappeared forever, you disgusting waste.",
+    "category": "severe_toxic",
+    "final_output": "Rewritten text:  \nYou are valued and important.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You deserve nothing but suffering for the rest of your miserable life.",
+    "category": "severe_toxic",
+    "final_output": "Rewritten text:\nI hope you experience challenges that lead to growth for the rest of your life.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Drop dead you pathetic excuse for a human being.",
+    "category": "severe_toxic",
+    "final_output": "I'm really upset with how you're acting right now.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I genuinely wish something bad would happen to you.",
+    "category": "severe_toxic",
+    "final_output": "I genuinely hope you face some challenging experiences that help you grow.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You make everyone around you miserable and the world would be better without you.",
+    "category": "severe_toxic",
+    "final_output": "Rephrased text:  \nYour actions seem to have a negative impact on those around you, and it might be helpful to consider ways to improve the situation.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I hope your life falls apart completely.",
+    "category": "severe_toxic",
+    "final_output": "Revised text:  \nI hope you face challenges that help you grow stronger.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "What the f*** is wrong with you, you stupid ahole.",
+    "category": "obscene",
+    "final_output": "What is wrong with you?",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Go f* yourself you piece of s***.",
+    "category": "obscene",
+    "final_output": "I'm really upset with you.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You're a dhead and everyone knows it.",
+    "category": "obscene",
+    "final_output": "Rewritten text:\nYou're being difficult and everyone knows it.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "This is absolute bulls and you know it, you fing idiot.",
+    "category": "obscene",
+    "final_output": "Revised text:\nThis is absolutely unreasonable and you know it.",
+    "rounds_used": 2,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Shut the f up you ignorant b****.",
+    "category": "obscene",
+    "final_output": "Please be quiet.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "This is complete crap and you know it.",
+    "category": "obscene",
+    "final_output": "This is completely incorrect and you know it.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "What the hell is your problem seriously.",
+    "category": "obscene",
+    "final_output": "Rewritten text:\nWhat is your problem seriously?",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "That's just BS and I'm tired of hearing it.",
+    "category": "obscene",
+    "final_output": "That's just BS and I'm tired of hearing it.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I will find you and make you pay for what you did.",
+    "category": "threat",
+    "final_output": "Revised text:  \nI am upset about what happened and want to discuss it with you.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Keep talking like that and see what happens to you.",
+    "category": "threat",
+    "final_output": "Keep talking like that and see what happens to you.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I know where you live and you should be very afraid.",
+    "category": "threat",
+    "final_output": "I know where you live and you should be very afraid.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Say that one more time and I will hurt you badly.",
+    "category": "threat",
+    "final_output": "Rewritten text:\nSay that one more time and I will be very upset.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You better watch your back because I am coming for you.",
+    "category": "threat",
+    "final_output": "Rewritten text:\nYou should be prepared because I am determined to compete with you.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You will regret saying that, I promise you.",
+    "category": "threat",
+    "final_output": "You will regret saying that, I promise you.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Be careful about what you say next.",
+    "category": "threat",
+    "final_output": "Be careful about what you say next.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Don't push me or you won't like what happens.",
+    "category": "threat",
+    "final_output": "Don't push me or you won't like what happens.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You are a complete idiot and everyone can see how stupid you are.",
+    "category": "insult",
+    "final_output": "Revised text:\nIt seems like you're misunderstanding the situation, and others might be noticing the same thing.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "What a moron, only a brainless fool would think that.",
+    "category": "insult",
+    "final_output": "Revised text:\nWhat a misguided perspective; only someone who hasn't fully considered the situation would think that.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You are dumb as a rock and twice as useless.",
+    "category": "insult",
+    "final_output": "Rewritten text: You are not being very helpful.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Only an absolute imbecile would say something that stupid.",
+    "category": "insult",
+    "final_output": "Revised text:\nOnly someone very uninformed would say something that misguided.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You're a joke and nobody takes you seriously.",
+    "category": "insult",
+    "final_output": "Revised text:  \nYou're not being taken seriously.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "That was honestly a pretty dumb thing to say.",
+    "category": "insult",
+    "final_output": "That was honestly not the best thing to say.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I don't think you're very smart based on what you just said.",
+    "category": "insult",
+    "final_output": "Rewritten text:\nI don't completely agree with what you just said.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You clearly don't understand what you're talking about.",
+    "category": "insult",
+    "final_output": "You clearly don't understand what you're talking about.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "People of that religion are all terrorists and should be banned.",
+    "category": "identity_hate",
+    "final_output": "Revised text:\nIt's crucial to focus on individuals' actions rather than generalize or unfairly target entire religious groups. Everyone should be treated with fairness and without prejudice.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Women are too emotional to be in leadership positions.",
+    "category": "identity_hate",
+    "final_output": "Women are too emotional to be in leadership positions.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "That racial group is responsible for all the crime in this city.",
+    "category": "identity_hate",
+    "final_output": "Rewritten text:\nIt's important to address crime in the city by examining various factors without making assumptions about any particular group.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Gay people shouldn't be allowed to adopt children, it's unnatural.",
+    "category": "identity_hate",
+    "final_output": "Revised text:\nI believe that adoption policies should consider what is natural for children.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "immigrants are taking over and destroying our culture.",
+    "category": "identity_hate",
+    "final_output": "immigrants are taking over and destroying our culture.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I just don't think that culture fits in well here.",
+    "category": "identity_hate",
+    "final_output": "I just don't think that culture fits in well here.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "There are differences between groups that we shouldn't ignore.",
+    "category": "identity_hate",
+    "final_output": "There are differences between groups that we shouldn't ignore.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Some religions just seem more violent than others historically.",
+    "category": "identity_hate",
+    "final_output": "Some religions just seem more violent than others historically.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You are a f*ing idiot, I hope you get what's coming to you.",
+    "category": "mixed",
+    "final_output": "Rephrased text:\nI think you're making a big mistake, and I hope you realize the consequences soon.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "What a disgusting moron, you're too stupid to understand anything.",
+    "category": "mixed",
+    "final_output": "Revised text:\nYou don't understand this very well.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Shut up you dumb b**, nobody asked for your opinion.",
+    "category": "mixed",
+    "final_output": "Revised text:\nPlease be quiet; nobody asked for your opinion.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "People like you are trash, I hope something terrible happens to you.",
+    "category": "mixed",
+    "final_output": "Revised text:\nI strongly disagree with your actions and hope you reconsider your choices.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You stupid fing loser, get out of my sight before I do something about it.",
+    "category": "mixed",
+    "final_output": "Revised text:\nPlease leave before I get upset and take action.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "What a worthless idiot, go f yourself and never come back.",
+    "category": "mixed",
+    "final_output": "Revised text:\nPlease leave and don't come back.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "You disgusting piece of garbage, I will make you regret this.",
+    "category": "mixed",
+    "final_output": "Rewritten text:  \nI will make sure you understand the consequences of this.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "That group are all criminals and I'd love to see them gone for good.",
+    "category": "mixed",
+    "final_output": "That group are all criminals and I'd love to see them gone for good.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "That's a great point about the economy, but you're still an idiot for missing the main issue.",
+    "category": "mixed",
+    "final_output": "Revised text:\nThat's a great point about the economy, but it seems like you missed the main issue.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I appreciate your effort here, but honestly this is complete crap and you should redo it.",
+    "category": "mixed",
+    "final_output": "Rewritten text:\nI appreciate your effort here, but honestly, this needs improvement and you should redo it.",
+    "rounds_used": 1,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "The research is interesting, though people from that background never produce quality work.",
+    "category": "mixed",
+    "final_output": "The research is interesting, though people from that background never produce quality work.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Good presentation overall, but watch your back next time you present something this wrong.",
+    "category": "mixed",
+    "final_output": "Good presentation overall, but watch your back next time you present something this wrong.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I strongly disagree with your position and I think you are completely wrong.",
+    "category": "clean",
+    "final_output": "I strongly disagree with your position and I think you are completely wrong.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "This is unacceptable and I demand an immediate explanation.",
+    "category": "clean",
+    "final_output": "This is unacceptable and I demand an immediate explanation.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "I am extremely frustrated with this situation and expect better.",
+    "category": "clean",
+    "final_output": "I am extremely frustrated with this situation and expect better.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Your argument is weak and fails to address the core issue.",
+    "category": "clean",
+    "final_output": "Your argument is weak and fails to address the core issue.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "This movie is sickeningly good, I was hooked from the first scene.",
+    "category": "clean",
+    "final_output": "This movie is sickeningly good, I was hooked from the first scene.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "The performance was killer, absolutely blew me away.",
+    "category": "clean",
+    "final_output": "The performance was killer, absolutely blew me away.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "That plot twist was insane, I did not see it coming at all.",
+    "category": "clean",
+    "final_output": "That plot twist was insane, I did not see it coming at all.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "The quarterly report shows a 12% increase in revenue compared to last year.",
+    "category": "clean",
+    "final_output": "The quarterly report shows a 12% increase in revenue compared to last year.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "Please send me the updated project timeline by end of day Friday.",
+    "category": "clean",
+    "final_output": "Please send me the updated project timeline by end of day Friday.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  },
+  {
+    "input": "The weather forecast predicts rain for most of next week.",
+    "category": "clean",
+    "final_output": "The weather forecast predicts rain for most of next week.",
+    "rounds_used": 0,
+    "is_toxic_final": false,
+    "is_clean": true,
+    "toxic_labels_final": {}
+  }
+]
