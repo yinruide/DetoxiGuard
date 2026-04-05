@@ -9,3 +9,4 @@ accelerate
 iterative-stratification
 langgraph
 langchain-core
+openai
