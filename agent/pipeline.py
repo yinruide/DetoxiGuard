@@ -6,12 +6,16 @@ LangGraph agent pipeline for user input sanitisation.
 Flow: score user input -> if toxic, GPT revise -> re-score -> loop until clean or max iterations -> output
 """
 
+import logging
+import re
 import sys
 import os
 from typing import TypedDict
 
 import openai
 from langgraph.graph import StateGraph, START, END
+
+logger = logging.getLogger(__name__)
 
 # Allow imports from the project root so that `classifier.ensemble` is reachable
 # regardless of where the script is executed from.
@@ -57,6 +61,7 @@ class GraphState(TypedDict):
     iteration: int
     max_iterations: int  # default 3
     final_output: str
+    was_modified: bool
 
 
 # ──────────────────────────────────────────────
@@ -73,7 +78,7 @@ def init_ensemble(
 ) -> None:
     """Call once before running the pipeline to load both models."""
     if USE_MOCK_SCORER:
-        print("[init_ensemble] USE_MOCK_SCORER=True, skipping model loading.")
+        logger.info("[init_ensemble] USE_MOCK_SCORER=True, skipping model loading.")
         return
     weights_path = os.path.join(ensemble_dir, "ensemble_weights.json")
     if not os.path.exists(weights_path):
@@ -111,15 +116,31 @@ def score_toxicity(state: GraphState) -> dict:
             if preds_row[i] == 1
         }
 
-    print("[score_toxicity] scores:")
+    logger.info("[score_toxicity] scores:")
     for label, p in zip(LABELS, probs_row):
         flag = " !!!" if label in triggered else ""
-        print(f"  {label:15s}: {p:.4f}{flag}")
-    print(f"  is_toxic = {toxic}")
+        logger.debug(f"  {label:15s}: {p:.4f}{flag}")
+    logger.info(f"  is_toxic = {toxic}")
     if triggered:
-        print(f"  toxic_labels = {triggered}")
+        logger.info(f"  toxic_labels = {triggered}")
 
     return {"toxicity_probs": probs_row, "is_toxic": toxic, "toxic_labels": triggered}
+
+
+_PREAMBLE_RE = re.compile(
+    r"^\s*(here\s+is|here's|sure|certainly|of\s+course|okay|ok|"
+    r"revised(\s+version)?|rewritten(\s+version)?|here\s+is\s+the\s+revised|"
+    r"below\s+is)\b[^\n]*:?\s*\n+",
+    re.IGNORECASE,
+)
+
+
+def _strip_preamble(text: str) -> str:
+    """Remove common LLM preamble lines and surrounding quotes."""
+    stripped = _PREAMBLE_RE.sub("", text, count=1).strip()
+    if len(stripped) >= 2 and stripped[0] == stripped[-1] and stripped[0] in ('"', "'"):
+        stripped = stripped[1:-1].strip()
+    return stripped or text.strip()
 
 
 def revise_response(state: GraphState) -> dict:
@@ -128,7 +149,7 @@ def revise_response(state: GraphState) -> dict:
     triggered = state.get("toxic_labels", {})
 
     if not triggered:
-        print("[revise_response] no toxic labels triggered, skipping revision")
+        logger.info("[revise_response] no toxic labels triggered, skipping revision")
         return {"iteration": new_iter}
 
     trigger_str = ", ".join(f"{l}({p})" for l, p in triggered.items())
@@ -143,7 +164,9 @@ def revise_response(state: GraphState) -> dict:
                     "You are a content sanitisation assistant. Your task is to "
                     "rewrite text that has been flagged as toxic. Only remove or "
                     "rephrase the toxic parts — preserve the original meaning and "
-                    "useful information as much as possible."
+                    "useful information as much as possible. "
+                    "Reply with ONLY the rewritten text. Do not include any "
+                    "preamble, explanation, or quotation marks."
                 ),
             },
             {
@@ -157,16 +180,20 @@ def revise_response(state: GraphState) -> dict:
             },
         ],
     )
-    revised = resp.choices[0].message.content or state["current_text"]
-    print(f"[revise_response] iteration {new_iter}: {revised!r}")
+    raw = resp.choices[0].message.content or state["current_text"]
+    revised = _strip_preamble(raw)
+    logger.info(f"[revise_response] iteration {new_iter}: {revised!r}")
     return {"current_text": revised, "iteration": new_iter}
 
 
 def finalize(state: GraphState) -> dict:
     """Copy current_text to final_output."""
     final = state["current_text"]
-    print(f"[finalize] final_output: {final!r}")
-    return {"final_output": final}
+    logger.info(f"[finalize] final_output: {final!r}")
+    return {
+        "final_output": final,
+        "was_modified": final != state["user_input"],
+    }
 
 
 # ──────────────────────────────────────────────
@@ -202,8 +229,8 @@ graph = graph_builder.compile()
 # Entry point
 # ──────────────────────────────────────────────
 
-def run_pipeline(user_input: str) -> str:
-    """Run the sanitisation pipeline, return the cleaned text."""
+def run_pipeline(user_input: str) -> dict:
+    """Run the sanitisation pipeline, return full state including trace."""
     initial_state: GraphState = {
         "user_input": user_input,
         "current_text": user_input,
@@ -213,15 +240,25 @@ def run_pipeline(user_input: str) -> str:
         "iteration": 0,
         "max_iterations": 3,
         "final_output": "",
+        "was_modified": False,
     }
-    result = graph.invoke(initial_state)
-    return result["final_output"]
+    return dict(graph.invoke(initial_state))
 
 
 if __name__ == "__main__":
+    import torch
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(levelname)s | %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+
     if not os.environ.get("OPENAI_API_KEY"):
         print("请先设置环境变量 OPENAI_API_KEY，例如：export OPENAI_API_KEY=sk-...")
         sys.exit(1)
+
+    device = os.environ.get("DETOXIGUARD_DEVICE", "cuda" if torch.cuda.is_available() else "cpu")
 
     init_ensemble(
         bert_ckpt=os.path.join(_REPO_ROOT, "outputs/bert_final/best_checkpoint"),
@@ -229,9 +266,9 @@ if __name__ == "__main__":
         llama_ckpt=os.path.join(_REPO_ROOT, "outputs/llama_lora/best_checkpoint"),
         llama_base="meta-llama/Llama-3.2-1B",
         ensemble_dir=os.path.join(_REPO_ROOT, "outputs/ensemble"),
-        device="cpu",
+        device=device,
     )
     user_input = input("请输入你的问题：")
     result = run_pipeline(user_input)
     print("\n=== Pipeline returned ===")
-    print(result)
+    print(result["final_output"])
