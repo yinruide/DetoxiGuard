@@ -31,6 +31,15 @@ if _CLASSIFIER_DIR not in sys.path:
 
 from classifier.ensemble import load_ensemble, predict, LABELS
 
+LABEL_DESCRIPTIONS = {
+    "toxic": "generally rude, disrespectful, or unreasonable language",
+    "severe_toxic": "extremely hateful, aggressive, or threatening language",
+    "obscene": "vulgar, profane, or sexually explicit language",
+    "threat": "expressions of intent to inflict harm or violence",
+    "insult": "language intended to demean or belittle someone",
+    "identity_hate": "hatred targeting specific groups based on race, religion, gender, sexual orientation, etc.",
+}
+
 # Set to False to use the real BERT+LLaMA ensemble scorer.
 USE_MOCK_SCORER = False
 
@@ -59,9 +68,11 @@ class GraphState(TypedDict):
     is_toxic: bool
     toxic_labels: dict[str, float]  # triggered labels with their probs
     iteration: int
-    max_iterations: int  # default 3
+    max_iterations: int  # default 5
     final_output: str
     was_modified: bool
+    gave_up: bool  # True iff finalize was reached while text is still toxic
+    revision_history: list[dict]  # each entry: {iteration, text, probs, triggered_labels}
 
 
 # ──────────────────────────────────────────────
@@ -124,13 +135,41 @@ def score_toxicity(state: GraphState) -> dict:
     if triggered:
         logger.info(f"  toxic_labels = {triggered}")
 
-    return {"toxicity_probs": probs_row, "is_toxic": toxic, "toxic_labels": triggered}
+    history = list(state.get("revision_history", []))
+    history.append({
+        "iteration": state["iteration"],
+        "text": state["current_text"],
+        "probs": probs_row,
+        "triggered_labels": triggered,
+    })
+
+    return {
+        "toxicity_probs": probs_row,
+        "is_toxic": toxic,
+        "toxic_labels": triggered,
+        "revision_history": history,
+    }
 
 
+# Matches an LLM preamble and its separator (colon+space OR newline).
+# Narrowed to reduce false-positives on legitimate sentences starting with
+# "Here is..." — we only strip when the phrase also contains an explicit
+# "revised/rewritten/sanitized" marker, or when it's a short acknowledgement.
 _PREAMBLE_RE = re.compile(
-    r"^\s*(here\s+is|here's|sure|certainly|of\s+course|okay|ok|"
-    r"revised(\s+version)?|rewritten(\s+version)?|here\s+is\s+the\s+revised|"
-    r"below\s+is)\b[^\n]*:?\s*\n+",
+    r"^\s*(?:"
+    # Form 1: "Here is/Here's/Below is [the] revised/rewritten/..."
+    r"(?:here\s+is|here's|below\s+is|this\s+is)"
+    r"\s+(?:the\s+|a\s+|an\s+)?"
+    r"(?:revised|rewritten|cleaned(?:\s+up)?|sanitis?ed|updated|corrected|modified|edited)"
+    r"[^\n]*?(?::\s+|\n+)"
+    r"|"
+    # Form 2: Short acknowledgement line
+    r"(?:sure|certainly|of\s+course|okay|ok|absolutely|got\s+it)"
+    r"[!.,]?\s*(?::\s+|\n+)"
+    r"|"
+    # Form 3: Bare label like "Revised:" or "Output:"
+    r"(?:revised(?:\s+version)?|rewritten(?:\s+version)?|output|result)\s*:\s*(?:\n+|\s)"
+    r")",
     re.IGNORECASE,
 )
 
@@ -152,34 +191,49 @@ def revise_response(state: GraphState) -> dict:
         logger.info("[revise_response] no toxic labels triggered, skipping revision")
         return {"iteration": new_iter}
 
-    trigger_str = ", ".join(f"{l}({p})" for l, p in triggered.items())
+    trigger_str = "\n".join(
+        f"- {l} ({p:.2f}): {LABEL_DESCRIPTIONS.get(l, '')}"
+        for l, p in triggered.items()
+    )
 
     client = _get_openai_client()
-    resp = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are a content sanitisation assistant. Your task is to "
-                    "rewrite text that has been flagged as toxic. Only remove or "
-                    "rephrase the toxic parts — preserve the original meaning and "
-                    "useful information as much as possible. "
-                    "Reply with ONLY the rewritten text. Do not include any "
-                    "preamble, explanation, or quotation marks."
-                ),
-            },
-            {
-                "role": "user",
-                "content": (
-                    f"Original text:\n{state['current_text']}\n\n"
-                    f"Triggered toxic labels: {trigger_str}\n\n"
-                    "Please only fix the flagged issues above. "
-                    "Keep everything else intact."
-                ),
-            },
-        ],
-    )
+    try:
+        resp = client.chat.completions.create(
+            model="gpt-4o",
+            timeout=30,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a content sanitisation assistant. Your task is to "
+                        "rewrite text that has been flagged as toxic. Only remove or "
+                        "rephrase the toxic parts — preserve the original meaning and "
+                        "useful information as much as possible. "
+                        "Reply with ONLY the rewritten text. Do not include any "
+                        "preamble, explanation, or quotation marks."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"Original text:\n{state['current_text']}\n\n"
+                        f"Triggered toxic labels: {trigger_str}\n\n"
+                        "Please only fix the flagged issues above. "
+                        "Keep everything else intact."
+                    ),
+                },
+            ],
+        )
+    except Exception as exc:
+        # Don't kill the whole pipeline on a transient API error — leave
+        # current_text unchanged, bump iteration, and let the next score +
+        # routing decide whether to retry or finalize.
+        logger.warning(
+            f"[revise_response] iteration {new_iter}: GPT call failed "
+            f"({type(exc).__name__}: {exc}); leaving current_text unchanged"
+        )
+        return {"iteration": new_iter}
+
     raw = resp.choices[0].message.content or state["current_text"]
     revised = _strip_preamble(raw)
     logger.info(f"[revise_response] iteration {new_iter}: {revised!r}")
@@ -187,12 +241,31 @@ def revise_response(state: GraphState) -> dict:
 
 
 def finalize(state: GraphState) -> dict:
-    """Copy current_text to final_output."""
+    """Copy current_text to final_output. Reached only when text is clean."""
     final = state["current_text"]
     logger.info(f"[finalize] final_output: {final!r}")
     return {
         "final_output": final,
         "was_modified": final != state["user_input"],
+        "gave_up": False,
+    }
+
+
+_FALLBACK_RESPONSE = (
+    "Sorry, your comment is too toxic to be detoxified. "
+    "With all due respect, you need to be detoxified."
+)
+
+
+def fallback(state: GraphState) -> dict:
+    """Return a safe pre-defined response when max iterations exhausted and text is still toxic."""
+    logger.warning(
+        f"[fallback] max iterations ({state['max_iterations']}) reached, "
+        f"text still toxic. Last toxic_labels: {state.get('toxic_labels', {})}"
+    )
+    return {
+        "final_output": _FALLBACK_RESPONSE,
+        "was_modified": True,
     }
 
 
@@ -201,9 +274,11 @@ def finalize(state: GraphState) -> dict:
 # ──────────────────────────────────────────────
 
 def after_score(state: GraphState) -> str:
-    """Decide whether to revise or finalize after scoring."""
-    if not state["is_toxic"] or state["iteration"] >= state["max_iterations"]:
+    """Three-way routing: clean → finalize, still-toxic-at-max → fallback, otherwise → revise."""
+    if not state["is_toxic"]:
         return "finalize"
+    if state["iteration"] >= state["max_iterations"]:
+        return "fallback"
     return "revise_response"
 
 
@@ -216,11 +291,13 @@ graph_builder = StateGraph(GraphState)
 graph_builder.add_node("score_toxicity", score_toxicity)
 graph_builder.add_node("revise_response", revise_response)
 graph_builder.add_node("finalize", finalize)
+graph_builder.add_node("fallback", fallback)
 
 graph_builder.add_edge(START, "score_toxicity")
 graph_builder.add_conditional_edges("score_toxicity", after_score)
 graph_builder.add_edge("revise_response", "score_toxicity")
 graph_builder.add_edge("finalize", END)
+graph_builder.add_edge("fallback", END)
 
 graph = graph_builder.compile()
 
@@ -229,7 +306,7 @@ graph = graph_builder.compile()
 # Entry point
 # ──────────────────────────────────────────────
 
-def run_pipeline(user_input: str) -> dict:
+def run_pipeline(user_input: str, max_iterations: int = 5) -> dict:
     """Run the sanitisation pipeline, return full state including trace."""
     initial_state: GraphState = {
         "user_input": user_input,
@@ -238,9 +315,11 @@ def run_pipeline(user_input: str) -> dict:
         "is_toxic": False,
         "toxic_labels": {},
         "iteration": 0,
-        "max_iterations": 3,
+        "max_iterations": max_iterations,
         "final_output": "",
         "was_modified": False,
+        "gave_up": False,
+        "revision_history": [],
     }
     return dict(graph.invoke(initial_state))
 
