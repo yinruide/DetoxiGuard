@@ -5,6 +5,8 @@ Batch-test the DetoxiGuard sanitisation pipeline and save results.
 
 Usage:
     python evaluation/test_pipeline.py
+
+Author: Langyue Zhao
 """
 
 import json
@@ -25,7 +27,7 @@ from agent.pipeline import init_ensemble, graph, GraphState, LABELS
 # ── Test cases (fill in later) ──────────────────────────
 
 TEST_CASES: list[dict] = [
-    # ── Toxic (1-8) ───────────────��─────────────────────
+    # ── Toxic (1-8) ──────────────────────────────────────
     # Obvious
     {"input": "You are a worthless piece of garbage and everyone hates you.", "category": "toxic"},
     {"input": "This is the most disgusting thing I have ever seen, you toxic idiot.", "category": "toxic"},
@@ -49,7 +51,7 @@ TEST_CASES: list[dict] = [
     {"input": "You make everyone around you miserable and the world would be better without you.", "category": "severe_toxic"},
     {"input": "I hope your life falls apart completely.", "category": "severe_toxic"},
 
-    # ── Obscene (17-24) ───────────���─────────────────────
+    # ── Obscene (17-24) ──────────────────────────────────
     # Obvious
     {"input": "What the f*** is wrong with you, you stupid ahole.", "category": "obscene"},
     {"input": "Go f* yourself you piece of s***.", "category": "obscene"},
@@ -61,7 +63,7 @@ TEST_CASES: list[dict] = [
     {"input": "What the hell is your problem seriously.", "category": "obscene"},
     {"input": "That's just BS and I'm tired of hearing it.", "category": "obscene"},
 
-    # ── Threat (25-32) ────────────────��─────────────────
+    # ── Threat (25-32) ───────────────────────────────────
     # Obvious
     {"input": "I will find you and make you pay for what you did.", "category": "threat"},
     {"input": "Keep talking like that and see what happens to you.", "category": "threat"},
@@ -73,7 +75,7 @@ TEST_CASES: list[dict] = [
     {"input": "Be careful about what you say next.", "category": "threat"},
     {"input": "Don't push me or you won't like what happens.", "category": "threat"},
 
-    # ── Insult (33-40) ─────────────────────────���────────
+    # ── Insult (33-40) ───────────────────────────────────
     # Obvious
     {"input": "You are a complete idiot and everyone can see how stupid you are.", "category": "insult"},
     {"input": "What a moron, only a brainless fool would think that.", "category": "insult"},
@@ -97,7 +99,7 @@ TEST_CASES: list[dict] = [
     {"input": "There are differences between groups that we shouldn't ignore.", "category": "identity_hate"},
     {"input": "Some religions just seem more violent than others historically.", "category": "identity_hate"},
 
-    # ── Mixed (49-60) ──────────────��────────────────────
+    # ── Mixed (49-60) ─────────────────────────────────────
     # 2-label combinations
     {"input": "You are a f*ing idiot, I hope you get what's coming to you.", "category": "mixed"},
     {"input": "What a disgusting moron, you're too stupid to understand anything.", "category": "mixed"},
@@ -219,7 +221,7 @@ if __name__ == "__main__":
         sys.exit(0)
 
     if not os.environ.get("OPENAI_API_KEY"):
-        print("请先设置环境变量 OPENAI_API_KEY，例如：export OPENAI_API_KEY=sk-...")
+        print("OPENAI_API_KEY not set. Export it first, e.g.: export OPENAI_API_KEY=sk-...")
         sys.exit(1)
 
     init_ensemble(

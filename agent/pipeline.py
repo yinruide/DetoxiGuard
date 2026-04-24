@@ -4,6 +4,8 @@ pipeline.py
 LangGraph agent pipeline for user input sanitisation.
 
 Flow: score user input -> if toxic, GPT revise -> re-score -> loop until clean or max iterations -> output
+
+Author: Langyue Zhao
 """
 
 import logging
@@ -334,7 +336,7 @@ if __name__ == "__main__":
     )
 
     if not os.environ.get("OPENAI_API_KEY"):
-        print("请先设置环境变量 OPENAI_API_KEY，例如：export OPENAI_API_KEY=sk-...")
+        print("OPENAI_API_KEY not set. Export it first, e.g.: export OPENAI_API_KEY=sk-...")
         sys.exit(1)
 
     device = os.environ.get("DETOXIGUARD_DEVICE", "cuda" if torch.cuda.is_available() else "cpu")
@@ -347,7 +349,7 @@ if __name__ == "__main__":
         ensemble_dir=os.path.join(_REPO_ROOT, "outputs/ensemble"),
         device=device,
     )
-    user_input = input("请输入你的问题：")
+    user_input = input("Enter your text: ")
     result = run_pipeline(user_input)
     print("\n=== Pipeline returned ===")
     print(result["final_output"])
