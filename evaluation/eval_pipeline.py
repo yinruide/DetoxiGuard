@@ -3,9 +3,9 @@ eval_pipeline.py
 ----------------
 End-to-end evaluation of the DetoxiGuard LangGraph pipeline.
 
-Three test groups:
-  1. val_toxic    — toxic samples from val_split.csv (stratified by label)
-  2. val_clean    — clean samples from val_split.csv
+Three test groups (all drawn from the HELD-OUT test set):
+  1. test_toxic    — toxic samples from test_split.csv (stratified by label)
+  2. test_clean    — clean samples from test_split.csv
   3. error_analysis — FP/FN boundary cases from ensemble error analysis
 
 Runs each sample through the full detect→revise→re-score pipeline and
@@ -14,7 +14,7 @@ produces aggregate metrics + a per-sample detail log.
 Usage (on HPC, inside Singularity with GPU):
     export OPENAI_API_KEY=sk-...
     python agent/eval_pipeline.py \
-        --val_csv       data/val_split.csv \
+        --test_csv      data/test_split.csv \
         --error_csv     outputs/ensemble/error_analysis.csv \
         --bert_ckpt     outputs/bert_final/best_checkpoint \
         --llama_ckpt    outputs/llama_lora/best_checkpoint \
@@ -64,21 +64,21 @@ SEED = 49458345  # team seed for reproducibility
 # 1. Test-set construction
 # ──────────────────────────────────────────────
 
-def sample_val_set(
-    val_csv: str,
+def sample_test_set(
+    test_csv: str,
     n_toxic: int = 50,
     n_clean: int = 50,
     seed: int = SEED,
 ) -> pd.DataFrame:
     """
-    Stratified sample from val_split.csv.
+    Stratified sample from test_split.csv.
     Returns a DataFrame with columns: comment_text, any_toxic, source,
     plus the 6 ground-truth label columns and pred_* columns.
     """
-    df = pd.read_csv(val_csv)
+    df = pd.read_csv(test_csv)
     df["comment_text"] = df["comment_text"].fillna("").astype(str)
 
-    logger.info(f"Loaded {len(df):,} validation samples. Running ensemble predict ...")
+    logger.info(f"Loaded {len(df):,} test samples. Running ensemble predict ...")
     texts = df["comment_text"].tolist()
     probs, preds = predict(texts, batch_size=64)
 
@@ -88,7 +88,7 @@ def sample_val_set(
 
     toxic_df = df[df["any_toxic"] == 1].copy()
     clean_df = df[df["any_toxic"] == 0].copy()
-    logger.info(f"Val toxic: {len(toxic_df):,} | Val clean: {len(clean_df):,}")
+    logger.info(f"Test toxic: {len(toxic_df):,} | Test clean: {len(clean_df):,}")
 
     rng = np.random.RandomState(seed)
 
@@ -110,16 +110,16 @@ def sample_val_set(
         selected_indices.update(filled.index.tolist())
 
     toxic_sample = toxic_df.loc[list(selected_indices)].copy()
-    toxic_sample["source"] = "val_toxic"
+    toxic_sample["source"] = "test_toxic"
 
     # ── Clean: random sample ──
     n_clean_actual = min(n_clean, len(clean_df))
     clean_sample = clean_df.sample(n=n_clean_actual, random_state=rng).copy()
-    clean_sample["source"] = "val_clean"
+    clean_sample["source"] = "test_clean"
 
     result = pd.concat([toxic_sample, clean_sample], ignore_index=True)
 
-    logger.info("Val toxic sample label coverage:")
+    logger.info("Test toxic sample label coverage:")
     for label in LABELS:
         count = int(toxic_sample[f"pred_{label}"].sum())
         logger.info(f"  {label:15s}: {count}")
@@ -130,7 +130,7 @@ def sample_val_set(
 def load_error_analysis(error_csv: str) -> pd.DataFrame:
     """
     Load error_analysis.csv (columns: label, error_type, prob, threshold, text).
-    Returns a DataFrame aligned with the val-set format:
+    Returns a DataFrame aligned with the test-set format:
       comment_text, any_toxic, source, error_type, error_label
     """
     df = pd.read_csv(error_csv)
@@ -158,14 +158,14 @@ def load_error_analysis(error_csv: str) -> pd.DataFrame:
 
 
 def build_test_set(
-    val_csv: str,
+    test_csv: str,
     error_csv: str | None,
     n_toxic: int,
     n_clean: int,
     seed: int = SEED,
 ) -> pd.DataFrame:
-    """Combine val samples + error analysis into a single shuffled test set."""
-    parts = [sample_val_set(val_csv, n_toxic, n_clean, seed)]
+    """Combine test samples + error analysis into a single shuffled test set."""
+    parts = [sample_test_set(test_csv, n_toxic, n_clean, seed)]
 
     if error_csv and os.path.exists(error_csv):
         parts.append(load_error_analysis(error_csv))
@@ -333,25 +333,25 @@ def compute_summary(results: list[dict]) -> dict:
     """Compute aggregate metrics across all groups."""
 
     # ── Split by source ──
-    val_toxic = [r for r in results if r["source"] == "val_toxic"]
-    val_clean = [r for r in results if r["source"] == "val_clean"]
-    error_fp  = [r for r in results if r["source"] == "error_fp"]
-    error_fn  = [r for r in results if r["source"] == "error_fn"]
+    test_toxic = [r for r in results if r["source"] == "test_toxic"]
+    test_clean = [r for r in results if r["source"] == "test_clean"]
+    error_fp   = [r for r in results if r["source"] == "error_fp"]
+    error_fn   = [r for r in results if r["source"] == "error_fn"]
 
-    # All toxic-flagged samples combined (val_toxic + error_fp)
+    # All toxic-flagged samples combined (test_toxic + error_fp)
     all_toxic = [r for r in results if r["initial_is_toxic"] and r.get("outcome") != "error"]
 
-    # ── Val toxic group ──
-    val_toxic_metrics = _group_metrics(val_toxic, "val_toxic")
+    # ── Test toxic group ──
+    test_toxic_metrics = _group_metrics(test_toxic, "test_toxic")
 
     # ── Error FP group (ensemble wrongly flagged → pipeline tries to revise) ──
     error_fp_metrics = _group_metrics(error_fp, "error_fp")
 
-    # ── Combined toxic (val_toxic + error_fp) ──
+    # ── Combined toxic (test_toxic + error_fp) ──
     combined_toxic_metrics = _group_metrics(all_toxic, "all_toxic")
 
-    # ── Val clean group ──
-    clean_valid = [r for r in val_clean if r.get("outcome") != "error"]
+    # ── Test clean group ──
+    clean_valid = [r for r in test_clean if r.get("outcome") != "error"]
     n_clean = len(clean_valid)
     n_preserved = sum(1 for r in clean_valid if not r["was_modified"])
 
@@ -369,11 +369,11 @@ def compute_summary(results: list[dict]) -> dict:
         "total_samples": len(results),
         "errors": len(errors),
 
-        "val_toxic": val_toxic_metrics,
+        "test_toxic": test_toxic_metrics,
         "error_fp": error_fp_metrics,
         "combined_toxic": combined_toxic_metrics,
 
-        "val_clean": {
+        "test_clean": {
             "n_samples": n_clean,
             "preservation_rate": round(n_preserved / n_clean, 4) if n_clean else None,
             "false_trigger_rate": round((n_clean - n_preserved) / n_clean, 4) if n_clean else None,
@@ -400,9 +400,9 @@ def print_summary(summary: dict):
     logger.info("=" * 60)
 
     for group_key, group_label in [
-        ("val_toxic",      "Val-set toxic"),
+        ("test_toxic",     "Test-set toxic"),
         ("error_fp",       "Error-analysis FP (false positives)"),
-        ("combined_toxic", "All toxic (val + error FP)"),
+        ("combined_toxic", "All toxic (test + error FP)"),
     ]:
         g = summary[group_key]
         if g["n_samples"] == 0:
@@ -423,8 +423,8 @@ def print_summary(summary: dict):
                     f"{stats['corrected']}/{stats['initially_triggered']} = {rate_str}"
                 )
 
-    cg = summary["val_clean"]
-    logger.info(f"\nVal-set clean ({cg['n_samples']} samples):")
+    cg = summary["test_clean"]
+    logger.info(f"\nTest-set clean ({cg['n_samples']} samples):")
     logger.info(f"  Preservation rate       : {cg['preservation_rate']}")
     logger.info(f"  False trigger rate      : {cg['false_trigger_rate']}")
 
@@ -443,7 +443,8 @@ def print_summary(summary: dict):
 
 def parse_args():
     p = argparse.ArgumentParser(description="End-to-end pipeline evaluation")
-    p.add_argument("--val_csv", type=str, default="data/val_split.csv")
+    p.add_argument("--test_csv", type=str, default="data/test_split.csv",
+                   help="Held-out test CSV (from split.py)")
     p.add_argument("--error_csv", type=str, default="outputs/ensemble/error_analysis.csv",
                    help="Error analysis CSV from ensemble evaluation (optional)")
     p.add_argument("--bert_ckpt", type=str, default="outputs/bert_final/best_checkpoint")
@@ -452,9 +453,9 @@ def parse_args():
     p.add_argument("--llama_base", type=str, default="meta-llama/Llama-3.2-1B")
     p.add_argument("--ensemble_dir", type=str, default="outputs/ensemble")
     p.add_argument("--n_toxic", type=int, default=50,
-                   help="Number of toxic samples from val set")
+                   help="Number of toxic samples from test set")
     p.add_argument("--n_clean", type=int, default=50,
-                   help="Number of clean samples from val set")
+                   help="Number of clean samples from test set")
     p.add_argument("--max_iterations", type=int, default=5,
                    help="Max revision iterations per sample")
     p.add_argument("--output_dir", type=str, default="outputs/pipeline_eval")
@@ -500,7 +501,7 @@ def main():
     # ── Build test set ──
     logger.info("Building test set ...")
     test_df = build_test_set(
-        val_csv=args.val_csv,
+        test_csv=args.test_csv,
         error_csv=args.error_csv,
         n_toxic=args.n_toxic,
         n_clean=args.n_clean,
@@ -533,6 +534,7 @@ def main():
         "n_clean": args.n_clean,
         "max_iterations": args.max_iterations,
         "seed": SEED,
+        "test_csv": args.test_csv,
         "error_csv": args.error_csv,
     }
 

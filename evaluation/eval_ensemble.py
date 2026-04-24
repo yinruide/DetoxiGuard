@@ -2,8 +2,8 @@
 eval_ensemble.py
 ----------------
 Standalone evaluation script for the DetoxiGuard BERT+LLaMA ensemble
-classifier. Loads the saved ensemble weights, runs inference on the shared
-validation set, and produces:
+classifier. Loads the saved ensemble weights, runs inference on BOTH
+the validation set and the held-out test set, and produces per-split:
 
     1. Summary metrics table  (console + CSV)
     2. Per-label ROC curves
@@ -14,7 +14,8 @@ validation set, and produces:
     7. Error analysis  (top FP / FN examples per label)
     8. Ensemble weight summary table (CSV)
 
-All figures are saved to  evaluation/eval_ensemble_results/
+Val results  → {output_dir}/val/
+Test results → {output_dir}/test/
 
 Usage (inside Singularity on HPC with GPU):
     python evaluation/eval_ensemble.py \
@@ -24,7 +25,10 @@ Usage (inside Singularity on HPC with GPU):
         --llama_base   meta-llama/Llama-3.2-1B \
         --ensemble_dir outputs/ensemble \
         --val_csv      data/val_split.csv \
+        --test_csv     data/test_split.csv \
         --output_dir   evaluation/eval_ensemble_results
+
+Co-authored by Ruide Yin and Yanfu Wang
 """
 
 import argparse
@@ -159,7 +163,7 @@ def build_metrics_table(labels_arr: np.ndarray, probs_arr: np.ndarray,
 # 2. ROC curves
 # ──────────────────────────────────────────────
 
-def plot_roc_curves(labels_arr, probs_arr, save_path):
+def plot_roc_curves(labels_arr, probs_arr, save_path, split_name=""):
     fig, ax = plt.subplots(figsize=FIGSIZE_SINGLE)
     for i, label in enumerate(LABELS):
         fpr, tpr, _ = roc_curve(labels_arr[:, i], probs_arr[:, i])
@@ -169,7 +173,7 @@ def plot_roc_curves(labels_arr, probs_arr, save_path):
     ax.plot([0, 1], [0, 1], "k--", alpha=0.3, label="Random")
     ax.set_xlabel("False Positive Rate")
     ax.set_ylabel("True Positive Rate")
-    ax.set_title("Per-label ROC Curves — Ensemble")
+    ax.set_title(f"Per-label ROC Curves — Ensemble ({split_name})")
     ax.legend(loc="lower right", fontsize=9)
     ax.grid(alpha=0.2)
     fig.tight_layout()
@@ -182,7 +186,7 @@ def plot_roc_curves(labels_arr, probs_arr, save_path):
 # 3. Precision-Recall curves
 # ──────────────────────────────────────────────
 
-def plot_pr_curves(labels_arr, probs_arr, save_path):
+def plot_pr_curves(labels_arr, probs_arr, save_path, split_name=""):
     fig, ax = plt.subplots(figsize=FIGSIZE_SINGLE)
     for i, label in enumerate(LABELS):
         prec, rec, _ = precision_recall_curve(labels_arr[:, i], probs_arr[:, i])
@@ -191,7 +195,7 @@ def plot_pr_curves(labels_arr, probs_arr, save_path):
 
     ax.set_xlabel("Recall")
     ax.set_ylabel("Precision")
-    ax.set_title("Per-label Precision-Recall Curves — Ensemble")
+    ax.set_title(f"Per-label Precision-Recall Curves — Ensemble ({split_name})")
     ax.legend(loc="lower left", fontsize=9)
     ax.grid(alpha=0.2)
     fig.tight_layout()
@@ -204,7 +208,7 @@ def plot_pr_curves(labels_arr, probs_arr, save_path):
 # 4. Confusion matrices
 # ──────────────────────────────────────────────
 
-def plot_confusion_matrices(labels_arr, probs_arr, thresholds, save_path):
+def plot_confusion_matrices(labels_arr, probs_arr, thresholds, save_path, split_name=""):
     fig, axes = plt.subplots(2, 3, figsize=FIGSIZE_MULTI)
     axes = axes.flatten()
     for i, label in enumerate(LABELS):
@@ -216,15 +220,17 @@ def plot_confusion_matrices(labels_arr, probs_arr, thresholds, save_path):
             annot=True,
             fmt="d",
             cmap="Blues",
-            ax=axes[i],
             xticklabels=["Neg", "Pos"],
             yticklabels=["Neg", "Pos"],
+            ax=axes[i],
         )
-        axes[i].set_title(f"{label}  (t={t:.2f})", fontsize=11)
-        axes[i].set_ylabel("True")
+        axes[i].set_title(f"{label} (t={t:.2f})")
         axes[i].set_xlabel("Predicted")
-    fig.suptitle("Confusion Matrices (learned thresholds) — Ensemble", fontsize=13)
-    fig.tight_layout(rect=[0, 0, 1, 0.95])
+        axes[i].set_ylabel("True")
+
+    fig.suptitle(f"Confusion Matrices (learned thresholds) — Ensemble ({split_name})",
+                 fontsize=14, y=1.02)
+    fig.tight_layout()
     fig.savefig(save_path, dpi=DPI, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {save_path}")
@@ -234,42 +240,30 @@ def plot_confusion_matrices(labels_arr, probs_arr, thresholds, save_path):
 # 5. Probability distribution histograms
 # ──────────────────────────────────────────────
 
-def plot_prob_distributions(labels_arr, probs_arr, thresholds, save_path):
+def plot_prob_distributions(labels_arr, probs_arr, thresholds, save_path, split_name=""):
     fig, axes = plt.subplots(2, 3, figsize=FIGSIZE_MULTI)
     axes = axes.flatten()
     for i, label in enumerate(LABELS):
-        ax = axes[i]
-        pos_probs = probs_arr[labels_arr[:, i] == 1, i]
-        neg_probs = probs_arr[labels_arr[:, i] == 0, i]
-
-        ax.hist(
-            neg_probs,
-            bins=80,
-            alpha=0.6,
-            label=f"Negative (n={len(neg_probs):,})",
-            color="#85B7EB",
-            density=True,
-        )
-        ax.hist(
-            pos_probs,
-            bins=80,
-            alpha=0.6,
-            label=f"Positive (n={len(pos_probs):,})",
-            color="#E24B4A",
-            density=True,
-        )
-
+        y_true = labels_arr[:, i]
+        y_prob = probs_arr[:, i]
         t = thresholds[label]
-        ax.axvline(t, color="black", linestyle="--", linewidth=1.2, label=f"opt t={t:.2f}")
-        ax.axvline(0.5, color="gray", linestyle=":", linewidth=1, label="t=0.50")
 
-        ax.set_title(label, fontsize=11)
-        ax.set_xlabel("Predicted probability")
-        ax.set_ylabel("Density")
-        ax.legend(fontsize=7, loc="upper center")
+        axes[i].hist(
+            y_prob[y_true == 0], bins=50, alpha=0.5, label="Negative",
+            color="steelblue", density=True,
+        )
+        axes[i].hist(
+            y_prob[y_true == 1], bins=50, alpha=0.5, label="Positive",
+            color="coral", density=True,
+        )
+        axes[i].axvline(t, color="red", linestyle="--", label=f"t={t:.2f}")
+        axes[i].set_title(label)
+        axes[i].set_xlabel("Predicted probability")
+        axes[i].legend(fontsize=8)
 
-    fig.suptitle("Probability Distributions (positive vs negative) — Ensemble", fontsize=13)
-    fig.tight_layout(rect=[0, 0, 1, 0.95])
+    fig.suptitle(f"Probability Distributions — Ensemble ({split_name})",
+                 fontsize=14, y=1.02)
+    fig.tight_layout()
     fig.savefig(save_path, dpi=DPI, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {save_path}")
@@ -279,36 +273,26 @@ def plot_prob_distributions(labels_arr, probs_arr, thresholds, save_path):
 # 6. Threshold sensitivity curves
 # ──────────────────────────────────────────────
 
-def plot_threshold_sensitivity(labels_arr, probs_arr, thresholds, save_path):
+def plot_threshold_sensitivity(labels_arr, probs_arr, thresholds, save_path, split_name=""):
     fig, ax = plt.subplots(figsize=FIGSIZE_SINGLE)
-    # Ensemble threshold search in ensemble.py is capped to [0.05, 0.50].
-    t_range = np.arange(0.05, 0.51, 0.01)
+    t_range = np.arange(0.05, 0.96, 0.01)
 
     for i, label in enumerate(LABELS):
-        f1_scores = []
+        y_true = labels_arr[:, i]
+        y_prob = probs_arr[:, i]
+        f1s = []
         for t in t_range:
-            preds = (probs_arr[:, i] >= t).astype(int)
-            f1_scores.append(f1_score(labels_arr[:, i], preds, zero_division=0))
-        ax.plot(t_range, f1_scores, label=label)
+            y_pred = (y_prob >= t).astype(int)
+            f1s.append(f1_score(y_true, y_pred, zero_division=0))
+        ax.plot(t_range, f1s, label=label)
 
         t_opt = thresholds[label]
-        f1_opt = f1_score(
-            labels_arr[:, i],
-            (probs_arr[:, i] >= t_opt).astype(int),
-            zero_division=0,
-        )
-        ax.plot(t_opt, f1_opt, "o", markersize=6, color="black", zorder=5)
-        ax.annotate(
-            f"{t_opt:.2f}",
-            (t_opt, f1_opt),
-            textcoords="offset points",
-            xytext=(5, 5),
-            fontsize=7,
-        )
+        f1_at_opt = f1_score(y_true, (y_prob >= t_opt).astype(int), zero_division=0)
+        ax.scatter([t_opt], [f1_at_opt], marker="*", s=100, zorder=5)
 
     ax.set_xlabel("Threshold")
     ax.set_ylabel("F1 Score")
-    ax.set_title("F1 vs Threshold per Label — Ensemble")
+    ax.set_title(f"F1 vs Threshold per Label — Ensemble ({split_name})")
     ax.legend(fontsize=9)
     ax.grid(alpha=0.2)
     fig.tight_layout()
@@ -388,6 +372,97 @@ def save_weight_summary(weights: dict, save_path: str) -> pd.DataFrame:
 
 
 # ──────────────────────────────────────────────
+# Per-split evaluation driver
+# ──────────────────────────────────────────────
+
+def evaluate_split(
+    csv_path: str,
+    split_name: str,
+    output_dir: str,
+    thresholds: dict[str, float],
+    ensemble_weights: dict,
+    batch_size: int,
+):
+    """Run the full evaluation suite on one data split."""
+
+    split_dir = os.path.join(output_dir, split_name)
+    os.makedirs(split_dir, exist_ok=True)
+
+    print(f"\n{'#' * 60}")
+    print(f"  Evaluating on: {split_name}  ({csv_path})")
+    print(f"{'#' * 60}")
+
+    df = pd.read_csv(csv_path)
+    df["comment_text"] = df["comment_text"].fillna("").astype(str)
+    texts = df["comment_text"]
+    labels_arr = df[LABELS].values.astype(float)
+    print(f"  Samples: {len(df):,}")
+
+    print("  Running ensemble inference ...")
+    probs_arr = predict_probs(texts.tolist(), batch_size=batch_size)
+    print(f"  Predictions shape: {probs_arr.shape}")
+
+    np.save(os.path.join(split_dir, f"{split_name}_probs_ensemble.npy"), probs_arr)
+    np.save(os.path.join(split_dir, f"{split_name}_labels.npy"), labels_arr)
+    print(f"  Saved: {split_name}_probs_ensemble.npy, {split_name}_labels.npy")
+
+    # ── Metrics table ──
+    print(f"\n{'=' * 60}")
+    print(f"SUMMARY METRICS ({split_name})")
+    print("=" * 60)
+    metrics_df = build_metrics_table(labels_arr, probs_arr, thresholds)
+    print(metrics_df.to_string(index=False, float_format=lambda x: f"{x:.4f}"))
+    csv_out = os.path.join(split_dir, "metrics_summary.csv")
+    metrics_df.to_csv(csv_out, index=False, float_format="%.4f")
+    print(f"\n  Saved: {csv_out}")
+
+    # ── Weight summary ──
+    print("\n  Saving ensemble weight summary ...")
+    save_weight_summary(
+        ensemble_weights,
+        os.path.join(split_dir, "ensemble_weight_summary.csv"),
+    )
+
+    # ── Plots ──
+    print("\n  Generating plots ...")
+    plot_roc_curves(
+        labels_arr, probs_arr,
+        os.path.join(split_dir, "roc_curves.png"),
+        split_name=split_name,
+    )
+    plot_pr_curves(
+        labels_arr, probs_arr,
+        os.path.join(split_dir, "pr_curves.png"),
+        split_name=split_name,
+    )
+    plot_confusion_matrices(
+        labels_arr, probs_arr, thresholds,
+        os.path.join(split_dir, "confusion_matrices.png"),
+        split_name=split_name,
+    )
+    plot_prob_distributions(
+        labels_arr, probs_arr, thresholds,
+        os.path.join(split_dir, "prob_distributions.png"),
+        split_name=split_name,
+    )
+    plot_threshold_sensitivity(
+        labels_arr, probs_arr, thresholds,
+        os.path.join(split_dir, "threshold_sensitivity.png"),
+        split_name=split_name,
+    )
+
+    # ── Error analysis ──
+    print(f"\n  Error analysis ({split_name}) ...")
+    error_analysis(
+        texts, labels_arr, probs_arr, thresholds,
+        os.path.join(split_dir, "error_analysis.csv"),
+        top_k=10,
+    )
+
+    print(f"\n  {split_name} outputs saved to: {split_dir}/")
+
+
+# ──────────────────────────────────────────────
 # Main
 # ──────────────────────────────────────────────
 
@@ -413,6 +488,9 @@ def parse_args():
     parser.add_argument("--val_csv", type=str,
                         default="data/val_split.csv",
                         help="Validation CSV (from split.py)")
+    parser.add_argument("--test_csv", type=str,
+                        default="data/test_split.csv",
+                        help="Held-out test CSV (from split.py)")
     parser.add_argument("--output_dir", type=str,
                         default="evaluation/eval_ensemble_results",
                         help="Directory to save all evaluation outputs")
@@ -446,74 +524,24 @@ def main():
         {k: round(v, 2) for k, v in thresholds.items()},
     )
 
-    print("Loading validation data ...")
-    val_df = pd.read_csv(args.val_csv)
-    val_df["comment_text"] = val_df["comment_text"].fillna("").astype(str)
-    texts = val_df["comment_text"]
-    labels_arr = val_df[LABELS].values.astype(float)
-    print(f"Validation samples: {len(val_df):,}")
-
-    print("Running ensemble inference ...")
-    probs_arr = predict_probs(texts.tolist(), batch_size=args.batch_size)
-    print(f"Predictions shape: {probs_arr.shape}")
-
-    np.save(os.path.join(args.output_dir, "val_probs_ensemble.npy"), probs_arr)
-    np.save(os.path.join(args.output_dir, "val_labels.npy"), labels_arr)
-    print("  Saved: val_probs_ensemble.npy, val_labels.npy")
-
-    print("\n" + "=" * 60)
-    print("SUMMARY METRICS")
-    print("=" * 60)
-    metrics_df = build_metrics_table(labels_arr, probs_arr, thresholds)
-    print(metrics_df.to_string(index=False, float_format=lambda x: f"{x:.4f}"))
-    csv_path = os.path.join(args.output_dir, "metrics_summary.csv")
-    metrics_df.to_csv(csv_path, index=False, float_format="%.4f")
-    print(f"\n  Saved: {csv_path}")
-
-    print("\nSaving ensemble weight summary ...")
-    save_weight_summary(
-        ensemble_weights,
-        os.path.join(args.output_dir, "ensemble_weight_summary.csv"),
+    # ── Evaluate on val ──
+    evaluate_split(
+        csv_path=args.val_csv,
+        split_name="val",
+        output_dir=args.output_dir,
+        thresholds=thresholds,
+        ensemble_weights=ensemble_weights,
+        batch_size=args.batch_size,
     )
 
-    print("\nGenerating plots ...")
-    plot_roc_curves(
-        labels_arr,
-        probs_arr,
-        os.path.join(args.output_dir, "roc_curves.png"),
-    )
-    plot_pr_curves(
-        labels_arr,
-        probs_arr,
-        os.path.join(args.output_dir, "pr_curves.png"),
-    )
-    plot_confusion_matrices(
-        labels_arr,
-        probs_arr,
-        thresholds,
-        os.path.join(args.output_dir, "confusion_matrices.png"),
-    )
-    plot_prob_distributions(
-        labels_arr,
-        probs_arr,
-        thresholds,
-        os.path.join(args.output_dir, "prob_distributions.png"),
-    )
-    plot_threshold_sensitivity(
-        labels_arr,
-        probs_arr,
-        thresholds,
-        os.path.join(args.output_dir, "threshold_sensitivity.png"),
-    )
-
-    print("\nError analysis ...")
-    error_analysis(
-        texts,
-        labels_arr,
-        probs_arr,
-        thresholds,
-        os.path.join(args.output_dir, "error_analysis.csv"),
-        top_k=10,
+    # ── Evaluate on test ──
+    evaluate_split(
+        csv_path=args.test_csv,
+        split_name="test",
+        output_dir=args.output_dir,
+        thresholds=thresholds,
+        ensemble_weights=ensemble_weights,
+        batch_size=args.batch_size,
     )
 
     print("\n" + "=" * 60)
