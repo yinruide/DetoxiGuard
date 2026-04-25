@@ -1,0 +1,45 @@
+Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+Some weights of LlamaForSequenceClassification were not initialized from the model checkpoint at meta-llama/Llama-3.2-1B and are newly initialized: ['score.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Loading model ...
+Loaded thresholds: {'toxic': 0.9, 'severe_toxic': 0.94, 'obscene': 0.88, 'threat': 0.85, 'insult': 0.9, 'identity_hate': 0.78}
+Loading validation data ...
+Validation samples: 22,355
+Running inference ...
+Predictions shape: (22355, 6)
+  Saved: val_probs_llama.npy, val_labels.npy
+
+============================================================
+SUMMARY METRICS
+============================================================
+        label  support  AUC-ROC  PR-AUC  t=0.5 F1  t=0.5 P  t=0.5 R  opt_t  opt F1  opt P  opt R
+        toxic     2139   0.9850  0.8913    0.7864   0.6981   0.9004 0.9000  0.8022 0.8092 0.7952
+ severe_toxic      196   0.9898  0.4789    0.4899   0.3519   0.8061 0.9400  0.5322 0.4593 0.6327
+      obscene     1214   0.9918  0.8826    0.7908   0.7006   0.9077 0.8800  0.8132 0.7887 0.8394
+       threat       69   0.9672  0.5924    0.6310   0.5354   0.7681 0.8500  0.6623 0.6098 0.7246
+       insult     1130   0.9883  0.8247    0.7391   0.6411   0.8726 0.9000  0.7762 0.7461 0.8088
+identity_hate      211   0.9797  0.6139    0.6264   0.5204   0.7867 0.7800  0.6354 0.5571 0.7393
+        MACRO     4959   0.9836  0.7140    0.6773   0.5746   0.8403    NaN  0.7036 0.6617 0.7567
+        MICRO     4959   0.9906  0.8359    0.7509   0.6518   0.8855    NaN  0.7765 0.7549 0.7994
+
+  Saved: outputs/eval_llama/metrics_summary.csv
+
+Generating plots ...
+  Saved: outputs/eval_llama/roc_curves.png
+  Saved: outputs/eval_llama/pr_curves.png
+  Saved: outputs/eval_llama/confusion_matrices.png
+  Saved: outputs/eval_llama/prob_distributions.png
+  Saved: outputs/eval_llama/threshold_sensitivity.png
+
+Error analysis ...
+  Saved: outputs/eval_llama/error_analysis.csv
+    toxic            FP examples: 10  |  FN examples: 10
+    severe_toxic     FP examples: 10  |  FN examples: 10
+    obscene          FP examples: 10  |  FN examples: 10
+    threat           FP examples: 10  |  FN examples: 10
+    insult           FP examples: 10  |  FN examples: 10
+    identity_hate    FP examples: 10  |  FN examples: 10
+
+============================================================
+All outputs saved to: outputs/eval_llama/
+============================================================
