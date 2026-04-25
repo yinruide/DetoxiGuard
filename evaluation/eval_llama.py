@@ -358,7 +358,7 @@ def parse_args():
         description="Evaluate LLaMA+LoRA toxic comment classifier"
     )
     parser.add_argument("--checkpoint", type=str,
-                        default="outputs/llama_lora/best_checkpoint",
+                        default="outputs/llama/best_checkpoint",
                         help="Path to the best LoRA checkpoint directory")
     parser.add_argument("--base_model", type=str,
                         default="meta-llama/Llama-3.2-1B",
@@ -367,7 +367,7 @@ def parse_args():
                         default="data/val_split.csv",
                         help="Validation CSV (from split.py)")
     parser.add_argument("--output_dir", type=str,
-                        default="evaluation/eval_llama_results",
+                        default="outputs/eval_llama",
                         help="Directory to save all evaluation outputs")
     parser.add_argument("--batch_size", type=int, default=32,
                         help="Inference batch size")

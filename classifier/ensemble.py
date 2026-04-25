@@ -25,7 +25,7 @@ Usage:
     python ensemble.py \
         --bert_ckpt   outputs/bert/best_checkpoint \
         --bert_base   bert-base-uncased \
-        --llama_ckpt  outputs/llama_lora/best_checkpoint \
+        --llama_ckpt  outputs/llama/best_checkpoint \
         --llama_base  meta-llama/Llama-3.2-1B \
         --val_csv     data/val_split.csv \
         --output_dir  outputs/ensemble
@@ -379,7 +379,7 @@ def parse_args():
                         help="Path to the fine-tuned BERT checkpoint directory")
     parser.add_argument("--bert_base", type=str, default="bert-base-uncased",
                         help="HuggingFace model ID for the BERT base model")
-    parser.add_argument("--llama_ckpt", type=str, default="outputs/llama_lora/best_checkpoint",
+    parser.add_argument("--llama_ckpt", type=str, default="outputs/llama/best_checkpoint",
                         help="Path to the fine-tuned LLaMA+LoRA checkpoint directory")
     parser.add_argument("--llama_base", type=str, default="meta-llama/Llama-3.2-1B",
                         help="HuggingFace model ID for the LLaMA base model")

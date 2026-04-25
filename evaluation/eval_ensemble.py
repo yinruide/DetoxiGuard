@@ -477,7 +477,7 @@ def parse_args():
                         default="bert-base-uncased",
                         help="HuggingFace model ID for the BERT base model")
     parser.add_argument("--llama_ckpt", type=str,
-                        default="outputs/llama_lora/best_checkpoint",
+                        default="outputs/llama/best_checkpoint",
                         help="Path to the fine-tuned LLaMA+LoRA checkpoint directory")
     parser.add_argument("--llama_base", type=str,
                         default="meta-llama/Llama-3.2-1B",
@@ -492,7 +492,7 @@ def parse_args():
                         default="data/test_split.csv",
                         help="Held-out test CSV (from split.py)")
     parser.add_argument("--output_dir", type=str,
-                        default="evaluation/eval_ensemble_results",
+                        default="outputs/eval_ensemble_results",
                         help="Directory to save all evaluation outputs")
     parser.add_argument("--batch_size", type=int, default=32,
                         help="Inference batch size")

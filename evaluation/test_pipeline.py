@@ -227,7 +227,7 @@ if __name__ == "__main__":
     init_ensemble(
         bert_ckpt=os.path.join(_REPO_ROOT, "outputs/bert_final/best_checkpoint"),
         bert_base="bert-base-uncased",
-        llama_ckpt=os.path.join(_REPO_ROOT, "outputs/llama_lora/best_checkpoint"),
+        llama_ckpt=os.path.join(_REPO_ROOT, "outputs/llama/best_checkpoint"),
         llama_base="meta-llama/Llama-3.2-1B",
         ensemble_dir=os.path.join(_REPO_ROOT, "outputs/ensemble"),
         device="cpu",

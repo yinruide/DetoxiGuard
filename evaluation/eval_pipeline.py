@@ -445,11 +445,11 @@ def parse_args():
     p = argparse.ArgumentParser(description="End-to-end pipeline evaluation")
     p.add_argument("--test_csv", type=str, default="data/test_split.csv",
                    help="Held-out test CSV (from split.py)")
-    p.add_argument("--error_csv", type=str, default="outputs/ensemble/error_analysis.csv",
+    p.add_argument("--error_csv", type=str, default="outputs/eval_ensemble_results/val/error_analysis.csv",
                    help="Error analysis CSV from ensemble evaluation (optional)")
     p.add_argument("--bert_ckpt", type=str, default="outputs/bert_final/best_checkpoint")
     p.add_argument("--bert_base", type=str, default="bert-base-uncased")
-    p.add_argument("--llama_ckpt", type=str, default="outputs/llama_lora/best_checkpoint")
+    p.add_argument("--llama_ckpt", type=str, default="outputs/llama/best_checkpoint")
     p.add_argument("--llama_base", type=str, default="meta-llama/Llama-3.2-1B")
     p.add_argument("--ensemble_dir", type=str, default="outputs/ensemble")
     p.add_argument("--n_toxic", type=int, default=50,
