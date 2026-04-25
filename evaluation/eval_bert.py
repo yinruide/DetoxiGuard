@@ -13,14 +13,14 @@ set, and produces:
     6. Threshold sensitivity curves (F1 vs threshold per label)
     7. Error analysis  (top FP / FN examples per label)
 
-All figures are saved to  evaluation/eval_bert_results/
+All figures are saved to  outputs/eval_bert/
 
 Usage:
     python evaluation/eval_bert.py \
         --checkpoint  outputs/bert_final/best_checkpoint \
         --base_model  bert-base-uncased \
         --val_csv     data/val_split.csv \
-        --output_dir  evaluation/eval_bert_results
+        --output_dir  outputs/eval_bert
 
 Author: Yanfu Wang
 """
@@ -38,6 +38,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from sklearn.metrics import (
+    auc,
     average_precision_score,
     confusion_matrix,
     f1_score,
@@ -362,7 +363,7 @@ def error_analysis(
 ) -> pd.DataFrame:
     """
     For each label, find the top-k false positives and false negatives
-    ranked by confidence.
+    ranked by distance from the threshold (i.e. most confident mistakes).
     """
     records = []
 
@@ -443,7 +444,7 @@ def parse_args():
     parser.add_argument(
         "--output_dir",
         type=str,
-        default="evaluation/eval_bert_results",
+        default="outputs/eval_bert",
         help="Directory to save all evaluation outputs",
     )
     parser.add_argument(
@@ -477,7 +478,8 @@ def main():
     thresh_path = os.path.join(args.checkpoint, "optimal_thresholds.json")
     with open(thresh_path) as f:
         thresholds = json.load(f)
-    print(f"Loaded thresholds: {{ {', '.join(f'{k}: {round(v, 2)}' for k, v in thresholds.items())} }}")
+    rounded_thresholds = {k: round(float(v), 2) for k, v in thresholds.items()}
+    print(f"Loaded thresholds: {rounded_thresholds}")
 
     # ── Load validation data ──────────────────
     print("Loading validation data ...")
@@ -497,10 +499,10 @@ def main():
     )
     print(f"Predictions shape: {probs_arr.shape}")
 
-    # Save raw probabilities for downstream use
+    # Save raw probabilities for downstream use (e.g., ensemble comparison)
     np.save(os.path.join(args.output_dir, "val_probs_bert.npy"), probs_arr)
     np.save(os.path.join(args.output_dir, "val_labels.npy"), labels_arr)
-    print("  Saved: val_probs_bert.npy, val_labels.npy")
+    print(f"  Saved: val_probs_bert.npy, val_labels.npy")
 
     # ── 1. Metrics table ──────────────────────
     print("\n" + "=" * 60)
