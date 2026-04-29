@@ -1,12 +1,13 @@
 torch
 transformers
 peft
-datasets
+accelerate
 scikit-learn
 pandas
 numpy
-accelerate
 iterative-stratification
+matplotlib
+seaborn
 langgraph
 langchain-core
 openai
