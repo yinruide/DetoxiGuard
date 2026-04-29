@@ -1,44 +1,44 @@
 {
   "toxic": {
-    "w_bert": 0.45,
-    "w_llama": 0.55,
-    "threshold": 0.41,
-    "f2": 0.8735,
-    "f1": 0.8049
+    "w_bert": 0.3,
+    "w_llama": 0.7,
+    "threshold": 0.3,
+    "f2": 0.8605,
+    "f1": 0.7734
   },
   "severe_toxic": {
-    "w_bert": 1.0,
-    "w_llama": 0.0,
-    "threshold": 0.41,
-    "f2": 0.6539,
-    "f1": 0.5008
+    "w_bert": 0.4,
+    "w_llama": 0.6,
+    "threshold": 0.48,
+    "f2": 0.6623,
+    "f1": 0.5102
   },
   "obscene": {
+    "w_bert": 0.5,
+    "w_llama": 0.5,
+    "threshold": 0.3,
+    "f2": 0.8671,
+    "f1": 0.7785
+  },
+  "threat": {
+    "w_bert": 0.15,
+    "w_llama": 0.85,
+    "threshold": 0.32,
+    "f2": 0.7273,
+    "f1": 0.6292
+  },
+  "insult": {
     "w_bert": 0.7,
     "w_llama": 0.3,
     "threshold": 0.28,
-    "f2": 0.8717,
-    "f1": 0.7861
-  },
-  "threat": {
-    "w_bert": 0.5,
-    "w_llama": 0.5,
-    "threshold": 0.43,
-    "f2": 0.7841,
-    "f1": 0.6703
-  },
-  "insult": {
-    "w_bert": 0.2,
-    "w_llama": 0.8,
-    "threshold": 0.18,
-    "f2": 0.8412,
-    "f1": 0.7205
+    "f2": 0.8393,
+    "f1": 0.7475
   },
   "identity_hate": {
-    "w_bert": 0.8,
-    "w_llama": 0.2,
+    "w_bert": 0.3,
+    "w_llama": 0.7,
     "threshold": 0.14,
-    "f2": 0.7604,
-    "f1": 0.6161
+    "f2": 0.7363,
+    "f1": 0.5905
   }
 }

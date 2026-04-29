@@ -1,0 +1,100 @@
+2026-04-29 07:08:49 | WARNING | Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+2026-04-29 07:08:51 | INFO | Loading BERT model for ensemble ...
+2026-04-29 07:08:51 | INFO | Loading LLaMA model for ensemble ...
+Some weights of LlamaForSequenceClassification were not initialized from the model checkpoint at meta-llama/Llama-3.2-1B and are newly initialized: ['score.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2026-04-29 07:08:55 | INFO | Ensemble loaded and cached.
+Loading ensemble ...
+Loaded thresholds: {'toxic': 0.3, 'severe_toxic': 0.48, 'obscene': 0.3, 'threat': 0.32, 'insult': 0.28, 'identity_hate': 0.14}
+
+############################################################
+  Evaluating on: val  (data/val_split.csv)
+############################################################
+  Samples: 22,355
+  Running ensemble inference ...
+  Predictions shape: (22355, 6)
+  Saved: val_probs_ensemble.npy, val_labels.npy
+
+============================================================
+SUMMARY METRICS (val)
+============================================================
+        label  support  AUC-ROC  PR-AUC  t=0.5 F1  t=0.5 P  t=0.5 R  opt_t  opt F1  opt P  opt R
+        toxic     2139   0.9862  0.9008    0.7922   0.7113   0.8939 0.3000  0.7734 0.6618 0.9303
+ severe_toxic      196   0.9922  0.4918    0.5089   0.3718   0.8061 0.4800  0.5102 0.3690 0.8265
+      obscene     1214   0.9929  0.8958    0.7968   0.7172   0.8962 0.3000  0.7785 0.6653 0.9382
+       threat       69   0.9609  0.6639    0.6316   0.5294   0.7826 0.3200  0.6292 0.5138 0.8116
+       insult     1130   0.9900  0.8417    0.7616   0.6794   0.8664 0.2800  0.7475 0.6322 0.9142
+identity_hate      211   0.9878  0.6665    0.6264   0.5204   0.7867 0.1400  0.5905 0.4439 0.8815
+        MACRO     4959   0.9850  0.7434    0.6862   0.5882   0.8387    NaN  0.6716 0.5477 0.8837
+        MICRO     4959   0.9919  0.8512    0.7610   0.6711   0.8786    NaN  0.7437 0.6238 0.9208
+
+  Saved: outputs/eval_ensemble_results/val/metrics_summary.csv
+
+  Saving ensemble weight summary ...
+  Saved: outputs/eval_ensemble_results/val/ensemble_weight_summary.csv
+
+  Generating plots ...
+  Saved: outputs/eval_ensemble_results/val/roc_curves.png
+  Saved: outputs/eval_ensemble_results/val/pr_curves.png
+  Saved: outputs/eval_ensemble_results/val/confusion_matrices.png
+  Saved: outputs/eval_ensemble_results/val/prob_distributions.png
+  Saved: outputs/eval_ensemble_results/val/threshold_sensitivity.png
+
+  Error analysis (val) ...
+  Saved: outputs/eval_ensemble_results/val/error_analysis.csv
+    toxic            FP examples: 10  |  FN examples: 10
+    severe_toxic     FP examples: 10  |  FN examples: 10
+    obscene          FP examples: 10  |  FN examples: 10
+    threat           FP examples: 10  |  FN examples: 10
+    insult           FP examples: 10  |  FN examples: 10
+    identity_hate    FP examples: 10  |  FN examples: 10
+
+  val outputs saved to: outputs/eval_ensemble_results/val/
+
+############################################################
+  Evaluating on: test  (data/test_split.csv)
+############################################################
+  Samples: 22,355
+  Running ensemble inference ...
+  Predictions shape: (22355, 6)
+  Saved: test_probs_ensemble.npy, test_labels.npy
+
+============================================================
+SUMMARY METRICS (test)
+============================================================
+        label  support  AUC-ROC  PR-AUC  t=0.5 F1  t=0.5 P  t=0.5 R  opt_t  opt F1  opt P  opt R
+        toxic     2138   0.9862  0.8964    0.7969   0.7190   0.8938 0.3000  0.7707 0.6604 0.9252
+ severe_toxic      196   0.9870  0.4693    0.4883   0.3521   0.7959 0.4800  0.4867 0.3506 0.7959
+      obscene     1214   0.9931  0.8959    0.8026   0.7235   0.9012 0.3000  0.7850 0.6694 0.9489
+       threat       69   0.9887  0.6234    0.5622   0.4483   0.7536 0.3200  0.5473 0.4167 0.7971
+       insult     1131   0.9880  0.8185    0.7336   0.6549   0.8338 0.2800  0.7268 0.6140 0.8904
+identity_hate      212   0.9941  0.7216    0.6449   0.5437   0.7925 0.1400  0.5473 0.3958 0.8868
+        MACRO     4960   0.9895  0.7375    0.6714   0.5736   0.8285    NaN  0.6440 0.5178 0.8740
+        MICRO     4960   0.9921  0.8447    0.7561   0.6675   0.8718    NaN  0.7335 0.6123 0.9145
+
+  Saved: outputs/eval_ensemble_results/test/metrics_summary.csv
+
+  Saving ensemble weight summary ...
+  Saved: outputs/eval_ensemble_results/test/ensemble_weight_summary.csv
+
+  Generating plots ...
+  Saved: outputs/eval_ensemble_results/test/roc_curves.png
+  Saved: outputs/eval_ensemble_results/test/pr_curves.png
+  Saved: outputs/eval_ensemble_results/test/confusion_matrices.png
+  Saved: outputs/eval_ensemble_results/test/prob_distributions.png
+  Saved: outputs/eval_ensemble_results/test/threshold_sensitivity.png
+
+  Error analysis (test) ...
+  Saved: outputs/eval_ensemble_results/test/error_analysis.csv
+    toxic            FP examples: 10  |  FN examples: 10
+    severe_toxic     FP examples: 10  |  FN examples: 10
+    obscene          FP examples: 10  |  FN examples: 10
+    threat           FP examples: 10  |  FN examples: 10
+    insult           FP examples: 10  |  FN examples: 10
+    identity_hate    FP examples: 10  |  FN examples: 10
+
+  test outputs saved to: outputs/eval_ensemble_results/test/
+
+============================================================
+All outputs saved to: outputs/eval_ensemble_results/
+============================================================

@@ -1,0 +1,101 @@
+2026-04-29 06:43:14 | WARNING | Skipping import of cpp extensions due to incompatible torch version. Please upgrade to torch >= 2.11.0 (found 2.10.0+cu128).
+2026-04-29 06:43:16 | INFO | Loading validation data from data/val_split.csv ...
+2026-04-29 06:43:16 | INFO | Validation samples: 22,355
+2026-04-29 06:43:16 | INFO | Device: cuda
+2026-04-29 06:43:16 | INFO | Loading BERT model ...
+2026-04-29 06:43:16 | INFO | Loading LLaMA model ...
+Some weights of LlamaForSequenceClassification were not initialized from the model checkpoint at meta-llama/Llama-3.2-1B and are newly initialized: ['score.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+2026-04-29 06:43:20 | INFO | Running BERT inference on val set ...
+2026-04-29 06:44:54 | INFO | Running LLaMA inference on val set ...
+2026-04-29 06:58:24 | INFO | p_bert  shape=(22355, 6)  range=[0.0000, 1.0000]
+2026-04-29 06:58:24 | INFO | p_llama shape=(22355, 6)  range=[0.0000, 1.0000]
+2026-04-29 06:58:24 | INFO | ═══ Searching F2-optimal thresholds for BERT-only baseline ═══
+2026-04-29 06:58:24 | INFO |   toxic            w_bert=1.00  threshold=0.11  F2=0.8437  F1=0.7688
+2026-04-29 06:58:24 | INFO |   severe_toxic     w_bert=1.00  threshold=0.19  F2=0.6455  F1=0.4886
+2026-04-29 06:58:24 | INFO |   obscene          w_bert=1.00  threshold=0.12  F2=0.8536  F1=0.7668
+2026-04-29 06:58:24 | INFO |   threat           w_bert=1.00  threshold=0.32  F2=0.6718  F1=0.5778
+2026-04-29 06:58:25 | INFO |   insult           w_bert=1.00  threshold=0.25  F2=0.8262  F1=0.7457
+2026-04-29 06:58:25 | INFO |   identity_hate    w_bert=1.00  threshold=0.13  F2=0.7067  F1=0.5854
+2026-04-29 06:58:25 | INFO | ═══ Searching F2-optimal thresholds for LLaMA-only baseline ═══
+2026-04-29 06:58:25 | INFO |   toxic            w_bert=0.00  threshold=0.32  F2=0.8556  F1=0.7723
+2026-04-29 06:58:25 | INFO |   severe_toxic     w_bert=0.00  threshold=0.33  F2=0.6537  F1=0.4821
+2026-04-29 06:58:25 | INFO |   obscene          w_bert=0.00  threshold=0.24  F2=0.8608  F1=0.7677
+2026-04-29 06:58:25 | INFO |   threat           w_bert=0.00  threshold=0.48  F2=0.7181  F1=0.6391
+2026-04-29 06:58:25 | INFO |   insult           w_bert=0.00  threshold=0.28  F2=0.8213  F1=0.7234
+2026-04-29 06:58:25 | INFO |   identity_hate    w_bert=0.00  threshold=0.14  F2=0.7241  F1=0.5902
+2026-04-29 06:58:26 | INFO | ═══ Searching thresholds for uniform ensemble (w=0.5) ═══
+2026-04-29 06:58:26 | INFO |   toxic            threshold=0.23  F2=0.8604  (uniform w=0.5)
+2026-04-29 06:58:26 | INFO |   severe_toxic     threshold=0.41  F2=0.6538  (uniform w=0.5)
+2026-04-29 06:58:26 | INFO |   obscene          threshold=0.30  F2=0.8671  (uniform w=0.5)
+2026-04-29 06:58:26 | INFO |   threat           threshold=0.27  F2=0.7053  (uniform w=0.5)
+2026-04-29 06:58:26 | INFO |   insult           threshold=0.42  F2=0.8372  (uniform w=0.5)
+2026-04-29 06:58:26 | INFO |   identity_hate    threshold=0.24  F2=0.7341  (uniform w=0.5)
+2026-04-29 06:58:26 | INFO | ═══ Per-label joint (w, threshold) grid search ═══
+2026-04-29 06:58:29 | INFO |   toxic            w_bert=0.30  threshold=0.30  F2=0.8605  F1=0.7734
+2026-04-29 06:58:31 | INFO |   severe_toxic     w_bert=0.40  threshold=0.48  F2=0.6623  F1=0.5102
+2026-04-29 06:58:34 | INFO |   obscene          w_bert=0.50  threshold=0.30  F2=0.8671  F1=0.7785
+2026-04-29 06:58:36 | INFO |   threat           w_bert=0.15  threshold=0.32  F2=0.7273  F1=0.6292
+2026-04-29 06:58:38 | INFO |   insult           w_bert=0.70  threshold=0.28  F2=0.8393  F1=0.7475
+2026-04-29 06:58:41 | INFO |   identity_hate    w_bert=0.30  threshold=0.14  F2=0.7363  F1=0.5905
+2026-04-29 06:58:41 | INFO | 
+2026-04-29 06:58:41 | INFO | ══════════════════════════════════════════════════
+2026-04-29 06:58:41 | INFO |           FOUR-GROUP COMPARISON REPORT            
+2026-04-29 06:58:41 | INFO | ══════════════════════════════════════════════════
+2026-04-29 06:58:41 | INFO | ── 1. BERT tuned ──
+2026-04-29 06:58:41 | INFO |   Macro-F1=0.6555  Micro-F1=0.7360  Macro-AUC=0.9825  Macro-PR-AUC=0.7181
+2026-04-29 06:58:41 | INFO |   Label                F1       P       R     AUC  PR-AUC
+2026-04-29 06:58:41 | INFO |   toxic            0.7688  0.6697  0.9023  0.9822  0.8771
+2026-04-29 06:58:41 | INFO |   severe_toxic     0.4886  0.3477  0.8214  0.9915  0.4916
+2026-04-29 06:58:41 | INFO |   obscene          0.7668  0.6556  0.9234  0.9909  0.8827
+2026-04-29 06:58:41 | INFO |   threat           0.5778  0.4685  0.7536  0.9582  0.6198
+2026-04-29 06:58:41 | INFO |   insult           0.7457  0.6416  0.8903  0.9880  0.8196
+2026-04-29 06:58:41 | INFO |   identity_hate    0.5854  0.4553  0.8199  0.9839  0.6176
+2026-04-29 06:58:41 | INFO | ── 2. LLaMA tuned ──
+2026-04-29 06:58:41 | INFO |   Macro-F1=0.6624  Micro-F1=0.7329  Macro-AUC=0.9837  Macro-PR-AUC=0.7141
+2026-04-29 06:58:41 | INFO |   Label                F1       P       R     AUC  PR-AUC
+2026-04-29 06:58:41 | INFO |   toxic            0.7723  0.6644  0.9219  0.9850  0.8914
+2026-04-29 06:58:41 | INFO |   severe_toxic     0.4821  0.3353  0.8571  0.9898  0.4788
+2026-04-29 06:58:41 | INFO |   obscene          0.7677  0.6505  0.9366  0.9918  0.8826
+2026-04-29 06:58:41 | INFO |   threat           0.6391  0.5400  0.7826  0.9673  0.5930
+2026-04-29 06:58:41 | INFO |   insult           0.7234  0.6036  0.9027  0.9883  0.8248
+2026-04-29 06:58:41 | INFO |   identity_hate    0.5902  0.4511  0.8531  0.9798  0.6141
+2026-04-29 06:58:41 | INFO | ── 3. Ensemble uniform (w=0.5) ──
+2026-04-29 06:58:41 | INFO |   Macro-F1=0.6656  Micro-F1=0.7418  Macro-AUC=0.9846  Macro-PR-AUC=0.7436
+2026-04-29 06:58:41 | INFO |   Label                F1       P       R     AUC  PR-AUC
+2026-04-29 06:58:41 | INFO |   toxic            0.7652  0.6460  0.9383  0.9861  0.8998
+2026-04-29 06:58:41 | INFO |   severe_toxic     0.4977  0.3560  0.8265  0.9922  0.4931
+2026-04-29 06:58:41 | INFO |   obscene          0.7785  0.6653  0.9382  0.9929  0.8958
+2026-04-29 06:58:41 | INFO |   threat           0.5895  0.4628  0.8116  0.9585  0.6695
+2026-04-29 06:58:41 | INFO |   insult           0.7559  0.6507  0.9018  0.9901  0.8414
+2026-04-29 06:58:41 | INFO |   identity_hate    0.6071  0.4712  0.8531  0.9878  0.6620
+2026-04-29 06:58:41 | INFO | ── 4. Ensemble learned (per-label w) ──
+2026-04-29 06:58:41 | INFO |   Macro-F1=0.6716  Micro-F1=0.7437  Macro-AUC=0.9850  Macro-PR-AUC=0.7434
+2026-04-29 06:58:41 | INFO |   Label                F1       P       R     AUC  PR-AUC
+2026-04-29 06:58:41 | INFO |   toxic            0.7734  0.6618  0.9303  0.9862  0.9008
+2026-04-29 06:58:41 | INFO |   severe_toxic     0.5102  0.3690  0.8265  0.9922  0.4918
+2026-04-29 06:58:41 | INFO |   obscene          0.7785  0.6653  0.9382  0.9929  0.8958
+2026-04-29 06:58:41 | INFO |   threat           0.6292  0.5138  0.8116  0.9609  0.6639
+2026-04-29 06:58:41 | INFO |   insult           0.7475  0.6322  0.9142  0.9900  0.8417
+2026-04-29 06:58:41 | INFO |   identity_hate    0.5905  0.4439  0.8815  0.9878  0.6665
+2026-04-29 06:58:41 | INFO | Saved ensemble weights → outputs/ensemble/ensemble_weights.json
+2026-04-29 06:58:41 | INFO | Saved uniform thresholds → outputs/ensemble/uniform_thresholds.json
+2026-04-29 06:58:41 | INFO | Saved comparison report → outputs/ensemble/val_comparison.json
+2026-04-29 06:58:41 | INFO | 
+2026-04-29 06:58:41 | INFO | ═══ MACRO SUMMARY ═══
+2026-04-29 06:58:41 | INFO |   Method                          Macro-F1  Micro-F1     M-AUC  M-PR-AUC
+2026-04-29 06:58:41 | INFO |   BERT tuned                        0.6555    0.7360    0.9825    0.7181
+2026-04-29 06:58:41 | INFO |   LLaMA tuned                       0.6624    0.7329    0.9837    0.7141
+2026-04-29 06:58:41 | INFO |   Ensemble uniform                  0.6656    0.7418    0.9846    0.7436
+2026-04-29 06:58:41 | INFO |   Ensemble learned                  0.6716    0.7437    0.9850    0.7434
+2026-04-29 06:58:41 | INFO | 
+2026-04-29 06:58:41 | INFO | ═══ PER-LABEL LEARNED WEIGHTS ═══
+2026-04-29 06:58:41 | INFO |   Label            w_bert  w_llama  thresh      F2      F1
+2026-04-29 06:58:41 | INFO |   toxic              0.30     0.70    0.30  0.8605  0.7734
+2026-04-29 06:58:41 | INFO |   severe_toxic       0.40     0.60    0.48  0.6623  0.5102
+2026-04-29 06:58:41 | INFO |   obscene            0.50     0.50    0.30  0.8671  0.7785
+2026-04-29 06:58:41 | INFO |   threat             0.15     0.85    0.32  0.7273  0.6292
+2026-04-29 06:58:41 | INFO |   insult             0.70     0.30    0.28  0.8393  0.7475
+2026-04-29 06:58:41 | INFO |   identity_hate      0.30     0.70    0.14  0.7363  0.5905
+2026-04-29 06:58:41 | INFO | 
+Done.
