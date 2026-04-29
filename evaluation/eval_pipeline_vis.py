@@ -44,9 +44,9 @@ C_LIGHT_BG  = "#F8FAFC"
 
 
 def load_data(summary_path, details_path):
-    with open(summary_path) as f:
+    with open(summary_path, encoding="utf-8") as f:
         summary = json.load(f)
-    with open(details_path) as f:
+    with open(details_path, encoding="utf-8") as f:
         details = json.load(f)
     return summary, details
 
