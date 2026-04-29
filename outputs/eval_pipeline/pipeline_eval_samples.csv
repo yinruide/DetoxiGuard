@@ -1,0 +1,920 @@
+id,comment_text,toxic,severe_toxic,obscene,threat,insult,identity_hate,pred_toxic,pred_severe_toxic,pred_obscene,pred_threat,pred_insult,pred_identity_hate,any_toxic,source,label,error_type,prob,threshold,error_label
+feb730e5a4f42d26,"""
+
+Major Garrett
+Major Garrett is a congressional correspondent for Fox News. He has also been a White House correspondent for CNN, a senior editor and congressional correspondent for U.S. News and World Report, and a congressional reporter for the Washington Times.http://www.foxnews.com/story/0,2933,60317,00.html His book The Fifteen Biggest Lies in Politics was described as """"calmly reasoned"""" by the Indianapolis Star.http://www.amazon.com/gp/product/product-description/0312254598/ref=dp_proddesc_0?ie=UTF8&n;=283155&s;=books He is an alumnus of the Missouri School of Journalism.http://journalism.missouri.edu/alumni/major-garrett-84.html
+
+Controversy
+On January 8, 2008, Garrett reported that James Carville and Paul Begala were preparing to join the Clinton campaign, in a major shake-up of the campaign staff.http://www.newshounds.us/2008/01/08/major_garrett_from_fox_says_he_stands_by_his_source_that_begala_and_carville_are_joining_hillarys_team.php Despite strenuous objections from Carvillehttp://opinionator.blogs.nytimes.com/tag/james-carville/ and Begalahttp://www.huffingtonpost.com/paul-begala/fox-news-we-report-e_b_80698.html, Garrett stood by his story, which later proved to be untrue.http://www.crooksandliars.com/2008/01/09/fox-news-wrong-about-carville-and-begala-joining-hillary/
+
+References
+
+""",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+a9d462623f520774,"Hey you, can you please tell me how the fuck my edit on the University of China page was considered a personal attack, when it was actually factual speaking?
+03alpe01 is my name and we have the University of China, right here in Southampton,Poland!",1.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+d77db85b83eafc11,"==Jreidus== 
+ new message on my talk page",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,Hey you deleted the pics i put up for the malibu page. F! you i freakin live in malibu and have alot more money than u do! You know it took me a long time to put those pics up and u deleted them. your lucky your not in Malibu or in the la area because i would take u out back and kick your ass!,,,,,,,,,,,,,1,error_fp,threat,FP,0.9988,0.32,threat
+3e103f0edf18157b,::OMG! Is everyone you meet a sock? Why don't these idiots use TOR or something?,1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+1709d0ca19f3ac6c,"""
+
+ Replaceable fair use Image:Mishig_Sonompil.jpg 
+
+Thanks for uploading Image:Mishig_Sonompil.jpg. I noticed the description page specifies that the media is being used under a claim of fair use, but its use in Wikipedia articles fails our first non-free content criterion in that it illustrates a subject for which a freely licensed media could reasonably be found or created that provides substantially the same information. If you believe this media is not replaceable, please:
+
+ Go to the media description page and edit it to add , without deleting the original replaceable fair use template.
+ On the image discussion page, write the reason why this image is not replaceable at all.
+
+Alternatively, you can also choose to replace this non-free media by finding freely licensed media of the same subject, requesting that the copyright holder release this (or similar) media under a free license, or by taking a picture of it yourself.
+
+If you have uploaded other non-free media, consider checking that you have specified how these images fully satisfy our non-free content criteria. You can find a list of description pages you have edited by clicking on [ this link]. Note that even if you follow steps 1 and 2 above, non-free media which could be replaced by freely licensed alternatives will be deleted 2 days after this notification (7 days if uploaded before 13 July 2006), per our non-free content policy.  If you have any questions please ask them at the Media copyright questions page. Thank you. Do you want to opt out of receiving this notice?   """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+ed38717e1ffa0904,"== Luther and bouts with the devil == 
+
+ Stan, please see the remark I made about some contributors trying to emphasize the scatological with Luther. In the end they trivialize themselves with this garbage.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+27518e0b49343725,"""
+No problem, thank you for helping here. As a newer user, I am all about learning and have been learning much from Antid who gave me  this NPA warning, to which my reaction was also """"What ..? That was not a comment on the contributor in any meaningful sense or a comment to which a WP:NPA warning seems relevant — But since he is so experienced a user, he must be  illustrating both the standard and the method of how to address it."""" Perhaps you can assist me to understand the difference between his NPA warning and mine? I want to make sure I am a responsible editor. I'm all ears.  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+05f7b43deb23555f,yes and davie is a homosexual,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,1.0,1,test_toxic,,,,,
+,"Hello and welcome, liten I've had the same [problem with these girls they can be mean, but you can become a better person by klearning from your foolish past",,,,,,,,,,,,,0,error_fn,obscene,FN,0.0009,0.3,obscene
+,Definition of fat- Lauren Lozano!,,,,,,,,,,,,,0,error_fn,toxic,FN,0.0004,0.3,toxic
+14f111a32b9d3ef5,"== So when is an AfD secret? == 
+
+ I'm confused, you claim that everything is done in secret yet the issues with your article are being dealt with in an open, transparent, consensus-building manner. You use an AfD process as the sole basis for calling someone both rude and unfair which in itself just smacks of lacking good faith. Seriously, Don't be a dick.    
+
+ :Pick what you want here, you want an AfD one minute from Orderinchaos, and the next minute you're complaining when someone does. You can't have it both ways. I don't have to ask to open an AfD, nor should I have to. The AfD is an open discussion which allows for the building of community consensus, and the decision on what happens is up to the community. If you have a valid and supportable argument on why the article should be kept, take it up there. And again, Don't be a dick.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+5cc44058a8f90faa,": Its the Wiki airbrush brigade, remove from Wikpedia that which one does not like via layering, cabals, and brute force. This project is in sever need of an enema to remove all the shit that has collected here over the years.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,What is an moitheather no one knows but you a hoe so go eff a duck... ),,,,,,,,,,,,,0,error_fn,obscene,FN,0.0004,0.3,obscene
+aea5faae5f392598,RL should fuck off to America to be with all the other fat nazi twats.,1.0,0.0,0.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+66b8924c284d139b,"Sorry, but I know nothing of Munich and honestly have no interest in Germany or even Europe for that matter.  I've been there, and I was vastly unimpressed.  My country is far better in almost every measurable aspect.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+3ff6f8bccff12578,HOGTIE THIS YOU FAGGOT,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+70d25fc76ff79b76,"""
+
+You could add such a caption, and you could use it under fair use. But we aren't going to use this image, and the other one, that would be excessive. One image showing the resistance is enough, you don't need any more. And we certainly won't include claims about links to """"world jihad organizations"""" (whatever that means). We need to write neutrally, and from reliable sources, and images must have an appreciable impact in increasing the understanding of the event to be included. The IDF videos are already linked.  talk """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+74f073a32265d490,"Oh, but I see you've been blocked for other shit.  That's a lot of shit.",1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+58a22044c47b92a1,"== my monkey == 
+
+ dear wik, 
+   i just bought a rare magolian monkey. he keeps wearing me bras around..... in public. also last time he went to starbucks with me he callerd a bigger lady a fat butt. help.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+a04767b1333b4fb0,"You are not cool 
+
+You are the most hated fool in the world! You are a load of %$#! Barry Dejay rocks!",1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+33b82337c5188fb2,Can someone please provide a citation indicating that the WP SPI policy is guilty until proven innocent? It seems like people hereespecially the highly respected 'veteran' usersjust make up policy as they go.,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"You also want eternal hell???
+
+‘chaitanya-mangala’ shune yadi pashandi, yavana seha maha-vaishnava haya tatakshana If even a great atheist hears Shri Chaitanya-mangala (previous name for Shri Chaitanya-bhagavata), he immediately becomes a great devotee.
+Do not dare to do anything against Krishna con",,,,,,,,,,,,,0,error_fn,identity_hate,FN,0.0002,0.14,identity_hate
+,"Rape. 
+
+Naconkantari is DEAD, or soon will be... 
+The question is... how good are you at hiding from rapists? I'm a good finder.",,,,,,,,,,,,,0,error_fn,threat,FN,0.0077,0.32,threat
+0bc38cd0e5c857ba,""" 
+
+ == Semi-protected edit request on 15 August 2015 == 
+
+  
+
+  
+ Please excise from the Preamble heading the paragraphs I've reproduced below, in which the text of the Preamble is dissected, needlessly, and made subject to a myriad of specious editorial claims that are not and will never be substantiable, no matter how many sources one tacks on after the period. The text of the Constitution is the text of the Constitution. To assume that """"a more perfect union"""" refers back to the government under the Articles of Confederation is to take a liberty that the context doesn't allow. The phrase may be referencing England or France or the Ottoman Empire. It may be an expression of the founder's desire to create a union more perfect than all the unions that have come before and all the unions that have yet to come. Unfortunately, the Constitution doesn't explain what exactly it means by """"a more perfect union"""" and as a result neither can we. In addition to being groundless, the analysis is riddled with nonsense terms, such as """"the powers of the earth,"""" """"social contract of democratic philosophy,"""" and """"things of a general welfare."""" The final sentence of the second paragraph is plainly incoherent.  
+
+ Ultimately, my request is that the paragraphs at issue be deleted and replaced with the text of the Preamble verbatim. 
+
+ -""""One people"""" dissolved their connection with another, and assumed among the powers of the earth, a sovereign nation-state. The scope of the Constitution is twofold. First, """"to form a more perfect Union"""" than had previously existed in the """"perpetual Union"""" of the Articles of Confederation. Second, to """"secure the blessings of liberty"""", which were to be enjoyed by not only the first generation, but for all who came after, """"our posterity"""".[27] 
+
+ It is an itemized social contract of democratic philosophy. It details how the more perfect union was to be carried out between the national government and the people. The people are to be provided justice, civil peace, common defense, those things of a general welfare that they could not provide themselves, and freedom. A government of """"liberty and union, now and forever"""", unfolds when """"We"""" begin and establish this Constitution.   
+
+  
+   """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+7306ac71c0eb199a,is a very bad idea.,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"you are a cunt 
+
+Hello Mr Jim ....
+
+My reason for sending this message is that you are a cunt and I wish nothing upon you apart from death (: ...
+
+ That is all (: x",,,,,,,,,,,,,1,error_fp,obscene,FP,0.9995,0.3,obscene
+c5b4664252d4e39a,"**Then reorganize it, but keep your bullshit POV out of it.",1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,I see. Brutal force is your only real argument for people like you in Wikipedia. Keep demonstrating us what civilization is.,,,,,,,,,,,,,0,error_fn,toxic,FN,0.0005,0.3,toxic
+,""" 
+
+ :::::[Darwinbish disgorges a dishevelled and groggy Antandrus. ] Silly user! Too big!  '''' .""",,,,,,,,,,,,,0,error_fn,obscene,FN,0.0007,0.3,obscene
+d1f893a39a87fe66,Not really.  Its someone with knowledge of the incident making an account specifically to comment on this page Special:Contributions/Kaynbread,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+377b2bffd3dc120a,FFFFFFFFFFFFFFFUUUUUUUUUUUUUUUUUUUUUUUCCCCCCCCCCCCCKKKKKKKKKKKKKKKKKKK YOU YOU BASTARD,1.0,1.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+42364a4525c55d77,Fuck you bitch boy.^^^,1.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+201fb5ba6a3206ba,"""
+
+ Your script. 
+
+To Zen, your script made a number of changes. Most of which were okay.
+
+Several, however, seemed incorrect. You created wiki links to Chinese and Japanese Wikipedia where it was inappropriate. ☯    """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+a362fb43dac6f3e9,Walter Gorlitz is a cunt!,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+ef88976319ee7f00,I'M REALLY FUCKING SCARED 86.131.154.229,1.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+0505c5fe4a9b91ec,"I'm going to kill you 
+
+Zink Dawg your a Scrap and a fag and you need to die. I'm going to kill you if someone else doesn't. You better keep protecting your user space because I will keep vandalizing it.",1.0,0.0,1.0,1.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1,test_toxic,,,,,
+b28685ae03f1dac5,"Please do not add inappropriate external links to Wikipedia. Wikipedia is not a mere directory of links nor should it be used for advertising or promotion.  Inappropriate links include (but are not limited to) links to personal web sites, links to web sites with which you are affiliated, and links that exist to attract visitors to a web site or promote a product.  See the external links guideline and spam policies for further explanations of links that are considered appropriate.  If you feel the link should be added to the article, then please discuss it on the article's talk page rather than re-adding it. See the welcome page to learn more about Wikipedia. Thank you.  talk",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+3b99b8c62398c151,"Agnes Nitt 
+I respect what you said about Agnes Nitt. He's a greasy bastard innit. I mean, what a knob! What say we give him a hard time.",0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+cb34ed2f908c0f34,"""
+
+I am the copyright holder for the material at http://ontariopianos.com and I give my permission for the material on that website to be re-used in my article here on Wikipedia.  I am not sure how to go about removing the """"close paraphrasing"""" notice.  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"== CZAR BELINDA == 
+
+ CZAR BELINDA IS GAY... HE TAKES DICK IN THE ASS SOMETHING LIKE THIS",,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9995,0.14,identity_hate
+,brandon is gay he likes delldos up his ass and mouthThe,,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9995,0.14,identity_hate
+c936a588dd523862,"Let me make it perfectly clear... 
+
+...that you are not entitled to rape as you are far too ugly. 94.116.191.218",1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1,test_toxic,,,,,
+1e2bcc0680478e5c,"p.s. For cross-referencing, Anton made a collected list of all shared vertex figures and duals, put into a table by me at",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"""
+
+As for the arguements that abo should be included .. it already is. Wanker is used alot, but only as a common noun, and the usuage isn't unique. Same for the other words mentioned.
+
+Though other commonwealth countries (such as new zealand) may use cunt in a similar fashion, Australians do seem to",,,,,,,,,,,,,0,error_fn,obscene,FN,0.0009,0.3,obscene
+,"He's gay. Trust me. Really, really gay. ****",,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9993,0.14,identity_hate
+6b46d0df3887a038,I can't clean your shit,1.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"== hi men == 
+
+ fack u mather",,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.0002,0.48,severe_toxic
+,"A misery=
+You have made my life a misery on Wikipedia, and now you're gonna pay for it you disgusting, ignorant and stupid bastard.",,,,,,,,,,,,,0,error_fn,threat,FN,0.0007,0.32,threat
+29080f297c1d5154,I will bully and beat the crap out of you and kill you pathetic little rotten loser! There's no getting away and today your dead!,1.0,0.0,1.0,1.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,1,test_toxic,,,,,
+,hurricane machine to kill him.,,,,,,,,,,,,,0,error_fn,threat,FN,0.0039,0.32,threat
+2623a68f3a42771f,"I'm sorry, but you are now dead to the hairball association",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+c2569ca2b59b3cba,Stay in the closet.,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,i'll hook your mom you motherfucker. yeah suck my balls and slurp my come. bitch.,,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9985,0.48,severe_toxic
+,"I would also like to say 
+
+that not only are you a masturbate, but you are also gay lol",,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9994,0.14,identity_hate
+8ac8479112aa598e,"NBS 
+
+Read what is written in references and notes. )",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+6fb71ac42bd69ade,""" 
+
+ ::PS: Re-reading earlier discussions on this page, it now seems clear that you were referring to the definition of the whole numbers as 0,1,2,... . My comments in the section above this one still apply, especially under the heading """"Conclusion"""". Give me the sources, and I will turn them into an article. But I can't write an article based on other people's personal experiences. In fact, I am not even allowed to do so based on my own. See WP:Verifiability.   """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"chynks 
+
+ cockass 
+ya umm hello you goth raghead chynk slyin eyed son of a bitch
+remember me?
+ya chrome dome bastard",,,,,,,,,,,,,1,error_fp,insult,FP,0.9983,0.28,insult
+a645e898019293d2,""" 
+ *Green eyes would thus be inherent in these populations, if blue and brown are present. Hardly needs to be separately mentioned, when the two """"source colours"""" already are.  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+2687391618b89683,WE ARE GOING TO MAKE SURE YOU ARE EXPOSED!! DROP YOUR RELATIONS WITH ANTI AMERICAN HATE GROUPS 'WE ARE GOING TO MAKE SURE YOU ARE EXPOSED!! DROP YOUR RELATIONS WITH ANTI AMERICAN HATE GROUPS,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+5b431342ddb4eaec,"Stop blocking my usernames 
+
+I am the username vandal. If you don't stop blocking my usernames I will find out where you live and hit you with railway sleepers. 213.205.234.222",1.0,0.0,0.0,1.0,0.0,0.0,1.0,0.0,0.0,1.0,0.0,0.0,1,test_toxic,,,,,
+,"""
+The question, actually, is not whether one would do that, it's whether one could do that.  People have different moral compasses, and someone might have sex witha  hooker, then kill her and take any money she has on her at the time (although doing so would enrage anyone she works for). -'''' (Blah",,,,,,,,,,,,,0,error_fn,insult,FN,0.0003,0.28,insult
+,"Are you deaf or blind? I repeat. It started in late 2009, and collapsed in mid 2010, as supported by cites and polls.",,,,,,,,,,,,,0,error_fn,insult,FN,0.0004,0.28,insult
+54c3a3460f533492,"Did you come here because you have a problem with my name?  In that case, you're reading it wrong.  Shame on you and your dirty mind.",1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"""
+
+ nai caste ka veer 
+
+fuck you all motherfuckers pakistani janjua  muslims
+
+you pigs either lock this talk page too or unlock the talk page of my caste  
+
+""""i am become death, the destroyer of pakistani muslims"""" , note my ip and locate me and send terrorists to kill me......if you are a true musl",,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9982,0.48,severe_toxic
+91bf3f74cc0d9265,"== Totally crap == 
+
+ This article is totally crap. A knowledgeable person must rewrite it...",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+d801610e8c09b045,Butt-nothing. It's a studio album. You are wrong.,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+bcaff0d07efaf141,fukin dicks a dont care u pricks die all of u,1.0,0.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,1,test_toxic,,,,,
+,YOU ARE A MASSIVE PIECE OF CRAP LOLOLOL.,,,,,,,,,,,,,1,error_fp,toxic,FP,0.9982,0.3,toxic
+c947f831322fc906,"""
+
+That proves nothing. I should still get more results for salwar kameez, as that is the more """"common word"""" in english. If the only reason shalwar kameez gets more hits is because of kameez, then shouldnt logically salwar kameez get more.""",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+89b42bce0dcabc34,"ahh ...One jazzed  up drama spawns  a host of Coffee table buff books, who's authors' then quote THEMSELVES on WIKI, & the circle goes round & round..
+
+The TV show was good fiction. This article is IMHO,silly  fiction. True air farce smaltz!
+Show me one other Aircraft article with model planes & conspiracy sections...",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"User:Touth 
+
+HEY! What part of this user has left wikipedia don't you understand?",,,,,,,,,,,,,0,error_fn,toxic,FN,0.0003,0.3,toxic
+c7ded7a807e2376b,"""Welcome! 
+
+ Hello, , and welcome to Wikipedia! Thank you for your contributions. I hope you like the place and decide to stay. Here are a few good links for newcomers: 
+ *The five pillars of Wikipedia 
+ *How to edit a page 
+ *Help pages 
+ *Tutorial 
+ *How to write a great article 
+ *Manual of Style 
+ I hope you enjoy editing here and being a Wikipedian! Please sign your name on talk pages using four tildes (~~~~); this will automatically produce your name and the date. If you need help, check out Wikipedia:Where to ask a question, ask me on my talk page, or place {{helpme}} on your talk page and someone will show up shortly to answer your questions. Again, welcome!  -   
+
+  
+ ==Acid Bath== 
+ hey man i see we are have sort of a """"competition"""" here on the acid bath page, and id like to talk that over. since its getting a bit annoying. im not sure if you saw the message ive been adding saying """"wikipedia consists of all info, old and new, including past members and labels"""" that means that wikipedia wants all the past record labels and past members on the page. they were signed to rotten records so i dont understand why you keep removing them... nuclear blast was only the last compilation. as well the lineup is the last one before the band broke up, meaning the former members are the ones that were not the ones at the last moment of the band. 
+
+ maybe you can explain your point of view, and we can finally end this, and start working together on making the page better. 
+
+ -HDS 
+
+ ::the reason i keep getting rid of rotten is cause they fucked over acid bath so bad i dont want them accosiated with them   and  joe was just a fill  in on bass after audie died  and boon was in golgotha  not acid bath.    i have such a hatred of rotten  i want to keep them off every thing. 
+
+ :::well you cant just erase the past off acid bath. they released everything on that, and thats just the way its got to be man. the other members were part of acid bath at one time or another so, they belong there. wiki isnt a fan site where you state your opinions. its like a complete history of the band. so anything past, or while they were acid bath, belongs in there. -hds 
+
+ :::: Are we starting this fucking shit again? i told you wiki is of everything AB WAS in the past. stop tryign to re-invent the band in your views. 
+
+  98''' """,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,"""
+
+ Hahaha 
+
+Check this out:
+
+MickMacNee, an editor with a long history of block for disruptive behaviour [10], seems to have gone out of line in the last days. I don't mind him being defensive of an article he has written the major part about, and several users in the AfD discussion have been very ",,,,,,,,,,,,,0,error_fn,obscene,FN,0.0005,0.3,obscene
+dac286e8e42935ea,!!!!!!!!!! Fuck Stupid Ass. You gotta look this shit up.,1.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+a656cb3d5c444812,"Hi, are you sure? Check here and scroll down. If it was an accident from copying and pasting or something, it is no big deal.  If you didn't make that edit, than your account may have been compromised or something weird and should probably be investigated further. I just wanted to let you know.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"""
+
+Cash I am a walmart assocate and I do feel there is a link between Walmart managment and servant leadership, and here is why. The managers are not in charge of the store, the hourly associates are, they take orders directly from the customers. The customers are consitered under walmarts policies ",,,,,,,,,,,,,0,error_fn,obscene,FN,0.0004,0.3,obscene
+df9f82720054326a,"""
+
+the only reason media thinks that grunge hates glam is cuz of nirvana.  nirvana spread interest away from glam, and onto grunge.  and hair metal isn't all that bad, sure it may sound really repetitive, but there are still good hair metal bands out there, like twisted sister.  also, hinder is not metal in any way.  guys, please, get real.  it's already getting on my nerves just to call them """"hard rock"""", since they're not even quite as heavy as nickelback (who isn't heavy at all).   """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,make those kickass userboxes,,,,,,,,,,,,,0,error_fn,obscene,FN,0.0003,0.3,obscene
+,I reverted the edits you big baby. Seriously do you want me to burp you little baby? Stop taking life so seriously and grow the hell up. I did nothing wrong and yet you threaten a ban without referring to Wikipedia's article on Good Faith Edits.  Stop treating me like shit or I will kill myself you ,,,,,,,,,,,,,1,error_fp,threat,FP,0.9973,0.32,threat
+6016b3e5619ce739,::::::::I'm not the one who's claiming whoever doesn't speak English is stupid.,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+2b529ed1c3a9c4fd,"Fuck you Jasper you know he's a cunt and if you don't then you're one.
+
+WHAT RIGHT do YOU, motherfucker, have to edit MY talk page?
+
+Seriously, stop editing my talk page. Edit your own fucking talk page Edit my talk page again and, I primise, I will fuck your mother's withered ancient cunt.",1.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,1,test_toxic,,,,,
+d19876239f78c759,"""
+(edit conflict) As to the second issue, yes, my """"personal view is that the content in Giano's post is a personal attack"""" (a view that arguably most in the ANI thread share). The blocking policy, WP:BP, is clear that """"persistently making personal attacks"""" may trigger a block. The policy does expect that """"blocks will be made with good reasons only, based upon reviewable evidence and reasonable judgment, and that all factors that support a block are subject to independent peer review if requested"""", but that does imply that administrators must use their individual judgment - what you might call """"my opinion"""" - to decide whether or not to block. In particular, the policy states that """"Warning is not a prerequisite for blocking"""", and a fortiori, discussion is not a prerequisite for blocking. So, yes, in that sense, I may be """"enforcing [my] personal opinion about what is and is not rude"""", but that opinion must be based on sound judgment and stand up to community review.  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+c55e679e91d2bfc3,dawg you better shut up dont make fun of the US even though im not American aand DONT BE CALLING ME NO FUCKING DISHWASHER OR KICK YOUR FUCKING MONKEY ASS,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+95233360db1db0df,"A tag has been placed on Muck (band), requesting that it be speedily deleted from Wikipedia. This has been done because the article seems to be about a person, group of people, band, club, company, or web content, but it does not indicate how or why the subject is notable, that is, why an article about that subject should be included in Wikipedia. Under the criteria for speedy deletion, articles that do not assert notability may be deleted at any time. Please see the guidelines for what is generally accepted as notable, and if you can indicate why the subject of this article is notable, you may contest the tagging. To do this, add  on the top of the page (below the existing db tag) and leave a note on the article's talk page explaining your position. Please do not remove the speedy deletion tag yourself, but don't hesitate to add information to the article that would confirm its subject's notability under the guidelines.
+
+For guidelines on specific types of articles, you may want to check out our criteria for biographies, for web sites, for bands, or for companies. Feel free to leave a note on my talk page if you have any questions about this.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+048526245ce0aba2,""" """"Suffer"""" suffers from ignorance of its true meanings.""",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+747659f8f282661e,"By that time, wouldn't you be dead, old man? 223.227.119.162",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,This is dumb as shit,,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.0141,0.48,severe_toxic
+,"Hey Gwernol, go suck a dick you fuckin piece of shit, I told you that you cant stop me, whether I'm Eoganan, Pan-ethnic, whoever the fuck, I will bring this piece of shit thing down, AND put faggot users like Wobble in their place. Anyone can edit this shit, so go fuck yaself biatch !",,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9991,0.48,severe_toxic
+775ebd8d84b473f3,"If a signal occurs and the implementation does not use a separate signal stack, the frame for the signal handler overwrites something below the current frame. This is, of course, not the only thing, which can alter the stack. Coroutines can be implemented with structs to hold the state and ordinary function calls.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,Please stop being smug and supply me with a real answer concerning my ban.,,,,,,,,,,,,,0,error_fn,toxic,FN,0.0003,0.3,toxic
+,":::Perhaps you could have a stab, Baccy?",,,,,,,,,,,,,0,error_fn,toxic,FN,0.0003,0.3,toxic
+8062bbd02c99417c,""" 
+
+ == Polite userbox == 
+
+ Hello, I came across your  and I thought I would suggest a slightly different wording, which would sort of have a pun in it as well. How about: """"This user is polite and expects others to act in kind.""""? Just a suggestion.  ) – Kerαunoςcopia◁ """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,:: No one wants children seeing an explicit photo of a woman eating a butthole or sucking a penis. That's FRIGGIN DISGUSTING!,,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.007,0.48,severe_toxic
+038327604e7dece8,"Just a thought. 
+
+Hey Jeremy,
+Why don't you wash your vagina? Why do you insist on letting it smell like a musty pile of tuna? I'm tired of smelling it babe when we make love. I do you doggy style and the smell just pierces my nostrils. I have to turn away it disgust me so much. Also, wipe your ass a little better. I'm getting shit on my dick, and tht's fucking gross, you cunt.",1.0,0.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,And besides they still think it's ok to threaten someone with death to 'keep them locked into the muslims faith. They are a bunch of assholes.,,,,,,,,,,,,,1,error_fp,toxic,FP,0.998,0.3,toxic
+,"fuck you
+
+ Picka ti Machina 
+
+Youve been reverted, so fuck ya back
+
+How about you vandalise my page again, ill revert it, and get your good self blocked for an extended period of time. fuck you.
+
+i'm gonna find ya, harass ya, then fuckin kill ya because you are a fuckin gross lesbian.",,,,,,,,,,,,,1,error_fp,threat,FP,0.9996,0.32,threat
+,"fuck you 
+
+fuck you retard son of a bitch your ass is bigger that goatse, u suck 10 dicks at the same time and drink all the cum, your mom worked as a prostitute to buy condoms for your dad, that fucking retard, you are a failure at all you do, you should jump from the top of the empire state so the",,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9988,0.48,severe_toxic
+,"With the greatest of respect 
+
+You're a fucking self-righteous idiot and an embarassment to Wikipedia. You are actually the cancer that will kill this site. Hopefully cancer kills you first.",,,,,,,,,,,,,1,error_fp,insult,FP,0.9985,0.28,insult
+9030a4b11d38b588,"Ok. Here's a warning: Watch out, you're an asshole.",1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"Harun Yahya/Adnan Oktar 
+
+This is quoted from the wikipedia article on Harun Yahya:
+
+Even though he often writes about science, he has never actually studied any science at a university level.  (, , )
+
+There are also many disturbing data in that article: he claims to be a moral authority and an expe",,,,,,,,,,,,,0,error_fn,obscene,FN,0.0002,0.3,obscene
+,Orane sucks lots of penis.,,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.0244,0.48,severe_toxic
+,This guy should probably just jump from something.,,,,,,,,,,,,,0,error_fn,toxic,FN,0.0005,0.3,toxic
+,hannah montana has been the first president in the united states they say dat miley cyrus is only 16 (WRONG) she's not she 182 she still looks young because she had plastic surgery on  but really folks dere is nothing more than miley cyrus love for her people and i say miley cyrus is 1 freaky skank!,,,,,,,,,,,,,0,error_fn,obscene,FN,0.001,0.3,obscene
+46283a558d4d05f7,"""
+There are many people like me who totally agree with Jimbo's stance, and we don't normally pile on because very little could be added to what Jimbo wrote above, and because it is pointless to add """"me too"""" commentary. Wikipedia is not a bureaucracy where every procedure is fully documented, and you will never find a rulebook specifying just how unethical a paid advocate can be before they are banned.   """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+706d665c3d692613,"\fuck you, who the shit is ari?",1.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"What is the big f'in deal?  Obama is a not a Muslim.  If Obama or Bush were Muslim, it would show how open America is.  So what if a future President is a lesbian, Muslim, tobacco chewing, knife loving, gun hating, woman who had an abortion after some nooky with a platonic boyfriend?  Grow up!",,,,,,,,,,,,,1,error_fp,toxic,FP,0.9976,0.3,toxic
+7e7411d1a0dfb39a,"Timeslot hopping 
+
+Something should be said in the article about WPBS's notorious habit of shifting timeslots of programs without notice when they want to stop airing a certain show. They've done this with Doctor Who, Blake's 7, Red Dwarf, and Liberty's Kids that I've seen. Apparently, they do this to lose viewers of that particular program, so they can quit airing it.
+
+76.235.235.223",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"""
+
+Hilarious!
+Consider it my pleasure. Sue the school that gave you any qualification in English.   Ping me """,,,,,,,,,,,,,0,error_fn,insult,FN,0.0002,0.28,insult
+b4ea2b9829e81711,"those who you have sex with while under the influence of Crystal Meth, Shrooms, Acid, etc.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,"How can you say I am illiterate, ignorant or incompetent... I am not American...92.238.252.159",,,,,,,,,,,,,0,error_fn,identity_hate,FN,0.0002,0.14,identity_hate
+18b79a61bb122c3e,Hello there. Like the above Wikipedian I came across your Debian screenshot (http://en.wikipedia.org/wiki/Image:Screenshot-6.png) and was wondering what application provided that panel to the right? I would be very interested to know! If you could (be the first to) write on my Talk page I'd be very appreciative -). Thanks!,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,GWAH!! (fuck you nigger),,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9995,0.14,identity_hate
+230d04ae609f98e4,"You confessed to be an animalfucker 
+
+You finally did it, now get a life animalfucker.",1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+94dc8d867cbe9601,So why aren't I unblocked,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+2d8d90aa9ce19897,"""
+
+ Opinion please 
+
+As a result of a lengthy debate/poll we had in Template talk:Countries of Europe, I've formulated a proposal and need to know what other people think about it. Its scope extends obviously beyond Europe, so I made a subpage before I post it in WP:VPP. See  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+4437f35f65d82d11,"=mate==
+alls i wanted to do mate was post
+
+image:peopleofbritain.PNG
+i thought you were a united man you shite eyed scouse",1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+b3097f7cf4b28d59,"Mountain View High School 
+
+It's definitely true and verifiable, but if you want to be a Wikipedia Nazi on a power trip, go right ahead.  I have more important things to do in my life than fight you on this.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+ecae25dcc2fb6579,""" 
+
+ == dubious insertions == 
+
+ there is a paragraph which states... 
+
+ Benedict was considered to be Pope John Paul II's """"right hand man"""" and also one of his closest friends, and during the Pope's final illness, he carried out many of the Pope's functions as leader of the Catholic Church, such as molesting young boys and degrating women. 
+
+ MOLESTING BOYS AND DEGRATING WOMEN AS FUNCTIONS OF THE POPE???? 
+
+ is this a simple oversight or deliberate stupidity???""",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,"lonely
+
+Go outside and make a friend.  You've seen all your mom's basement has to offer.",,,,,,,,,,,,,0,error_fn,insult,FN,0.0003,0.28,insult
+c78c2b5b615f6e1a,"my prediction based on the episodes so far 
+
+ order people were eliminated in.
+ 
+   facts
+1 Geoff
+2 Bridgette
+3 E-Scope (Izzy) 
+4 Trent
+5 Gwen
+6 DJ
+7 Explosivo (Izzy)
+ 
+   Predictions
+
+8 Owen
+9 Leshawna
+10 Lindsay
+
+ No Teams
+
+11 Esquire (Izzy)
+12 Duncan
+13 Heather
+14 Geoff (returns)
+15 Harold
+16 Beth
+17 Justin
+18 DJ (returns)
+19 Courtney",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+c656cf503c65b9d7,"Have a good eve. giano, and I agree with Risker, mostly.  liqour is fine in the afternoon's here in the uncivilized west, it's one of the few actual preventions for Montezuma's Revenge.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+d28bbe0adda5152b,"""
+Hmm. I'm honestly not sure how I feel about that; it's not exactly an orthodox way of approaching interactions (although """"tier"""" systems do exist, e.g. """"Risx C"""", """"Risk X"""" etc.). I'll review the article again tomorrow and see how it's coming along. Best,  (t·c) """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,grabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a faggrabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a fag grabski is a,,,,,,,,,,,,,1,error_fp,toxic,FP,0.9981,0.3,toxic
+59ea8c6dc2102c99,YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK YOU SUCK DICK,1.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+b86bf32110384b88,Now all the margins are trashed from restoring from copy! What a joke!,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+71d6f8df4233340e,"""Thats My Bitch""""== 
+ This track is in no way confirmed for the album. 
+
+ ==""""""",1.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+bdb5818908a84dda,any addition to an article mentioning 'Richard & Judy' is doing its subject a great disservice. ( ),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"Destroing his eyes 
+
+I will destroy your eyes.",,,,,,,,,,,,,1,error_fp,threat,FP,0.9985,0.32,threat
+,"Oh yeah, I can't wait until this turns into another William II/Edward II/James I article, with LGBTQ freaks co-opting the content with paranoid theories about faggot coverups in the English Royal Family.  Fuck you and grow the fuck up.",,,,,,,,,,,,,1,error_fp,obscene,FP,0.9993,0.3,obscene
+,"== retired my ASS.  == 
+
+ intact is the correct term for a penis that has not been circumcised. go ahead and block me, hitler. i'm not giving another penny to wikipedia because they allow people like yourself and jakew to censor people. now go to hell. Kingrivera",,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.0144,0.48,severe_toxic
+d59b69e52ec5bbcf,"Fat bastard. 
+
+You are fat and I don't care if i am blocked because wikipedia admins rape babies!",1.0,0.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+,"::::You reckon? There are loony wannabe Holmes all over the USA just waiting for their 15 seconds of fame. Non-notable, pathetic copycat dross. Begone!",,,,,,,,,,,,,0,error_fn,insult,FN,0.0006,0.28,insult
+20986d9ca7875d0b,""" 
+
+Update: I see you're a limey cocksucker. Go bugger the """"queen"""" you loony fruit.""",1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+3ff5b10c0c54cd31,"""
+
+The oppose votes did not account for the substantial evidence that the Aguilera song is primary. If you want to discuss it I'm available, but unilaterally moving it back is not an option. t/c 
+
+Stop move warring or the page will be protected. Please continue the discussion; I've responded to your comment at my talk page. t/c 
+  It did account for it. The Oppose above mine did. If anything, the Pretty Ricky one should be the one which is not disambiguated because it was release in 2005, Aguilera's in 2012. Not having Aguilera's name appear in search results is not helpful. Oppose far outweighed support here, and you have no reason to overlook that.  —  • TALK   """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+fc5bdefe329dd672,i don't care. you suck!-clatimort,1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"== Under Construction ==FUK YOU, THE TRAITOR VANDAL MUST DIE!FUK YOU, THE TRAITOR VANDAL MUST DIE!FUK YOU, THE TRAITOR VANDAL MUST DIE!FUK YOU, THE TRAITOR VANDAL MUST DIE!FUK YOU, THE TRAITOR VANDAL MUST DIE!FUK YOU, THE TRAITOR VANDAL MUST DIE!FUK YOU, THE TRAITOR VANDAL MUST DIE!FUK YOU, THE TRAI",,,,,,,,,,,,,1,error_fp,threat,FP,0.9999,0.32,threat
+ec1ec3de2a9de607,":Get a life, please.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+31a81829c31ef3d4,Tracking this down from Treblinka etc - I was surprised to see a known propaganda writer's article used at the Nuremberg trials. The citation to the article is in Russian - not much help to me/most. Any English translation available to what should be a very interesting article for the prosecution.159.105.80.141,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+f8cb1744aa9d3948,":Oh ), it was there for a couple of seconds so it was not that difficult.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,fuck you ass hole (SEK),,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9986,0.48,severe_toxic
+fcda249f821c5119,yes i like to play with balls ),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,FUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK YOUFUCK,,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9989,0.48,severe_toxic
+9e0afb912ffb6b95,"Current USA boxart? 
+
+Could someone replace the UK boxart with the US one? Not all of us live with those Brits... 75.134.82.172",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+868cf7a5d850cac7,REDIRECT Talk:Someone like Me,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,No she did not die that is so stupid!,,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.0011,0.48,severe_toxic
+,"Wonderful. Maybe we should also include the (code)names used by nazis, muslim lumpens, and other nationalistic subcultures for the places they looted or lived therein as parasites and malicious minorities, contributing to Thessaloniki a huge NOTHING. S",,,,,,,,,,,,,0,error_fn,identity_hate,FN,0.0003,0.14,identity_hate
+12845c21c8c9f64a,":::::::No shit they're in the same area, but do me a favor and find a source which disagrees with the claim that Pittsburgh was the last city with a SB and WS Champ.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,"Aw, you're so sweet! 
+
+Too bad your a slutty panda hooker!! Go suck a cock!!",,,,,,,,,,,,,1,error_fp,insult,FP,0.9988,0.28,insult
+,Yeah Nigga.know what i'm talking 'bout bitch,,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9999,0.14,identity_hate
+8d665b81b2cc959f,"Portal:Sydney 
+
+I’m very willing to create a portal on Sydney. All I need to know is whenever I go to create it, it redirects to the Australian portal, how do I change this. I've read throughly the rules on portals, the guidlines, how to make a good portal and so on, because I don't want to make the same mistake that I have on the Sydney page in the past.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+a1dc3bc8f0fd1cd8,":That's because there isn't one. It's a stereotype that was made up by a couple of idiots, just like all stereotypes.",1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+d7d04334ece5f980,"wow avatar is gay 
+
+yes. i do mean this movie is homosexual. if you or anybody around you is thinking of killing themselves or going into depression because of this movie. you are all retarded. any1 who thinks this movie is just a badass epic anime your wrong. it is digi not anime.  yes there is a difference anime looks cool not gay / digi looks utterly fucking gay / retarded so any1 who posts against this  you are a retarded son of a b itch who needs a diaper change. 
+
+p.s. peace to this movies editors and may they rott in hell. also fuck off they're making another one so shows you they did good getting the cash from the movie that was supposed to be the one in box office. that's the only reason ppl went to that movie with the gay blue retarded fairys dieing from the might of earth who breathe space air. you sons of bitches
+
+74.113.173.43  signed: jeremy74.113.173.43",1.0,0.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+cb87204bd99bdd62,"== SCREW YOU == 
+
+ HOW DARE YOU GIVE ME A WARNING! ME!!!!!!!!!!!!!",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"You piece of chickenshit cunt 
+
+I'm going to have my way with the zero hedge article punk, and if you get in my way I'm going to rape your user page motherfucker.",,,,,,,,,,,,,1,error_fp,obscene,FP,0.9995,0.3,obscene
+bb0cab63b455fae3,"NONE OF THIS MP STUFF IS TRUE AND I HEARD TODAY ON REALLY GOOD AUTHORITY THAT MARSDEN HAS AN ATTORNEY IN NEW YORK DRAWING UP THE MOTHER OF ALL LAWSUITS AGAINST JIMBO, WIKIPEDIA SO YOU MIGHT WANT TO TAKE THIS MP SHIT AND OTHER SHIT DOWN ASAP.",1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+9ea66bc346ffa98e,"No Shemp, what is stupid here is you. Your ignorance of Jewish culture is appalling. Only a primitive could then utter the remarks you have. Religion is only one component of what can make you a Jew. The other is what type of vagina you popped out of. If you popped out of a vagina that is considered Jewish, then you are a Jew even if you father was Kunta Kinte. It's a messed up system but one that has allowed essentially a 'made up' people to continue to exist. It gives you all the advantages of racism without the overhead of maintaining the race. Genius.",1.0,1.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+d63e6764434f422b,"""
+
+ Merry Christmas! 
+
+150x100px|left
+
+  is wishing you a Merry Christmas! This greeting (and season) promotes WikiLove and hopefully this note has made your day a little better. Spread the WikiLove by wishing another user a Merry Christmas, whether it be someone you have had disagreements with in the past, a good friend, or just some random person. Don't eat yellow snow!   
+
+Spread the holiday cheer by adding {{subst:User:Flaming/MC2008}} to their talk page with a friendly message.""",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+845324a861541991,"""
+
+Blocked
+Edit warring over negative comments to a user's talk page was bad enough; the """"liar and hate-monger"""" is simply unacceptable.  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,i kill ashanti at 35,,,,,,,,,,,,,1,error_fp,threat,FP,0.9993,0.32,threat
+6e5174e2f135b55f,"""
+You can learn what you little pumpkin Japanese called """"etiquette"""". Go drink a cup of tea. |heru|nar """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+786f8869a5657cac,"""
+
+ Why are you removing the only remaining prose? 
+
+Look, I can understand if you really insist on adding those silly team standings in the qualifying round, but removing the only prose in the article is sad. If I'd list this at WP:Third opinion, someone will do use his/her common sense and will allow the prose to remain and remove the team standings tables. –'''''' (ITN: Where no updates but is stickied happens.) """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+081a5f7b052138cf,"Hey Roy.  Go fukk yourself you gay bich.
+
+Ya u heard me.  
+
+Pussy",1.0,1.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+,"Not
+
+a Goddamned thing, if you dont like it, its becouse you suck big fat elepant dicks-AppoloBitch",,,,,,,,,,,,,1,error_fp,obscene,FP,0.9998,0.3,obscene
+abf2bb9048125f74,"Other articles are irrelevant.  There is no blanket rule that says car makes must always be mentioned, nor one that says they must never be mentioned.  If you cannot be bothered to engage with the discussion about this article, then your contributions are also irrelevant.  46.37.55.80",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+4f3a22d960f0d3d1,""" Jan 2005 (UTC) 
+
+ ::::I beg to differ.  In the US, a university normally includes, at a minimum, graduate programs.  MALS notwithstanding, Reed does not.  I'm also not sure what """"restriction you refer to, but I will posit that I fall into the category of those with an up-to-date knowledge of Reed, as well as one with a knowledge from the 1970s and 1980s.   07:28, 5""",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+a4ff60615b731561,"You're not very bright, are you",1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,es un gordo feo pero rockea,,,,,,,,,,,,,0,error_fn,insult,FN,0.0003,0.28,insult
+,Once again Ryulong proves that he's a fucking moron. Big shock.,,,,,,,,,,,,,0,error_fn,identity_hate,FN,0.0015,0.14,identity_hate
+6bab57063219e3ed,"'Macao' vs 'Macau' 
+
+I am afraid it is the other way round - 'Macao' is English and 'Macau' is Portuguese. E.g. look at the cover of a Macao SAR passport - the full name of the Macao SAR is written as 'Região Administrativa Especial de Macau' in Portuguese and 'Macao Special Administrative Region' in English. 'Macao' is the English name and 'Macau' is the Portuguese name - this is recognised by Macao and its sovereign state.
+
+However, both are acceptable in English. It is just like using 'Munich' or 'München'. I am not trying to say that one of us is right and the other is wrong, I just want to draw your attention to the origin of 'Macao' and 'Macau'.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+652f5907b1cab999,I LIKE BIG BUTTS AND I CANNOT DIE,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+0479cbe984a6f3ca,"Dang, the hooks are tricky. I fixed the redlink. Feel free to expand others )  (talk · contribs)",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,REDIRECT Talk:Bolivian chinchilla rat,,,,,,,,,,,,,0,error_fn,insult,FN,0.0002,0.28,insult
+d03b52d1cdf33628,"Admin Coaching Re-confirmation
+Hello, previously you expressed interest in participating in the Wikipedia:Admin coaching project.  We are currently conducting a reconfirmation drive to give coaches the opportunity to update their information and capacity to participate in the project.  Please visit Wikipedia:Admin coaching/Status to update your status.  Also, please remember to update your capacity (5th table variable) in the form of a fraction (eg. 2/3 means you are currently coaching 2 students, and could accept 1 more student).  Thank you. '''''' talk",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,A MEAN FAGOT WHO LIKES TO SUCK THEM FOR A DIME,,,,,,,,,,,,,1,error_fp,insult,FP,0.9983,0.28,insult
+eec32a82cbd704c4,"hello 
+
+Hello, I wanted to type hell so I did.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,GO FU9K YOURSELF AND DIE YOU FU(KING PIECE OF SHlT I'M GOING TO FU(KING KILL YOU C0CKSU(KER YOU HEAR ME I'M GOING TO FU(KING KILL YOU AND CHOP YOUR HEAD OFF AND STICK MY FU(KING CO(K DOWN YOUR THROAT,,,,,,,,,,,,,1,error_fp,threat,FP,1.0,0.32,threat
+,"I'm going to punt your cat about, then it will die. Then you can invent a cyber-cat you geek. However, I will proceed to punt that.",,,,,,,,,,,,,0,error_fn,threat,FN,0.0403,0.32,threat
+,WIKIPDIA IS THE HOME OF LITTLE FUCKHEAD LIKE ELEEMOSYNARY,,,,,,,,,,,,,1,error_fp,toxic,FP,0.9977,0.3,toxic
+f817374f198f2c84,"June 2006 (UTC)
+ Faggot  01:07, 19",1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+f5760eed3633e6ac,"EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$! EA are a bunch of 'homosexuals' who like to make good games, then ruin them by making it a money game. F2P MY @$$!",1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+05222b567780e9ce,"""
+
+""""they should know immediately what it sounds like: it has highly-distorted guitars, shrieking vocals, etc"""" - but what defines black metal apart from other forms of music that ALSO use distortion and screaming? punk rock and indie may well have ideologies, but black metals different values are easily identifiable and unique. you all seem intent on giving black metal a disservice by simply labelling it as angry music. if you cared about the genre, you wouldnt. and LOL at thinking burzum has no ideology, if you are the kind of person that thinks that then you don't know enough to edit this article (the problem with 80% of wikipedia)
+
+""""To someone who is a non-listener, the fact that black metal has an uncompromising ideology is rather useless as a description"""" - why? wouldn't they want to know? 
+
+also nice to see the page locked. go listen to cradle of filth you complete tits, you're all untermensch 
+""",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,"Bhadani, you are a foolBold text 
+ ==  ==",,,,,,,,,,,,,1,error_fp,insult,FP,0.9983,0.28,insult
+3b5da45ced4026d6,"""If you want to make a section called """"Critique of Modern Scholarship"""", that would make more sense. """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"== NIGGERS IN AFRICA == 
+
+ Africa was discovered by Derek Gasroid. He was the darkest nigger of all. He couldnt be seen at night. He also was as fast as a cheetah. Well case hes used to being chased by cheetahs. he was also a gay flaming faggot. and the cowboys are gonna win super bowl. hell ya. go ",,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9997,0.14,identity_hate
+899b12150045dc00,"I also do not like the way you removed the links to the dodge 50 website and the owners forum, who do you think you are helping by removing them?",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+6ed54e510e12a050,"""
+
+ Your question on IRC 
+
+Hi - sorry I wasn't there to reply to the question you asked me on IRC yesterday.  The answer was no, not yet. inp23 """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+388ebf7f90a4d8bc,"""
+try these important things and maybe you won't be such a sucker motherfucker:
+
+1. Learn how to spell. If things remain as they are, everyone is bound to consider you to be the ignorant lame-brained cult member you are.
+
+2. Revert your attacks on Van Tucky on the talk pages. You come off as a vicious, vile psychopath. If you ever set your cult defending ass in a court of law, the jury would see through your charade in heartbeat.
+
+3. Stop playing good cop- bad cop with your fucking retarded Dahn hack Forestgarden
+
+4. Accept all Korean language sources you stupid bitch!! How dare you try to stifle and censor articles in the name of your fucked up cult. Your Forestgarden bitch believes its within Wiki policy to include Korean language articles when reporting on favorable aspects of your bitch master. Why don't you include all the other more negative portrayals in the Korean language. Also, who said this Itsahappyday fuckhead deserves to translate any Korean? This should all be disputed, you fucking racist, neo-nazi reject?
+
+5. Stop using the word cynical to describe your """"enemies."""" You come off even more retarded than your Ilchee bitch master. Your philosophical maturity is less than that of a first grader. The world is """"cynical."""" Those who don't believe in Dahn are """"cynical."""" I can't wait until South Park makes an episode about your bitch cult. 
+
+6. Are you fucking insane? Korea is the center of the universe? Korea as a cultural hub? Korea the place where the next messiah appears? You Dahn people never cease to amaze when it comes to your thought processes. Korea is not what your Ilchee bitch believes it to be. Think about it retard- the fucking nation of Palau has more of a right to talk about religious heritage than the fucking hermit kingdom. How can you be so retarded, that you choose a Korean cult? If you chose a Chinese or Indian one, at least it would show you have some portion of a brain. Coming to Korea and joining a Korean cult with Korea-centric views is more retarded than travelling to Antartica in search of good coffee while visiting Columbia in search of ice and snow.
+
+7. One more time: the philosophical underpinnings of your shit cult are so flimsy I must question your intelligence.
+
+8. Nicola Cola...what kind of bitch ass name is that? what is wrong with you?
+
+And you wonder why you need to join a fucked up cult to find friendship and loving. Dumb fuck!!!!!!""",1.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+,"EMOS ARE FUCKING GAY, STUPID FUCKING EMOS SHOULD ALL DIE",,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9985,0.48,severe_toxic
+c54d36b00ba3611e,""":You can claim all you want that you don't support the killing of your mom, but if you sharpen the knife and give it to the killer knowing that he will kill your mom, you're still supporting the murder of your mom.  ❉❉  
+
+ """,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,I am very tempted to show you a picture of my four headed penis...,,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.0124,0.48,severe_toxic
+6356d5bd20033741,"""
+
+AfD nomination of British and United States military ranks compared
+An article that you have been involved in editing, British and United States military ranks compared, has been listed for deletion.  If you are interested in the deletion discussion, please participate by adding your comments at Wikipedia:Articles for deletion/British and United States military ranks compared.  Thank you.  Caer’s whines """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"""
+
+Lol dumb arabs and their """"you cant show my god, heres a bomb because I have sand in my vagina!"""" fucking towelheads""",,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9997,0.14,identity_hate
+ad29ae00de3db174,">
+I also loved the comment by DieSwartzPunkt that I create a user page which says nothing of consequence or just plain nothing. Hmm maybe the CheckUser might like to look at User:LiveRail for this common factor.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+053ded09c3248ef5,":No sorry, I dont know that one.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"Regarding Your Message 
+
+Can you please be more specific instead of just shouting at me?",,,,,,,,,,,,,0,error_fn,toxic,FN,0.0001,0.3,toxic
+a087616c9f3d2d88,"""
+Re this edit: This type of edit summary is silly and immature. You have yet to comment once on the talk page per WP:BRD, and have resorted to threats in capital letters and exclamation marks. Grow up. (talk to me) """,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+53eba042a46a7966,"soon 
+this isnt over yet. i just come back and vandalise with sockpuppets for ever. you cant stop me.i will organize a wiki raid.You cant get me off here forever.you will be vandalised. I will have revenge on the wiki.mark my words",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+b2c3de5315c8f004,"Thankyou Sitush , your concern for me is touching , am sorry if my indents have  irritated you ! .",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+d9a66f13384ffed3,"""
+
+Intro
+CJ, what were your thoughts on how to restyle the intro?  (talk) """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+ed146a1644ffa90e,"is 3,932,100 and could",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+80f04c5fe22914cd,Keith Carr Loves it in the butt,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+6a2d4f236772343b,"Oh, and to come back to this again, in-episode context is a good reference, otherwise all of the G.I. Joe articles are improperly sourced. Because each and every one of those articles references the comic book issues directly. 72.72.240.141",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+95fb1efa86ebf5ee,"Oh, blow it out yer ear, you prententious little be-otch.",1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+48f05fddc69f3f44,""" 
+
+ :UPDATE: I took a look at what I added this morning and agree that it took the paragraph """"over the top"""". While the """"trace contaminants"""" issue is extremely important with chlorocarbons, citing the specific example of dioxin in 2,4,5-T (the """"Agent Orange"""" debacle) was excesively inflamatory. The chemist will review the article as now revised.  ('''' """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+dfc81e7bbc8ac044,"Stop your crap, little kid
+Aggrotech isn't a fusion genre. Japanoise is not an outgrowth of Industrial music. Do u understand? No? Maybe i should try Spanish language.",1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"""
+
+""""Bitch, suck my dick before I slap you with it.""""""""Bitch, suck my dick before I slap you with it.""""""""Bitch, suck my dick before I slap you with it.""""""""Bitch, suck my dick before I slap you with it.""""""""Bitch, suck my dick before I slap you with it.""""""""Bitch, suck my dick before I slap you with it",,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9991,0.48,severe_toxic
+a5d050889982cb44,"== What a Douche! == 
+
+ What a douche!  All I put was a harmless little 'penis' on a page, and this douche of a bot erased it, that little douche.  Why do douches like that have to mess with other people like douches?  Some people are just douches.  Testicles. 
+ -Funnykitty789 a.k.a. Not A Douche, You Douche",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,wank piss never eat the flowers. they want you to be a monkey sniper in the new world order.é{{}},,,,,,,,,,,,,1,error_fp,toxic,FP,0.9974,0.3,toxic
+ac3b988a0d69a6b3,It's not necessarily flawed to base your product range on a standard core. It might well be cheap actually and so the article's statement that ATI's logic was flawed is in the least a flawed statement - it might also inspire one to wonder whether the author was truly following an NPOV approach here.,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+dade9e8fdcf01347,"PARYS,
+
+YOU JUST BANNED ALL THE USERS OF THE CENTRAL BRANCH OF THE LOS ANGELES PUBLIC LIBRARY FROM BEING ABLE TO EDIT WIKIPEDIA PAGES.
+
+I AM GETTING IN TOUCH WITH VARIOUS WIKIPEDIA ADMINISTRATORS AND LETTING THEM KNOW THAT NOW LITERALLY 1000s OF PEOPLE WHO USE THE LOS ANGELES PUBLIC LIBRARY COMPUTERS WILL NOW BE NO LONGER ABLE TO EDIT WIKIPEDIA PAGES AS A RESULT OF YOUR GETTING THE LIBRARY'S IP ADDRESS BANNED. I AM GUESSING THAT YOU MAY HAVE DONE THE SAME THING WITH THE 1000s OF PEOPLE WHO USE THE U.C.L.A. COMPUTERS. THERE ARE ALOT OF PEOPLE WHO ARE GOING TO BE ANGRY AT YOU FOR DOING THIS, AND I WILL MAKE SURE THAT THEY FIND OUT WHO IS RESPONSIBLE FOR DOING THIS.
+
+AS LONG AS YOU CONTINUE TO PUT UP FALSE INFORMATION I WILL CORRECT IT AND TAKE FURTHER STEPS TO SEE THAT OTHER PEOPLE BECOME AWARE OF YOUR DELIBERATE MALICIOUS HOAXING. 
+
+2 previous wikipedia hoaxes you worked on have already been
+deleted: Crystal Cherry (crystalcherry?) and Once Moore.
+How many more hoaxes are you going to try to get away with?
+You are giving Mandy increasing grounds for filing a libel
+lawsuit against you as you are putting out false info that
+could have a financially damaging effect on her career.
+
+It's bad enough that you put a link to the teenage pornography
+book on your home page and that you put a link to your home page
+on Mandy's official board that has lots of very young users.",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+704f48d117876145,""" 
+
+ == Second opinion == 
+
+ I need a second opinion on this diff. Judge it with respect to these diffs: ,  and . Sorry for bothering you but you seem to be the only one, who is a regular to these articles, active right now. Thanks. ''''  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+f2604109c69b3d50,"The above user, who has failed to sign, is ignorant. The term 'nascent hydrogen' has a respectable scientific history and is not 'only used by quacks'. In addition his labeling my reverts 'vandalism' in edit summaries is uncivil at least. He should be ignored.",0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,""":It is neither more historically correct, nor more professional. Scholars routinely use the term """"Nazi"""". You cite the Encyclopedia Britannia as evidence of your claim. But, in fact, the Encyclopedia Britanica uses Nazi an order of magnitude more often than National Socialism. In the online versio",,,,,,,,,,,,,0,error_fn,toxic,FN,0.0004,0.3,toxic
+d86ff94aea975917,"Rights == 
+
+ From what i can see any TOM, DICK and HARRY can edit on Wiki hhaha. 
+ It's important for Croats on Wiki to keep Serb Pov out of anything to do with pages about Croats and Croatia. 
+ I strongly dislike such things as Rudjer Josip Boscovich article where he is being called Serb when he was Croat. The Serb Pov on that and many articles is not on. 
+ Vuk Kardazic was a Serb patriot and his sources and theory are bougus at best...shame many Serbs believe him to this day. 
+ 
+
+ ==",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+8ac2ec8537a9814b,"Piss Off 
+
+Suck my dick you pussy",1.0,1.0,1.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"I hit a jack off all day, after the rape my mother, destroy the vagina until it hurts, then when you start bleeding I start to have sex with the mother of you Americans motherfuckers
+
+They give the anus and the vagina every day for free, I'll sing a piece of music of Brazil who have money who slips ",,,,,,,,,,,,,0,error_fn,threat,FN,0.0259,0.32,threat
+c1fcaef7715cb277,""" 
+
+ == Your inappropriate response to my simple question to you == 
+
+ In the Dave Brat article I asked a good faith question to you to get your input on a discussion taking place on the Brat talk page.  Your response was an attempt to intimidate me into silence and to threaten me into submissiveness.  I did not know that is the way that admins are suppose to act when editing Wikipedia.  You can review your snarky, inappropriate response that falsely accuses me of """"disrupting"""" wikipedia here: false claim by an admin of me """"disrupting"""" wikipedia when I was simply asking an admin for his opinion.  Is this an issue that I take up with you or with a certain Notice Board?  Do you think Jimbo would look at my simple question as """"disrupting Wikipedia"""" like you do?  What do you think?  It is a talk page.  I try to talk to you.  If you did not want to answer you could have simply said that.  Why did not have to lie and say that I was """"disrupting Wikipedia""""?  That has to be one of most immature, responses that I have ever gotten from an admin.  It was truly unprofessional.  So, please help me out, who do I talk to about this?  Are you the only source?  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,Mmmm... yes... a pint of palestinian blood would be a fine dessert right now. -  talk/email,,,,,,,,,,,,,0,error_fn,threat,FN,0.0,0.32,threat
+88156fb61989663e,"How about some info on the RCB? 
+ I went to RCB about 8 or 9 years ago, and never knew about the change to AOSB.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+e1c3e3a71a215d0b,I gave my reasons and they were deleted two former al jezeera employee's who are Jordanian Muslims who quit fox news because the wernt critical enough on Israel does not count as a controversy!,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"Welcome, Korean assh*le's page.
+Why don't you enjoy licking Korean assh*le!",,,,,,,,,,,,,1,error_fp,obscene,FP,0.999,0.3,obscene
+442b3c33c4422fec,Please note how RonZ only ever reattacks the editor and never actually answers any queries?,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+83d542729b80be14,"Saying that Jews don't belong in Israel is anti-Semitic, and I'm surprised Wikipedia tolerates this.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"A message from Jasonceyre 
+
+ F u ck you hoe",,,,,,,,,,,,,0,error_fn,identity_hate,FN,0.0012,0.14,identity_hate
+7d0063e8e2d02ffa,Poop Sack,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+32f39cc720468008,""":::""""See Wikipedia: No Original Research."""" 
+ :::See what exactly, the entire article? Your suggestion is that it is forbidden to include relevant text from a reliable and notable source because the reader might infer that the information contradicts some other source? That is not """"original research."""" 
+ :::""""Suggesting that these statements are taken seriously as evidence against the notes is original research because you fail to cite anyone who agrees with that idea."""" 
+ :::I did cite someone and you know it: D.D. Guttenplan.  
+ :::Furthermore, read """"Spies."""" 
+ :::""""The second allegation: """"The co-authors, said Lubasov, 'were wrong when they put the name of Alger Hiss in the places where they tell about somebody who cooperated with Soviet special services, yes? So we are quite right in saying that we, the Russian intelligence service, have no documents... proving that Alger Hiss cooperated with our service somewhere or anywhere."""" So there you go, a """"reliable source"""" taking the Soviet statements """"seriously."""" 
+ :::""""it is irresponsible original research"""" 
+ :::This says to the readers, """"we are going to talk about Alger Hiss and the Soviet Archives, but statements on the subject from the Archivists themselves are forbidden to you to learn. This is nonsense. You're just trying to exclude relevant information you don't like.    
+
+ """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+ed013eeab700269c,"""
+
+ """"Occasional """" wording 
+
+All of you listen, there's no need for people to get so all out of sorts over such a simple little word as """"occasional"""". As I have explained before, this simply means that Wonder Woman, powerful as she is, does not routinely defeat those mentioned in physical confrontations. Yes, she has done so before, but not all the time, as some other editors want everyone to believe. She is not the most """"Powerful"""" being in existence, nor is Superman, Supergirl, Captain Marvel, or the Olympian Gods. The use of the descriptor """"an occasional victory"""" still remains the most appropriate wording.  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+1f89328f78bf7c30,"بـــــــڕوخــــێ علمانی 
+ مردن بۆ علمانی و هاوشێوەکانی",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+facd3642fb412268,"Hey
+You're a fucking cunt. Go kill yourself.",1.0,1.0,1.0,0.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,1,test_toxic,,,,,
+,"""
+
+ Hi Marcuse. I see you've run into Sojambi Pinola. don't mind him, he's a buffoon. He is friend of Biff Rose's. They mention each other on their respective web spots. Looks like the two of them are on here basahing other people until they stand alone as edit king. Too bad someone else wrote about",,,,,,,,,,,,,0,error_fn,insult,FN,0.0003,0.28,insult
+063a008bbccf9972,"Oh, and by the way I am not a some sick strange child that would not be disturbed by a real life murder scene. I am just your normal 14 year old girl doing a school assignment, who has a very weak stomach and thinks the entire Jack the Ripper case is digusting!",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+f32b4deb6efc85f1,Piss off fag! If you can't take the heat don't hang out in the kitchen! 109.151.98.87,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+e2d5a347feb0743f,"""
+Hmm. I'm not sure about this one. I think that Guy's addition is similar to the allowed example from WP:SELF - """"the name of the alleged victim is not being included in this article or at this time."""" It said, """"The purpose of the list is to help readers who wish to..."""". I think in whatever reproduction, in whatever medium, it is still going to be identified as a 'list', and it will still have 'readers' (although that may be doubtful in an audio format). I think the doubt comes over the next part of the sentence, """"...to know more about these scientists' views..."""". I agree with that, but we have an RFC going on above partly to determine exactly what is the purpose of this list. In short, I think that the use of Wikipedia's voice to state the purpose of the list is legitimate under WP:SELF (and may be required under WP:STAND), but that the actual purpose of the list is what needs discussion and agreement before we can state it definitively.   """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,Shane likes little boys (cause there penis is the same size as his),,,,,,,,,,,,,1,error_fp,toxic,FP,0.9981,0.3,toxic
+ed3a48c70357b938,"""Give me a break!! ==
+
+You guys are suck f*cking nerds. Who gives a damn if Harry is a """"villian"""" or not. Why don't you invest as much time in solving real world problems as you do bickering over a freakin movie. I mean come on, it's a FREAKIN MOVIE!!! Grow up and get a life. Do what normal people do: buy a ticket, watch the movie, forget about life for a couple hours, then go home and refocus. Spider man is make-believe folks. Some of you computer huggers need to remember that.  
+
+Bignole, I have every right to post a comment here. Do not wipe my comments off. I'll continue to add them again. And don't be a hypocrite: 50 other people have been using this as a forum and posting their opinions. Did you threaten them too?  
+
+Way to go RR2, keep standing up for freedom of speech!  
+
+Thanks RR3! I will continue to speak my mind, and stand up against censorship everywhere. Glad your on my side!  
+
+It's obvious we're in a war here, RR2. I've got your back. The re-edits will continue, I PROMISE YOU ALL!  
+
+F*ck you Bignole, you communist bastard! Free speech rules!!!  
+
+== """,1.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+b803c9f60c146a85,""" 
+
+  
+ == Why? == 
+
+ Because your obnoxious. If I wanted to help you in your little cat fight, I would have been messaged you. Get a hint.  """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+c8e00f8d7ac7e579,REDIRECT Talk:John Hoffman (defensive end),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+96a6484334657c32,who the fuck are you,1.0,0.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,Jose sucks big ones,,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.0015,0.48,severe_toxic
+10c725bcb5b17db4,"""
+
+Please remove the first reference. It does not back up the sentence """" """"Big Beautiful Woman"""" (commonly abbreviated as BBW) is an acronym most frequently used in the context of affirmation of or sexual attraction to women who are above average weight"""". I should know as I added the reference.""",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+98f5f0b257e8410b,"GIANO IS TRYING TO COVER UP HIS LACK OF AUTHORITY ON THE TOPIC BY REDIRECTING. HE IS OUT OF HIS LEAGUE ON THIS TOPIC AND REFUSES TO RETURN THE PROPER ARTICLE BECAUSE HIS EGO AND VANITY WILL NOT ALLOW HIM TO. HE KNOWS WHAT THE RIGHT THING TO DO IS. THIS WILL NEVER END UNTILL JUSTICE IS DONE. THE FIRST THING I WILL DO EVERY MORNING IS EMAIL WIKIPEDIA ABOUT YOUR INABILITIES AND PROBLEMS YOU HAVE MADE ON THIS PAGE. YOU WANT THIS TO END, THAN STOP BEING ON AN EGO TRIP AND RETURN THE PROPER ARTICLE!!!!!",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+8fba9501600acc9a,":::They're from G4S, formerly Group 4, an organisation not known for being terribly good.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"""== Sorry but you see....==
+
+I am fed up past my eyeballs with complaining, violent, crack-addicted niggers. They serve little purpose to the betterment of our society. Their vocubulary and mindset is completely devoid of the term """"self responsibility"""". Every time they commit a crime and get caugh",,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9999,0.14,identity_hate
+4e02b3acae45cad7,":Sorry, I don't really know anything about these motors, or induction motors generally.  Not sure who is into that, but look for other editors on relevant articles.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+75be7bf1d98552bb,"Looks fine, much better than it was. I think we should set a maximum of how many discussion points are visable (or, maybe a date range or something along those lines?)",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,Get a encyclopedia you nerds......(kanichiwa bitches),,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.0085,0.48,severe_toxic
+4e37ee977cd39e0c,"You said that the talk pages of the articles in Wikipedia are for advice on improving the article, not for general conversation and discussion about the topic of the article. I'm surprised! I thought that the talk pages of those articles were for general conversation and discussion. I thought that was their purpose.
+
+First, many of the edits, statements, comments, questions, and sections, etc, that exist in the talk pages of Wikipedia articles in fact are general discussions about its article's topic. If the talk pages in articles aren't really for general discussion, then how do you explain all those so many edits, statements, and sections, etc, that are general discussions?
+
+Second, if the talk pages of articles aren't really for general discussion, than where can I have general discussion about a topic of an article in Wikipedia? Where?",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUCK UP!
+SHUT THE FUC",,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9983,0.48,severe_toxic
+0a7476923dda09d1,"Thanks for the feedback. As for Insight, numerous sources have claimed it is an industry first. I will be researching further by posting at the Norton and Wilders forums.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+297f5edd45052a05,Good idea. I'm going to walk away from WP now because he's obviously fuming. Please see his reaction on his user page to a perfectly reasonable question I asked him... wow... 99.231.241.146,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+d2661e802f6595a9,you fucking jews don't know shit about metal music so stop adding info to bands that have nothing to do with metal music. go die in a gas chamber you fucking kike.,1.0,0.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1,test_toxic,,,,,
+db72c93afa8bf696,"TRPV1 agonist? 
+
+It makes no sense. TRPV1 activation causes pain or heat sensation. Capsaicine is known to activate the receptor, and that's what makes chili pungent. If one of the reasons for AM404 being an analgetic was TRPV1 activation, it would have to be the opposite to that of capsaicine. The only wat in which TRPV1 agonism would decrease pain is that a prolonged exposure to high doses of the agonist decreases the sensitivity, which is the case in any type of receptor activation, but this would mean that AM404 is no more an analgetic than capsaicine or any other source of pain... and the relief would come after a period of pain actually getting worse.
+
+Can anyone explain all this?",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,holocaust was needed by the whole humanity,,,,,,,,,,,,,0,error_fn,identity_hate,FN,0.0001,0.14,identity_hate
+e382bba25af3c7dd,MR laws is a homosexual,1.0,0.0,0.0,0.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1,test_toxic,,,,,
+36d89634135cb619,"This article is a big fraud by people like Paul B and Dab, these same people (westerners and christians) were once (and most still are) fervent supporters of violent AIT (basically whites coming down and subjugating and 'uplifting' blacks). Now with a barrage of evidence against AIT, it has been craftly morphed into AMT. This article has been modified by such people to present a picture that AIT was never a serious theory (phrases like 'polemic construct'..), however, in reality, AIT was and still is officially accepted & supported all over west & sometimes in India as well (due to leftist dominance in this field). I am not providing any links to supports this, as it is very obvious.. see Indian-history pages on websites of all major western organisations viz.CIA, US Dept. of state, discovery's history channel and so on.. In all of these cases, Aryan invasion, Dravidan subjugation and IVC distruction is mentioned as history. Basically, the trend is, if they can get away with mentioning AIT as fact, they will do so. If pressed with had evidence (or on sites like wikipedia where there is room for protest), AMT will be mentioned as an alternative, or AIT will be toned down to 'Invasion when IVC was already declining' or 'Invasion + other reasons caused the fall of IVC'.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+792657c0e771bf9a,"""""""you suck monkey butts"""" said George Washington """,1.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"FUCK YOU 
+
+YOU SAD PIECE OF SHIT
+GET A LIFE
+DONT THREATEN ME WITH BLOCKING ME OFF THIS SHIT
+DO I GIVE A FUCK
+YOU LONELY HERMIT MAN
+OPEN YOUR CURTAINS AND GET A LIFE BEFORE I BURN YOU ALIVE",,,,,,,,,,,,,1,error_fp,severe_toxic,FP,0.9984,0.48,severe_toxic
+fffe89233ffb33e1,"How many times 
+Styrofoam1994 how many times must i say that i am not ur friend.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"message on daedalus' page 
+
+Daedalus is nothing but a filthy n!gger and a cyberstalker who sits in his mommy's basement and who fails - yet again - at trying to ban me and stop me from getting my lulz on. I have access to THOUSANDS of IPs and have many 25 sleeper accounts, so u fail u wiki-police ho",,,,,,,,,,,,,1,error_fp,insult,FP,0.9985,0.28,insult
+6d49dca887dbab5a,"== Banned == 
+
+ What don't I just get banned for life so I can quit fucking around with you liberal cocksucking faggots?",1.0,1.0,1.0,0.0,1.0,1.0,1.0,1.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+e279911a793a0e9a,"::: I've been called an Islamo-fascist bitch, a Bengali, and a Zionist enforcer, and now I'm a corrupter of the truth. Cool!",1.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"You dummasses, I DID SAY THE DAMN RIGHT STUFF BUT YOU BASTARDS ACT LIKE IM MAKING MY OWN STORIES DUMMASSES",,,,,,,,,,,,,0,error_fn,identity_hate,FN,0.0015,0.14,identity_hate
+,"""
+
+_________________________________________________
+Nevermind the fact that he was talking about killing """"crackers"""", you fucking queer.""",,,,,,,,,,,,,1,error_fp,insult,FP,0.9987,0.28,insult
+,"Nonsense. They cover the same topics, but that doesn't add up to plagiarism.",,,,,,,,,,,,,0,error_fn,toxic,FN,0.0005,0.3,toxic
+8f45d868f6235beb,i no it would be very interesting to see my poop,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+48adeba9548e71f4,"Can someone please move this page? Same thing goes for his brother, who according to Grove and MGG spelling should be Anton Wranitzky. 89.233.252.43",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,rouge waves a frickin AWSOMEEEEEEE,,,,,,,,,,,,,0,error_fn,obscene,FN,0.0003,0.3,obscene
+324c1132b4f0afb4,I never edited a page you fucking retard.,1.0,0.0,1.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+e602fec7a5481ac7,CHRIS 73 - TOILET PERVERT,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,"LOL PENIS! 
+
+LOL!
+
+I AM TALKING TO YOU SO THIS SHIT IS NOT VANDALISING!",,,,,,,,,,,,,1,error_fp,toxic,FP,0.9988,0.3,toxic
+09899336db45abe7,"""
+I mind my language when i'm working with real people, not an ignorant dumbass!    """,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+e025dfc794377d08,"And note if you have your doubts. 12:54 AM over here. Raining, last I checked. I'm out in Dhanmondi (what kind of a stupid name is that?), in this apartment my imbecile Bangladeshi dad rented. Road number 5. Next to 'Eastern University' (what the hell is the thing with university names and compass directions over here?)
+
+Fact is, you people murdered my mom. And my idiot dad still loves your stinking country and you stinking apes, even as his wife lies six feet under thanks to you animals. And I'll never get justice, will I? You bastards will keep living, and polluting the free world with your filth. If I could kill every one of you, I would.
+
+But I'll settle for killing a few.",1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,1.0,1.0,1.0,1,test_toxic,,,,,
+,"If no-one beats me to it, I'll knock something up tonight.",,,,,,,,,,,,,0,error_fn,threat,FN,0.0,0.32,threat
+,"NOT REALLY, GO AHEAD AND FUCK OFF BITCH!!!",,,,,,,,,,,,,1,error_fp,obscene,FP,0.9995,0.3,obscene
+67a9b9eae1dae2b0,NATO PLANTED AND DETONATED THESE BOMBS.,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+7b2381623874f753,The Spilt has been confirmed via the Sugababes website as well as being reported as official by Sky News. The article should be changed to incorporate the split.,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"== Laura Bush Article == 
+
+ What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I’m ",,,,,,,,,,,,,1,error_fp,threat,FP,0.9999,0.32,threat
+9158641b2d998049,Tony Samual Elling is a gggggggggggaaaaaaaaaaaayyyyyyyyyyyyyy fffffffffffaaaaaaaaaaaaaaggggggggggggg!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  Stop reading this gay fags.,1.0,1.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+,do you arrogant bastards have nothing better do than bitch about who edits what. what the fuck you probably live in your parents basement and bitch bout what goes on in a insignificant websiTe. this is a load of bullshit why don't you get a life and find something better to do you worthless piece of,,,,,,,,,,,,,1,error_fp,obscene,FP,0.999,0.3,obscene
+747f76062ffdfb4e,"""
+
+>There are many things like this. Doctrines are fairly stable. Explanations come 
+>and go. Doctrines need not be understood to be believed. Doctrines are believed 
+>on the basis that their source is God, not depending on whether they are 
+>understood. Mkmcconn — 
+
+That's a very a-historical point of view. The church was coming out with doctrinal statements about the trinity, and the Arians were twisting them and believing them. So the church went back and clarified what they meant. That's why some of the creeds are quite amazingly pedantic.
+
+It's also a non-sensical point of view. You can't believe a bunch of words devoid of underlying meaning. You either believe them as they were meant, you mis-interpret them and thus mis-believe them, or you pretend to believe them. But there is no such thing as believing them without having a modicum of understanding. Sure you can believe some words are """"from God"""" but not know what they mean, but then you don't believe the doctrine you believe that there are some words that are true.
+
+>If you read a few dozen explanations on the begottenness of the Son from a 
+>spectrum of historical and contemporary sources, including Augustine, you will 
+>not find that this doctrine is connected to theories of time, despite what the 
+>deleted section claims about these theories being the """"root"""" of the doctrine.
+
+Apparently you didn't read what Augustine wrote. Let me refresh your memory...
+""""Your today yields not with tomorrow, for neither does it follow yesterday. Your today is eternity; therefore You begat the Co-eternal, to whom You said, 'This day have I begotten Thee.' Thou hast made all time; and before all times You are, nor in any time was there not time.""""
+
+Augustine directly links God being external to time with the begetting of the Son. Now if you have a  different point of view, prove it! Otherwise it is just hand-waving and show.
+
+> Don't understand the sentence above. Pfortuny 
+
+People are interested in the relationship between biblical doctrine and science. What is the problem with a ONE LINE reference?
+
+>Now my question is, have any published theologians linked Einstein's theories 
+>about time with the eternity of God?
+
+There's plenty of people thinking about this issue. Lewis is a published theologian is he not? Here is a paper from a college dealing with it....
+http://www.behindthegrove.org.uk/resources/essays/God_Time.rtf
+
+>Probably (but this is my oppinion) very little more (if more) than the 
+>tautology """"not created, not made, and without a beginning"""". Pfortuny 17:46, 5 
+>May 2004 (UTC)
+
+Instead of opinions, let's have have evidence from church fathers.
+
+>No, it is not that the filioque is fact or oppinion what matters here. What 
+>matters here is what the doctrine of the Church is, not what it means, what it 
+>refers to or whatever.  Pfortuny
+
+The doctrine of the church is important, but what it means is irrelevant? Come on!! Why look up Wik if not to find out what something means? You don't need Wik to read the Athanasian creed. You need Wik to *understand* it in its historical context.
+
+> To answer your first question, the Church defines which beliefs are dogma
+
+Then point me to where I can buy a book or books which is the final word on Christian dogma. Then I can verify for myself what parts of this article are dogma and which are opinion. Don't say the bible because it doesn't mention eternal generation.
+
+>For Orthodox at least, it's a """"theological opinion"""" that Mary lived a sinless 
+>life
+
+Ah huh! But for Catholics it is DOGMA. Thus what is and isn't dogma the OPINION of different churches and persons.
+
+At the end of the day folks, I have taken a quote from a church father that directly addresses the issue of """"eternally begotten"""" to explain to the reader the meaning. To take it down you would have to show either
+
+a) Augustine was out of step with the rest of the church at this point.
+b) The church was so confused, there are too many theories to discuss.
+
+But to just say """"let it be a mystery! Don't tell them what it means!"""", sorry that doesn't wash.
+
+""",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"furry balls and cant get no pussy everybody that be editing this shit!!! haha ya'll are gay''']],",,,,,,,,,,,,,1,error_fp,identity_hate,FP,0.9997,0.14,identity_hate
+181cfafb023c1891,"Because you're a DUMBASS, MastCell, that's why.",1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+8423f00b18c80391,"Really, no shit? I'll be a good nigger now.",1.0,0.0,1.0,0.0,0.0,1.0,1.0,0.0,1.0,0.0,1.0,1.0,1,test_toxic,,,,,
+6ef474958a701076,""" 
+ ==Fox domestication== 
+ :""""In the 1950s, Soviet scientists set up an experiment on a farm outside the city of Novosibirsk to understand how animals were domesticated. They decided to study foxes, which are closely related to wolves and dogs....More than 40 generations of foxes have now been bred in Novosibirsk, and the results speak for themselves. The foxes that the scientists bred selectively have become remarkably doglike. They will affectionately run up to people and even wag their tails.""""  Time magazine:  The Secrets Inside Your Dog's Mind By Carl Zimmer Monday, Sep. 21, 2009. 
+
+ Maybe add to article?   """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"Oh come,  on not again.  Admins, stop wasting time and just permaban, you know the situation won't change.",,,,,,,,,,,,,0,error_fn,toxic,FN,0.0009,0.3,toxic
+,"If that's not administrative, I can undo it can I? Of course not. Fuck off you evil abusive twat.!!!!!- () Wolfkeeper (Talk)",,,,,,,,,,,,,1,error_fp,obscene,FP,0.9993,0.3,obscene
+,"Our warning to you ,Weare  not afraid of you blocking our edits here ,and if you keep going with this Nationalist propaganda Chauvinism and Hate speech,we might start looking for you and face you in person,so watch out !",,,,,,,,,,,,,0,error_fn,threat,FN,0.0002,0.32,threat
+3a4fc6c6e7987e94,COCAINE OVERDOSE!!! HE WAS SNORTING COCAINE IN THE TOILET....,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+ae39f49cf0149dd0,"CitePMIDs - my G7 request - please undel 
+
+I myself put a speedy on the draft of my new template after 100 frustrating edits. Later, I had a really good working solution so that I would now ask for undel the author-initiated undel of Template:CitePMIDs.",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+a00e5be26d3691e7,"EVula, answer me, got damnit!",0.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+48b142f0da685c85,"Please re-consider once again, Im not sure if its appropiate for me to discuss this here, let me know if its not, I dont want to break any rules.
+I investigated the following in hopes to get a better resolution, I dont feel like the external links page shouldn't include the following if my site is not allowed because they contain the exact same things as my site, also, just because I am the owner of the site and am adding it, what would be the difference if I acted like I wasnt the owner? I I have only one link to the graffiti store once you enter the site, and its nowhere on the gallery or the top navigation, but just because I have a store doesnt mean I was posting my site in order to promote it, I was certainly not, or else I would of tried to add the store url when I added the other url. Also like I said before, my site has been up since 1997 off a different domain, and since 1999 off the current domain. We are ranked 5 on google, and get plenty of hits on our own, I was not trying to add my site here to receive more hits. PureGraffiti.com is going to be online for as long as the internet is alive, the gallery will be the biggest gallery of graffiti art online, weather one agrees with me or not, you can take a look at the stats and figure it out yourself. We are online for Graffiti Artists that dont have the knowledge or money to get their pictures up on a website that is already established and well known by almost everyone in the USA that is a Graffiti Artist. The store we have merely pays for the dedicated server bill costs to keep this huge site alive, and there are 500 other stores online that do advertize on google and other sites, we on the other hand dont. We also dont charge for the webspace, and we also dont have advertizing for money on our site in hopes to make money of our viewers like many of the sites you have accepted.
+
+Please take all this into consideration:
+
+http://www.Artcimes.org = first graffiti site. They have a store as well, and they have advertizing for money all through-out their site. Just because they are the first graffiti site, doesnt give them any special treatment. 
+http://www.bombing.org = Advertizing for money all over the site
+http://writers.org.ua = advertizing for money pop-up when visited the site.
+
+P.S. By no means I have a problem with these sites, however, I do think it is unfair that they get to be on there when my site is the same, and does not contain advertizements to make money.
+
+Thank you once again.
+Sabrina",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,"Thanks for being late to the party 
+
+but I have added no new articles since yesterday.  While you have all been very impolite and overly protective, I have lost interest in torturing you, so you can go fuck yourself.",,,,,,,,,,,,,0,error_fn,severe_toxic,FN,0.0073,0.48,severe_toxic
+e391f8a4845bf89b,"HIP DRV 
+
+I appreciate your closing the Human Instrumentality Project DRV in my favor, but is it really necessary to full-protect the redirect? Obviously that makes it more difficult for me to make a full article in the future, and in the short-term makes it more difficult for the redirect to be updated. (Some editors like BreadNinja or Dandy Sephy are constantly agitating for various page moves & renames; it is not implausible that in the next year or three the redirect will need editing.) Gwern  (contribs) 15:31 6 February 2010 (GMT)",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+219259bbcbfc6d93,thank you for editing iranian articles. you are our slave. slave of iranians.,1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,1,test_toxic,,,,,
+5062840e90872d12,"""Please do not replace Wikipedia pages with blank content. Blank pages are harmful to Wikipedia because they have a tendency to confuse readers. If it is a duplicate article, please redirect it to an appropriate existing page. If the page has been vandalised, please revert it to the last legitimate version. If you feel that the content of a page is inappropriate, please edit the page and replace it with appropriate content. If you believe there is no hope for the page, please see the deletion policy for how to proceed. Thanks for contributing to Wikipedia!    melmac """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+9e069160cb8d6e68,"== KILL ALL NGIGERS  == 
+
+ PROPOSAL KILL ALL NIGGERS",1.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1,test_toxic,,,,,
+a844fac79aa5c59c,"Read this idiot kumararao to know the influence of kannada over telugu...why telugu ppl should be thankful to kannada/kannadigas (includign sri krishnadevaraya)..it is well known fact that telugu ppl referred the kingdom as kannada/karnataka kingdom in their works, go and research into that
+http://en.wikipedia.org/wiki/Nannayya",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1,test_toxic,,,,,
+,""" 
+
+ :::::now i will list a few things which are better than metallica. keep in mind, this isnt all of them, id get fucking carpel tunnel typing it all cause after all, those pussies suck! towels, metal, wood, cheese, dogs, cats, fish, harold and kumar go to white castle, rob riggle, harold and kuma",,,,,,,,,,,,,0,error_fn,identity_hate,FN,0.0013,0.14,identity_hate
+,"Gay??? 
+
+Is there a source for the story of him being gay?  79.204.110.196",,,,,,,,,,,,,1,error_fp,toxic,FP,0.9972,0.3,toxic
+,"Your a dick head!! 
+
+How dare you go around deleting peoples articles. What kind of retard spends all their time on the computer... you, you nerd!!",,,,,,,,,,,,,1,error_fp,obscene,FP,0.9993,0.3,obscene
+,"== fu == 
+
+ You are a Nazi apologist. Go die in a fire.",,,,,,,,,,,,,1,error_fp,threat,FP,0.998,0.32,threat
+4ece423b3d85d0e2,"You're missing the point of these re-editting, many do agree with removing the picture with the old one, you should think about how others feel about this too, not just me who thinks someone is being racist through biasness, or the person moxy who requested you to block me. You may have the right to block me for accusing people, but you have no right from blocking others who refuse this picture for their own reasons. I guarantee you I won't be the only one who is unhappy about these pics, especially Asian men who won't feel happy about this. HOW THE HELL CAN YOU CALL THAT ANATOMICAL FEATURES when you can't seen see the guys penis??? ( And yes, I know Asian men are know for having smaller ones but not that tiny, that guy has an malfunction syndrome penis). WarriorsPride6565 (talk) (talk • contribs) 7:41, 12 march (UTC)",1.0,0.0,0.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+237f0dc0c6ca6412,"""
+Following the 3RR reports made just against both you and Mospyt, it is clear to me that you have done no wrong here. Your only blockworthy offence is being a fan of the All Blacks P  (deal) """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+,KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL YOURSELF KILL Y,,,,,,,,,,,,,1,error_fp,threat,FP,0.9992,0.32,threat
+,"""A RESPONSE TO . I ENTITLE THIS """"YOUR STUPIDITY""""
+The Assyrians are not extinct you incompetent bigoted fool. You lack all things historical you impotent maggot. The Assyrians have existed for over 6500 years you incumbent animal. The Assyrians first spoke Akkadian and in the 8th century the kings ",,,,,,,,,,,,,0,error_fn,threat,FN,0.0144,0.32,threat
+adf38dc8a46a901d,"""
+
+You are making up that figure. It does not occur in the article you cite too. And think how illogical you sound. """"33 million."""" There cannot be more than defensive gun uses than total crimes, as a matter of logic. And this would mean that 99.99 percent of DGUs are unreported. Nowhere in that article does the number 33 million occur. You are lying through your teeth.""",0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1,test_toxic,,,,,
+70534f0794ee93b2,REDIRECT User talk:MLRoach/Archive 4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+c60eefdf6d76d2c7,"""}}
+
+ Red Dawn (2012 film) box office gross 
+
+Hello Old jacobite. I'm here to request you for help. Some user allegedly keeps reverting the edits on the Red dawn article where I've used Boxoffice.com as a source. The box office gross on Box office mojo is incorrect. To prove that just click on the foreign tab for the red dawn film. You'll see that it states the fireign gross for the film is """"n/a"""" however at the same page box office gross for many countries is given. Probably the user thinks that the gross on box office mojo is correct. If you can then please inform him about this mistake. Also if you can then please maintain a vigilance on the page to make sure the edits are not reverted back again since I'm not very active these days.   """,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,test_clean,,,,,
+0f21a44ba42e1fb9,"Please don't be a cunt and make threats please.  I just wanted to discuss the issue.  The criticism portion is a complaint about school rules, that's irrelevant for an encyclopedia entry.  Have criticism is fine, but these criticisms are not valid for an encyclopedic entry, and further are a POV.
+
+Every school has rules, do complaints of the rules belong an encyclopedia?",1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0,0.0,0.0,0.0,1,test_toxic,,,,,
+,What is you to decide what is offensive to Ukrainians and residents of Kyiv or not? Who has put in your mind so powerful charge of ignorance that you tenderly bear throughout all your life and share with normal people on Wikipedia?,,,,,,,,,,,,,0,error_fn,insult,FN,0.0003,0.28,insult
+,"s>  
+
+ Have a nice fucking life.",,,,,,,,,,,,,1,error_fp,toxic,FP,0.9982,0.3,toxic
+,"""well wat i think of halo 4 is the best game ever and i wont to  let those mw3 players """"suck dick""""""",,,,,,,,,,,,,1,error_fp,obscene,FP,0.999,0.3,obscene

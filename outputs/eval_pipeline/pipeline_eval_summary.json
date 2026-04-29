@@ -1,0 +1,155 @@
+{
+  "total_samples": 313,
+  "errors": 0,
+  "test_toxic": {
+    "n_samples": 100,
+    "correction_success_rate": 0.99,
+    "fallback_rate": 0.01,
+    "avg_iterations": 1.13,
+    "iteration_distribution": {
+      "1": 91,
+      "2": 7,
+      "3": 1,
+      "5": 1
+    },
+    "per_label_correction": {
+      "toxic": {
+        "initially_triggered": 100,
+        "corrected": 99,
+        "correction_rate": 0.99
+      },
+      "severe_toxic": {
+        "initially_triggered": 22,
+        "corrected": 22,
+        "correction_rate": 1.0
+      },
+      "obscene": {
+        "initially_triggered": 67,
+        "corrected": 67,
+        "correction_rate": 1.0
+      },
+      "threat": {
+        "initially_triggered": 9,
+        "corrected": 9,
+        "correction_rate": 1.0
+      },
+      "insult": {
+        "initially_triggered": 63,
+        "corrected": 63,
+        "correction_rate": 1.0
+      },
+      "identity_hate": {
+        "initially_triggered": 22,
+        "corrected": 22,
+        "correction_rate": 1.0
+      }
+    }
+  },
+  "error_fp": {
+    "n_samples": 57,
+    "correction_success_rate": 1.0,
+    "fallback_rate": 0.0,
+    "avg_iterations": 1.25,
+    "iteration_distribution": {
+      "1": 47,
+      "2": 6,
+      "3": 4
+    },
+    "per_label_correction": {
+      "toxic": {
+        "initially_triggered": 57,
+        "corrected": 57,
+        "correction_rate": 1.0
+      },
+      "severe_toxic": {
+        "initially_triggered": 32,
+        "corrected": 32,
+        "correction_rate": 1.0
+      },
+      "obscene": {
+        "initially_triggered": 54,
+        "corrected": 54,
+        "correction_rate": 1.0
+      },
+      "threat": {
+        "initially_triggered": 16,
+        "corrected": 16,
+        "correction_rate": 1.0
+      },
+      "insult": {
+        "initially_triggered": 53,
+        "corrected": 53,
+        "correction_rate": 1.0
+      },
+      "identity_hate": {
+        "initially_triggered": 30,
+        "corrected": 30,
+        "correction_rate": 1.0
+      }
+    }
+  },
+  "combined_toxic": {
+    "n_samples": 157,
+    "correction_success_rate": 0.9936,
+    "fallback_rate": 0.0064,
+    "avg_iterations": 1.17,
+    "iteration_distribution": {
+      "1": 138,
+      "2": 13,
+      "3": 5,
+      "5": 1
+    },
+    "per_label_correction": {
+      "toxic": {
+        "initially_triggered": 157,
+        "corrected": 156,
+        "correction_rate": 0.9936
+      },
+      "severe_toxic": {
+        "initially_triggered": 54,
+        "corrected": 54,
+        "correction_rate": 1.0
+      },
+      "obscene": {
+        "initially_triggered": 121,
+        "corrected": 121,
+        "correction_rate": 1.0
+      },
+      "threat": {
+        "initially_triggered": 25,
+        "corrected": 25,
+        "correction_rate": 1.0
+      },
+      "insult": {
+        "initially_triggered": 116,
+        "corrected": 116,
+        "correction_rate": 1.0
+      },
+      "identity_hate": {
+        "initially_triggered": 52,
+        "corrected": 52,
+        "correction_rate": 1.0
+      }
+    }
+  },
+  "test_clean": {
+    "n_samples": 100,
+    "preservation_rate": 1.0,
+    "false_trigger_rate": 0.0
+  },
+  "error_fn": {
+    "n_samples": 56,
+    "caught_by_pipeline": 22,
+    "miss_rate": 0.6071,
+    "note": "These are ensemble false negatives \u2014 the classifier missed them, so the pipeline is expected to miss them too. Reported as a system limitation."
+  },
+  "total_elapsed_seconds": 341.1,
+  "config": {
+    "n_toxic": 100,
+    "n_clean": 100,
+    "max_iterations": 5,
+    "seed": 49458345,
+    "test_csv": "data/test_split.csv",
+    "error_csv": "outputs/eval_ensemble_results/val/error_analysis.csv"
+  }
+}
