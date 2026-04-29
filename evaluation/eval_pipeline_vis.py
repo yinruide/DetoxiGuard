@@ -35,10 +35,11 @@ LABEL_DISPLAY = ["Toxic", "Severe\nToxic", "Obscene", "Threat", "Insult", "Ident
 DPI = 150
 
 # Color palette — consistent with eval_ensemble style
-C_PRIMARY   = "#2563EB"   # blue
-C_SECONDARY = "#10B981"   # green
-C_ACCENT    = "#F59E0B"   # amber
-C_DANGER    = "#EF4444"   # red
+C_PRIMARY   = "#2563EB"   
+C_SECONDARY = "#10B981"   
+C_ACCENT    = "#F59E0B"   
+C_DANGER    = "#EF4444"   
+C_PASS      = "#60A5FA"   
 C_GRAY      = "#6B7280"
 C_LIGHT_BG  = "#F8FAFC"
 
@@ -180,6 +181,14 @@ def plot_group_summary(summary, save_path):
     colors.append("#8B5CF6")  # purple
     labels_text.append(f'{tc["preservation_rate"]*100:.1f}%\n(n={tc["n_samples"]})')
 
+    # FN catch rate
+    fn = summary["error_fn"]
+    catch_rate = (1.0 - fn["miss_rate"]) * 100 if fn["miss_rate"] is not None else 0
+    groups.append("FN Catch\nRate")
+    rates.append(catch_rate)
+    colors.append(C_DANGER)
+    labels_text.append(f'{catch_rate:.1f}%\n(n={fn["n_samples"]})')
+
     x_pos = np.arange(len(groups))
     bars = ax.bar(x_pos, rates, width=0.6, color=colors, edgecolor="white", linewidth=0.5)
 
@@ -216,11 +225,12 @@ def plot_outcome_breakdown(details, save_path):
 
     outcome_colors = {
         "corrected":   C_SECONDARY,
+        "clean_pass":  C_PASS,
         "passthrough": C_PRIMARY,
         "fallback":    C_DANGER,
         "error":       C_GRAY,
     }
-    outcome_order = ["corrected", "passthrough", "fallback", "error"]
+    outcome_order = ["corrected", "clean_pass", "passthrough", "fallback", "error"]
 
     # Count outcomes per source
     data = {s: {o: 0 for o in outcome_order} for s in source_order}
