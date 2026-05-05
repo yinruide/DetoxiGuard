@@ -223,7 +223,7 @@ DetoxiGuard/
 ### Installation
 
 ```bash
-git clone https://github.com/ry2406/DetoxiGuard.git
+git clone https://github.com/yinruide/DetoxiGuard.git
 cd DetoxiGuard
 pip install -r requirements.txt
 ```
