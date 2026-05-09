@@ -344,7 +344,7 @@ python agent/pipeline.py
 | Task | Resource |
 |----------|------|
 | Training (LLaMA) | NYU HPC, 2× NVIDIA A100 40GB GPU |
-| Training (BERT) | NYU HPC, 1× NVIDIA L4 GPU |
+| Training (BERT) | Local machine, 1× NVIDIA RTX 4070 GPU |
 | Evaluation | NYU HPC, 1× L4/A100 GPU |
 | Pipeline eval (GPT-4o) | OpenAI API, 313 samples, 341s total, ~$0.20 |
 
